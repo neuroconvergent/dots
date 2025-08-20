@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+# Automatically create tmux session at fuzzy found location
+
+BASE="$(pwd)"
+SESSION_OVERRIDE=""
+
+print_help() {
+cat <<EOF
+Usage: $(basename $0) [OPTIONS] [target_dir]
+
+Options:
+  -b BASE_DIR       Set the base directory for fuzzy search (default: current directory)
+  -s SESSION_NAME   Override the default tmux session name
+  -h, --help        Show this help message and exit
+
+Arguments:
+  target_dir        Optional: target directory to open. If not provided, fzf is used.
+EOF
+}
+
+# Parse options
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -b)
+            BASE="$2"
+            shift 2
+            ;;
+        -s)
+            SESSION_OVERRIDE="$2"
+            shift 2
+            ;;
+        -h|--help)
+            print_help
+            exit 0
+            ;;
+        --) # end of options
+            shift
+            break
+            ;;
+        -*)
+            echo "Unknown option: $1"
+            print_help
+            exit 1
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+
+# Determine target directory
+if [ -n "$1" ]; then
+    TARGET="$1"
+else
+    TARGET=$(find "$BASE" -mindepth 1 -maxdepth 3 -type d \
+        | sed "s|^$BASE/||" \
+        | fzf --prompt="Select directory: " \
+              --preview "ls -la $BASE/{}" \
+              --height=40% --border)
+    [ -z "$TARGET" ] && exit 0
+    TARGET="$BASE/$TARGET"
+fi
+
+# Session name = override if provided, otherwise basename of target
+SESSION="${SESSION_OVERRIDE:-$(basename "$TARGET")}"
+
+# Check if session exists
+if tmux has-session -t "$SESSION" 2>/dev/null; then
+    tmux attach -t "$SESSION"
+    exit 0
+fi
+
+# Start new session if it doesn't exist
+tmux new-session -d -s "$SESSION" -c "$TARGET" "nvim"        # Window 1
+tmux new-window -t "$SESSION:2" -c "$TARGET"                  # Window 2: empty terminal
+if [ -d "$TARGET/.git" ] || git -C "$TARGET" rev-parse --is-inside-work-tree &>/dev/null; then
+    tmux new-window -t "$SESSION:3" -n lazygit -c "$TARGET" "lazygit"  # Window 3
+fi
+tmux new-window -t "$SESSION:4" -n yazi -c "$TARGET" "yazi"   # Window 4
+
+# Attach to session with window 1 selected
+tmux attach -t "$SESSION" -c "$TARGET" \; select-window -t "$SESSION:1"

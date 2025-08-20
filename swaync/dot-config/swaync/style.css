@@ -1,0 +1,544 @@
+/*
+ * vim: ft=less
+ */
+
+:root{
+	--slider-bg: rgba(255,255,255,0.9);
+	--cc-bg: rgba(38, 42, 53, 0.8);
+	--noti-border-color: rgba(223, 175, 175, 1);
+	--noti-bg: rgba(38, 42, 53,1);
+	--noti-bg-darker: rgb(38, 38, 38);
+	--noti-bg-hover: rgba(255, 255, 255, 0.2);
+	--noti-bg-focus: rgba(68, 68, 68, 0.6);
+	--noti-close-bg: rgba(255, 255, 255, 0.1);
+	--noti-close-bg-hover: rgba(255, 255, 255, 0.15);
+	--text-color: rgb(255, 255, 255);
+	--text-color-disabled: rgb(150, 150, 150);
+	--bg-selected: rgb(223, 175, 175);
+	--slider-color: rgba(223,175,175,1);
+}
+
+* {
+		/*font-family: Noto Sans NerdFont;*/
+		font-family: IosevkaTerm Nerd Font;
+		font-size: 16px;
+}
+
+.notification-row {
+	outline: none;
+}
+
+.notification-row:focus,
+.notification-row:hover {
+	background: var(--noti-bg-focus);
+}
+
+.notification {
+	border-radius: 12px;
+	padding: 6px;
+	background-color: transparent;
+	border: 0px transparent;
+	margin: 3px 5px;
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.7),
+		0 2px 6px 2px rgba(0, 0, 0, 0.3);
+	min-height: 5em;
+	min-width: 200px;
+	padding: 0;
+}
+
+/* Uncomment to enable specific urgency colors*/
+.low {
+	background: var(--noti-bg);
+	padding: 6px;
+	border-radius: 12px;
+}
+
+.normal {
+	background: var(--noti-bg);
+	padding: 6px;
+	border-radius: 12px;
+}
+
+.critical {
+	background: var(--noti-bg);
+	border: 0px solid red;
+	color: #E78284;
+	padding: 6px;
+	border-radius: 12px;
+}
+
+.notification-content {
+	background: transparent;
+	padding: 6px;
+	border: 0px;
+	border-radius: 12px;
+}
+
+.close-button {
+	background: var(--noti-close-bg);
+	color: var(--text-color);
+	text-shadow: none;
+	padding: 0;
+	border-radius: 100%;
+	margin-top: 16px;
+	margin-right: 16px;
+	box-shadow: none;
+	border: none;
+	min-width: 24px;
+	min-height: 24px;
+}
+
+.close-button:hover {
+	box-shadow: none;
+	background: var(--noti-close-bg-hover);
+	transition: all 0.15s ease-in-out;
+	border: none;
+}
+
+.notification-default-action {
+	padding: 4px;
+	margin: 0px;
+	box-shadow: none;
+	border-top: 3px solid var(--noti-border-color);
+	border-radius: 7px;
+	background: var(--noti-bg-color);
+	border: 3px solid var(--noti-border-color);
+	color: var(--text-color);
+	transition: all 0.15s ease-in-out;
+}
+.notification-action {
+	padding: 4px;
+	margin: 0px 0px 5px 0px;
+	box-shadow: none;
+	background: var(--noti-bg-color);
+	border: 3px solid var(--noti-border-color);
+	color: var(--text-color);
+	transition: all 0.15s ease-in-out;
+}
+
+.critical .notification-default-action {
+	padding: 0px;
+	margin: 0px;
+	box-shadow: none;
+	background: var(--noti-bg-color);
+	border: 3px solid red;
+	color: var(--text-color);
+	transition: all 0.15s ease-in-out;
+}
+.critical .notification-action {
+	padding: 4px;
+	margin: 0px 0px 5px 0px;
+	box-shadow: none;
+	background: var(--noti-bg-color);
+	border: 3px red;
+	color: var(--text-color);
+	transition: all 0.15s ease-in-out;
+}
+
+.notification-default-action:hover,
+.notification-action:hover {
+	-gtk-icon-effect: none;
+	background: var(--noti-bg-hover);
+}
+
+.notification-default-action {
+	border-radius: 12px;
+}
+
+/* When alternative actions are visible */
+/*.notification-default-action:not(:only-child) {
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}*/
+
+.notification-action {
+	border-radius: 0px;
+	border-top: none;
+	border-right: none;
+}
+
+/* add bottom border radius to eliminate clipping */
+.notification-action:first-child {
+	border-bottom-left-radius: 12px;
+}
+
+.notification-action:last-child {
+	border-bottom-right-radius: 12px;
+	border-right: 3px solid var(--noti-border-color);
+}
+
+.critical .notification-action:last-child {
+	border-bottom-right-radius: 12px;
+	border-right: 3px solid red;
+}
+
+.inline-reply {
+	margin-top: 8px;
+}
+
+progressbar,
+progress,
+trough {
+  border-radius: 7px;
+  padding: 4px;
+  color: var(--text-color);
+  margin: 2px;
+}
+
+.inline-reply-entry {
+	background: var(--noti-bg-darker);
+	color: var(--text-color);
+	caret-color: var(--text-color);
+	border: 1px solid var(--noti-border-color);
+	border-radius: 12px;
+}
+.inline-reply-button {
+	margin-left: 4px;
+	background: var(--noti-bg);
+	border: 3px solid var(--noti-border-color);
+	border-radius: 12px;
+	color: var(--text-color);
+}
+.inline-reply-button:disabled {
+	background: initial;
+	color: var(--text-color-disabled);
+	border: 3px solid transparent;
+}
+.inline-reply-button:hover {
+	background: var(--noti-bg-hover);
+}
+
+.image {
+}
+
+.body-image {
+	margin-top: 6px;
+	background-color: white;
+	border-radius: 12px;
+}
+
+.title{
+	font-size: 16px;
+	font-weight: Bold;
+	background: transparent;
+	color: var(--text-color);
+	text-shadow: none;
+}
+.summary {
+	font-size: 1.25rem;
+	font-weight: Bold;
+	background: transparent;
+	color: var(--text-color);
+	text-shadow: none;
+}
+
+.time {
+	font-size: 1rem;
+	font-weight: bold;
+	background: transparent;
+	color: var(--text-color);
+	text-shadow: none;
+	margin-right: 15px;
+}
+
+.body {
+	font-size: 1rem;
+	font-weight: normal;
+	background: transparent;
+	color: var(--text-color);
+	text-shadow: none;
+}
+
+.critical .summary {
+	font-size: 1.25rem;
+	font-weight: Bold;
+	background: transparent;
+	color: #E78284;
+	text-shadow: none;
+}
+
+.critical .time {
+	font-size: 1rem;
+	background: transparent;
+	color: #E78284;
+	text-shadow: none;
+	margin-right: 15px;
+}
+
+.critical .body {
+	font-size: 1rem;
+	font-weight: normal;
+	background: transparent;
+	color: #E78284;
+	text-shadow: none;
+}
+
+.control-center {
+	background: var(--cc-bg);
+	border-radius: 12px;
+	border: 3px solid var(--noti-border-color);
+}
+
+.control-center-list {
+	background: transparent;
+}
+
+.control-center-list-placeholder {
+	opacity: 0.5;
+}
+
+.floating-notifications {
+	background: transparent;
+}
+
+/* Window behind control center and on all other monitors */
+.blank-window {
+	background: alpha(black, 0);
+}
+
+/*** Widgets ***/
+
+/* Title widget */
+.widget-title {
+	margin: 8px;
+	font-weight: bold;
+	font-size: 18px;
+}
+.widget-title > label {
+	font-size: 1.5rem;
+}
+.widget-title > button {
+	color: var(--text-color);
+	text-shadow: none;
+	background: var(--noti-bg);
+	border: 3px solid var(--noti-border-color);
+	box-shadow: none;
+	border-radius: 12px;
+}
+
+.widget-title > button > label {
+	font-size: 1rem;
+}
+.widget-title > button:hover {
+	background: var(--noti-bg-hover);
+}
+
+/* DND widget */
+.widget-dnd {
+	margin: 8px;
+}
+.widget-dnd > label {
+	font-size: 1.1rem;
+}
+.widget-dnd > switch {
+	font-size: initial;
+	border-radius: 12px;
+	background: var(--noti-bg);
+	border: 3px solid var(--noti-border-color);
+	box-shadow: none;
+}
+.widget-dnd > switch:checked {
+	background: var(--bg-selected);
+}
+.widget-dnd > switch slider {
+	background: white;
+	border-radius: 12px;
+}
+
+/* Label widget */
+.widget-label {
+	margin: 8px;
+}
+.widget-label > label {
+	font-size: 1.1rem;
+}
+
+/* Mpris widget */
+.widget-mpris {
+	/* The parent to all players */
+}
+.widget-mpris-player {
+	background-color: var(--noti-bg);
+	padding: 5px;
+	margin: 8px 8px 0px 8px;
+	border: 3px solid var(--noti-border-color);
+	border-radius: 12px;
+}
+.widget-mpris-title {
+	font-weight: bold;
+	font-size: 1.25rem;
+}
+.widget-mpris-subtitle {
+	font-size: 1.1rem;
+}
+
+/* Buttons widget */
+.widget-buttons-grid {
+	padding: 8px;
+	margin: 8px;
+	border-radius: 12px;
+	background-color: var(--noti-bg);
+}
+
+.widget-buttons-grid>flowboxchild>button {
+	border: 3px solid var(--noti-border-color);
+}
+.widget-buttons-grid>flowbox>flowboxchild>button{
+	background: var(--noti-bg);
+	border-radius: 12px;
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button:hover {
+	background: var(--noti-bg-hover);
+}
+
+.widget-buttons-grid>button {
+	border: 3px solid var(--noti-border-color);
+}
+
+/* Menubar widget */
+.widget-menubar>button{
+	border: 3px solid var(--noti-border-color);
+}
+.widget-menubar.menu-button-bar>button{
+	margin: 5px 5px 10px 5px;
+	border: 3px solid var(--noti-border-color);
+	border-radius: 12px;
+	background: rgba(38, 42, 53, 0.8);
+}
+.widget-menubar>box>.menu-button-bar>button:hover {
+	background: var(--noti-bg-hover);
+}
+
+
+/* .AnyName { Name defined in config after #
+	background-color: var(--noti-bg);
+	padding: 8px;
+	margin: 8px;
+	border-radius: 12px;
+}
+
+.AnyName>button {
+	background: transparent;
+	border: none;
+}
+
+.AnyName>button:hover {
+	background-color: var(--noti-bg-hover);
+} */
+
+.widget-menubar>box>box>button {
+	margin: 5px 5px 10px 5px;
+	border: 3px solid var(--noti-border-color);
+	border-radius: 12px;
+	background: rgba(38, 42, 53, 0.8);
+}
+
+.widget-menubar>box>box>button:hover {
+	background: var(--noti-bg-hover);
+}
+
+.topbar-buttons { /* Name defined in config after # */
+	font-size: 24px;
+}
+.topbar-buttons>button { /* Name defined in config after # */
+	margin: 5px 5px 10px 5px;
+	border: 3px solid var(--noti-border-color);
+	border-radius: 12px;
+	background: rgba(38, 42, 53, 0.8);
+}
+.topbar-buttons>button:hover {
+	background: var(--noti-bg-hover);
+}
+
+.topbar-buttons>.power-buttons {
+	border: 3px solid var(--noti-border-color);
+}
+
+.powermode-buttons>button {
+	margin: 10px 5px 0px 5px;
+	border: 3px solid var(--noti-border-color);
+	border-radius: 12px;
+	background: rgba(38, 42, 53, 0.8);
+}
+
+.powermode-buttons>button:last-child{
+	margin: 10px 5px 10px 5px;
+}
+
+.powermode-buttons>button:hover {
+	background: var(--noti-bg-hover);
+}
+
+.power-buttons>button {
+	margin: 10px 5px 0px 5px;
+	border: 3px solid var(--noti-border-color);
+	border-radius: 12px;
+	background: rgba(38, 42, 53, 0.8);
+}
+
+.power-buttons>button:last-child{
+	margin: 10px 5px 10px 5px;
+}
+
+.power-buttons>button:hover {
+	background: var(--noti-bg-hover);
+}
+
+/* Volume widget */
+
+.widget-volume {
+	background-color: var(--noti-bg);
+	padding: 8px;
+	margin: 8px;
+	border-radius: 12px;
+	border: 3px solid var(--noti-border-color);
+}
+
+.widget-volume>horizontal>horizontal>top {
+	background-color: rgb(255,255,255);
+}
+
+.control-center trough {
+	background-color: var(--slider-bg);
+	padding: 0px;
+}
+.control-center highlight {
+	background-color: var(--slider-color);
+	min-height: 10px;
+}
+
+.per-app-volume {
+	background-color: var(--noti-bg-alt);
+	padding: 4px 8px 8px 8px;
+	margin: 0px 8px 8px 8px;
+	border-radius: 12px;
+}
+
+
+/* Backlight widget */
+.widget-backlight {
+	background-color: var(--noti-bg);
+	padding: 8px;
+	margin: 8px;
+	border-radius: 12px;
+	border: 3px solid var(--noti-border-color);
+}
+
+/* Title widget */
+.widget-inhibitors {
+	margin: 8px;
+	font-size: 1.5rem;
+}
+.widget-inhibitors > button {
+	font-size: initial;
+	color: var(--text-color);
+	text-shadow: none;
+	background: var(--noti-bg);
+	border: 3px solid var(--noti-border-color);
+	box-shadow: none;
+	border-radius: 12px;
+}
+.widget-inhibitors > button:hover {
+	background: var(--noti-bg-hover);
+}

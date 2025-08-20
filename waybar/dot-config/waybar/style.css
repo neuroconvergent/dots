@@ -1,0 +1,304 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: 'Iosevka Nerd Font','Font Awesome 5', 'SFNS Display',  Helvetica, Arial, sans-serif; 
+    font-size: 18px;
+    min-height: 0;
+}
+@define-color border1 rgba(223,175,175,1.0);
+@define-color border2 #dfafaf;
+@define-color background1 rgba(38,42,53,0.8);
+@define-color background2 rgba(38,42,53,0.8);
+@define-color background3 rgba(38,42,53,0.0);
+@define-color text1 #ffffff;
+@define-color text2 #ffffff;
+
+window#waybar {
+    /*background: rgba(38, 42, 53, 0.1);*/
+    background: @background3;
+    border: 3px @background3;
+    border-radius: 15px;
+	transition-property: background-color;
+	transition-duration: 0.5s;
+    color: @text1;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+#window {
+    background: @background1;
+    margin: 8px 5px 0px 0px;
+    padding: 2px 10px 2px 10px;
+	border: 3px solid @border1;
+    border-radius: 12px;
+    color:@text1;
+    font-weight:normal;
+    opacity:0.8;
+}
+window#waybar.empty #window {
+    background-color:transparent;
+	border:0px;
+}
+
+#taskbar {
+    background: @background1;
+    margin: 8px 5px 0px 0px;
+    padding:0px;
+    border-radius: 12px;
+    font-weight: normal;
+    font-style: normal;
+    border: 3px solid @border1;
+    opacity: 0.8;
+}
+#taskbar button {
+    margin:0;
+    border-radius: 15px;
+    padding: 0px 5px 0px 5px;
+}
+
+#taskbar button:hover {
+	background: @background2;
+}
+#taskbar.empty{
+    border: 0px;
+}
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces {
+    background: @background1;
+    margin: 8px 5px 0px 5px;
+    padding: 0px 5px 0px 5px;
+    border-radius: 15px;
+    border: 0px;
+    font-weight: bold;
+    font-style: normal;
+    opacity: 0.8;
+    font-size: 16px;
+    color: @text1;
+	border: 3px solid @border1;
+}
+#workspaces button {
+    padding: 0 5px;
+    margin: 4px 0px;
+    border-radius: 15px;
+    border: 0px;
+    transition: all 0.5s ease-in-out;
+    background: transparent;
+    color: @border2;
+    border-bottom: 3px solid transparent;
+}
+
+#workspaces button:hover {
+    color: @text1;
+    background: @background1;
+    border-radius: 15px;
+    opacity:0.7;
+}
+#workspaces button.empty {
+    color: @border1;
+    background: transparent;
+    border-radius: 15px;
+}
+#workspaces button.active {
+    background: @border2;
+    color: @text1;
+	border-radius: 15px;
+    min-width: 40px;
+    transition: all 0.3s ease-in-out;
+}
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+}
+
+#mode {
+    background: #64727D;
+    border-bottom: 3px solid #ffffff;
+}
+#clock, #battery, #custom-notifications, #custom-media, #custom-appmenu, #tray, #mode, #idle_inhibitor {
+    margin: 8px 2px 0px 0px;
+    padding: 2px 10px 2px 10px;
+    border-radius: 12px;
+	border: 3px solid @border1;
+	opacity: 0.8;
+
+}
+
+
+/*#clock, #battery, #bluetooth, #cpu, #memory, #temperature, #backlight, #network, #custom-notifications, #custom-media, #tray, #mode, #idle_inhibitor,#disk {
+    border-radius: 15px;
+    margin: 8px 2px 0px 0px;
+    padding: 2px 10px 2px 10px;
+    border-radius: 12px;
+	border: 3px solid @border1;
+	opacity: 0.8;
+}*/
+#custom-appmenu {
+    margin: 8px 5px 0px 0px;
+    padding: 2px 14px 2px 10px;
+    background: @background1;
+    color: @text1;
+}
+
+#clock {
+    background: @background1;
+    color: @text1;
+}
+
+#battery {
+    background: @background1;
+    color: @text1;
+}
+
+#bluetooth {
+    margin: 8px 0px 0px 0px;
+    padding: 2px 0px 2px 10px;
+    border-radius: 12px 0px 0px 12px;
+	border: 3px solid @border1;
+    border-right: none;
+	opacity: 0.8;
+    background: @background1;
+    color: @text1;
+}
+
+#battery.charging {
+    background: @background1;
+    color: @text1;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#disk {
+    margin: 8px 0px 0px 0px;
+    padding: 2px 0px 2px 10px;
+    border-radius: 12px 0px 0px 12px;
+	border: 3px solid @border1;
+    border-right: none;
+	opacity: 0.8;
+    background: @background1;
+    color: @text2;
+}
+
+#cpu, #memory {
+    margin: 8px 0px 0px 0px;
+    padding: 2px 0px 2px 0px;
+    border-radius: 0px;
+	border: 3px solid @border1;
+    border-right: none;
+    border-left: none;
+	opacity: 0.8;
+    background: @background1;
+    color: @text2;
+}
+
+#temperature {
+    margin: 8px 2px 0px 0px;
+    padding: 2px 10px 2px 0px;
+    border-radius: 0px 12px 12px 0px;
+	border: 3px solid @border1;
+    border-left: none;
+	opacity: 0.8;
+    background: @background1;
+    color: @text2;
+}
+
+#temperature.critical {
+    background: #eb4d4b;
+}
+
+#backlight {
+    margin: 8px 2px 0px 0px;
+    padding: 2px 10px 2px 0px;
+    border-radius: 0px 12px 12px 0px;
+	border: 3px solid @border1;
+    border-left: none;
+	opacity: 0.8;
+    background: @background1;
+    color: @text2;
+}
+
+#network {
+    margin: 8px 2px 0px 0px;
+    padding: 2px 10px 2px 0px;
+    border-radius: 0px 12px 12px 0px;
+	border: 3px solid @border1;
+    border-left: none;
+	opacity: 0.8;
+    background: @background1;
+    color: @text1;
+}
+
+#network.disconnected {
+    background: @background1;
+    color: @text1;
+}
+
+#pulseaudio {
+    background: @background1;
+    color: @text1;
+	border: 3px solid @border1;
+    border-right: none;
+    border-radius: 12px 0px 0px 12px;
+    margin: 8px 0px 0px 8px;
+    padding: 2px 0px 0px 10px;
+	opacity: 0.8;
+}
+
+#pulseaudio.muted {
+    background: @background1;
+    color: @text1;
+	border: 3px solid @border1;
+}
+
+#custom-notifications, #idle_inhibitor {
+    background: @background1;
+    color: @text1;
+    padding: 2px 18px 2px 10px;
+}
+#custom-media {
+    background: @background1; /*remove for app specific coloring*/
+    font-size: 18px;
+    color: @text1;
+}
+.custom-spotify {
+    background: #66cc99;
+}
+.custom-firefox {
+    background: #e66000;
+}
+
+.custom-vlc {
+    background: #ffa000;
+}
+.custom-clementine {
+	background: @background1;
+}
+
+
+#tray {
+    background: @background1;
+    color: @text1;
+}
+
+#idle_inhibitor {
+    background-color: @background1;
+}
+
+#idle_inhibitor.activated {
+    background-color: @border1;
+    color: @text1;
+}

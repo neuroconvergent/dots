@@ -1,0 +1,15 @@
+[settings]
+default-library = Notes
+
+[Notes]
+dir = /home/sundar/Notes/references
+opentool = kitty -e nvim
+editor = nvim
+use-git = False
+notes-name = notes.tex
+database-backend = papis
+bibtex-unicode = False
+ref-format = {doc[title]:.15} {doc[author]:.6} {doc[year]}
+multiple-authors-format = {au[family]}, {au[given]}
+citations-file-name = citations.yaml
+

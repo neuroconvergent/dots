@@ -1,0 +1,896 @@
+local Plug = vim.fn['plug#']
+
+vim.call("plug#begin", "~/.local/share/nvim/plugged")
+-- Plug 'vim-airline/vim-airline'
+-- Plug 'vim-airline/vim-airline-themes'
+-- Plug 'scrooloose/nerdtree'
+-- Plug 'adelarsq/vim-matchit'
+-- Plug 'jiangmiao/auto-pairs'
+-- Plug 'lervag/vimtex'
+-- Plug 'tadmccorkle/markdown.nvim'
+-- Plug 'preservim/vim-markdown'
+-- -- Markview for markdown previews
+-- Plug "OXY2DEV/markview.nvim"
+-- -- Treesitter
+-- Plug 'nvim-treesitter/nvim-treesitter'
+-- --Plug 'python-mode/python-mode'
+-- --, { 'for': 'python', 'branch': 'develop' }
+-- Plug 'mhinz/vim-startify'
+-- Plug 'arzg/vim-colors-xcode'
+-- Plug 'norcalli/nvim-colorizer.lua'
+-- Plug 'nvim-lua/plenary.nvim'
+-- Plug ('nvim-telescope/telescope.nvim', { tag = '0.1.8' })
+-- Plug 'folke/which-key.nvim'
+-- Plug 'ap/vim-css-color'
+-- -- Autocompletion plugins
+-- Plug 'hrsh7th/nvim-cmp'
+-- Plug 'hrsh7th/cmp-nvim-lsp'
+-- Plug 'hrsh7th/cmp-buffer'
+-- Plug 'hrsh7th/cmp-path'
+-- Plug 'hrsh7th/cmp-cmdline'
+-- Plug 'saadparwaiz1/cmp_luasnip'
+-- -- LSP configuration
+-- Plug 'neovim/nvim-lspconfig'
+-- -- LSP installer
+-- Plug 'williamboman/mason.nvim'
+-- Plug 'williamboman/mason-lspconfig.nvim'
+-- -- papis dependencies
+-- Plug 'kkharji/sqlite.lua'
+-- Plug 'MunifTanjim/nui.nvim'
+-- Plug 'pysan3/pathlib.nvim'
+-- Plug 'nvim-neotest/nvim-nio'
+-- -- markdown renderer
+-- Plug 'previm/previm'
+-- Plug 'catppuccin/nvim'
+-- -- noice
+-- Plug 'rcarriga/nvim-notify'
+-- Plug 'MunifTanjim/nui.nvim'
+-- Plug 'folke/noice.nvim'
+-- -- indentscope
+-- Plug 'echasnovski/mini.nvim'
+-- -- toggleterm
+-- Plug ('akinsho/toggleterm.nvim', { tag = 'v2.13.1'})
+-- -- LuaSnip for snippets
+-- Plug ('L3MON4D3/LuaSnip', {tag = 'v2.*', ['do'] ='make install_jsregexp'})
+-- -- Markdown tables
+-- Plug 'dhruvasagar/vim-table-mode'
+-- -- Obsidian for knowledge management
+-- Plug 'epwalsh/obsidian.nvim'
+-- -- Reference management with papis
+-- Plug 'jghauser/papis.nvim'
+-- -- This plugin needs to be at the end
+-- Plug 'ryanoasis/vim-devicons'
+-- Plug 'nvim-tree/nvim-web-devicons'
+vim.call("plug#end")
+
+
+vim.o.relativenumber = true
+vim.o.number = true
+vim.o.tabstop = 2
+vim.o.softtabstop = 2
+vim.o.shiftwidth = 2
+vim.o.signcolumn = yes
+vim.cmd('syntax on')
+vim.o.ignorecase = true
+vim.o.smartcase = true
+vim.o.mouse = "a"
+vim.o.termguicolors = true
+vim.cmd [[let &t_8f = "\e[38;2;%lu;%lu;%lum"]]
+vim.cmd [[let &t_8b = "\e[48;2;%lu;%lu;%lum"]]
+vim.o.encoding = 'UTF-8'
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+vim.o.scrolloff = 8
+vim.o.incsearch = true
+vim.cmd[[set noswapfile]]
+vim.cmd[[set nobackup]]
+local prefix = vim.fn.expand("$HOME/.vim/")
+vim.o.undodir = prefix .. "undodir"
+vim.o.undofile = true
+vim.o.smartindent = true
+vim.o.hidden = true
+vim.o.wrap = true
+vim.o.breakindent = true
+--vim.opt.showbreak = string.rep(" ", 3) -- Make it so that long lines wrap smartly
+vim.o.linebreak = true
+vim.cmd[[set whichwrap+=<,>,h,l]]
+vim.o.foldenable = true
+vim.o.foldmethod = 'syntax'
+vim.cmd[[set list lcs=tab:\-> ]]
+vim.cmd[[set clipboard=unnamedplus]]
+vim.cmd[[set shortmess+=c]]
+vim.o.signcolumn = 'yes'
+-- vim.o.winborder = 'rounded'
+vim.g.vim_markdown_folding_disabled = 1
+vim.api.nvim_set_hl(0, "Normal", {bg = "none"})
+vim.api.nvim_set_hl(0, "NormalNC", {bg = "none"})
+vim.api.nvim_set_hl(0, "EndOfBuffer", {bg = "none"})
+
+vim.o.autoread = true
+
+--vim-table-mode
+vim.g.table_mode_corner = '|'
+
+-- Colorizer
+require 'colorizer'.setup()
+
+-- Vim Airline
+vim.cmd[[let g:airline#extensions#tabline#enabled = 1]]
+vim.cmd[[let g:airline#extensions#tabline#left_sep ='']]
+vim.cmd[[let g:airline#extensions#tabline#left_sep_alt ='']]
+vim.cmd[[let g:airline_powerline_fonts = 1]]
+vim.cmd[[let g:airline_theme = 'catppuccin']]
+
+-- catppuccin
+require("catppuccin").setup {
+	transparent_background = true,
+	integrations = {
+		treesitter = true,
+	},
+	color_overrides = {
+		all = {
+			text = "#ffffff",
+			mantle = "#dfafaf",
+			crust = "#d7875f",
+			blue = "#7e99d6",
+			red = "#E78284",
+			lavender = "#B4BEFE",
+			mauve = "#CA9EE6",
+			sky = "#85C1DC",
+			green = "#A6E3A1",
+			peach = "#ffd3ac",
+			codeblock = "#2e3343",
+			surface0 = "#ffffff"
+		},
+		latte = {},
+		frappe = {},
+		macchiato = {},
+		mocha = {},
+	},
+	custom_highlights = function(colors)
+		return {
+			Comment = { fg = colors.mantle },
+			TabLineSel = { fg = "#ff0000" },
+			LineNr = { fg = colors.text },
+			-- Diff highlights
+			DiffAdd = { bg = colors.green, fg = colors.text },
+			DiffChange = { bg = colors.peach, fg = colors.text },
+			DiffDelete = { bg = colors.crust, fg = colors.text },
+			DiffText = { bg = colors.blue, fg = colors.text },
+
+			-- nvim-notify highlights
+			NotifyERRORBorder = { fg = colors.red },
+			NotifyWARNBorder  = { fg = colors.crust },
+			NotifyINFOBorder  = { fg = colors.green },
+			NotifyDEBUGBorder = { fg = "#8B8B8B" },
+			NotifyTRACEBorder = { fg = colors.codeblock },
+
+			NotifyERRORIcon   = { fg = colors.red },
+			NotifyWARNIcon    = { fg = colors.crust },
+			NotifyINFOIcon    = { fg = colors.green },
+			NotifyDEBUGIcon   = { fg = "#8B8B8B" },
+			NotifyTRACEIcon   = { fg = colors.mauve },
+
+			NotifyERRORTitle  = { fg = colors.red },
+			NotifyWARNTitle   = { fg = colors.crust },
+			NotifyINFOTitle   = { fg = colors.green },
+			NotifyDEBUGTitle  = { fg = "#8B8B8B" },
+			NotifyTRACETitle  = { fg = colors.crust },
+
+			NotifyERRORBody   = { link = "Normal" },
+			NotifyWARNBody    = { link = "Normal" },
+			NotifyINFOBody    = { link = "Normal" },
+			NotifyDEBUGBody   = { link = "Normal" },
+			NotifyTRACEBody   = { link = "Normal" },
+
+			-- Markview highlights
+			MarkviewPalette0        = { fg = colors.text,   bg = "NONE", underline = true, bold = true},
+			MarkviewPalette1        = { fg = colors.red,    bg = "NONE", underline = true, bold = true},
+			MarkviewPalette2        = { fg = colors.lavender, bg = "NONE", underline = true, bold = true},
+			MarkviewPalette3        = { fg = colors.mauve,  bg = "NONE", underline = true, bold = true},
+			MarkviewPalette4        = { fg = colors.green,  bg = "NONE", underline = true, bold = true},
+			MarkviewPalette5        = { fg = colors.red,    bg = "NONE", underline = true, bold = true},
+			MarkviewPalette6        = { fg = colors.peach,  bg = "NONE", underline = true, bold = true},
+			MarkviewCode            = { bg = colors.codeblock },
+			MarkviewInlineCode      = { fg = colors.text, bg = "NONE" },
+			MarkviewHyperlink       = { fg = colors.crust, underline = true },
+			MarkviewTableHeader     = { fg = colors.mantle, bold = true },
+			["@punctuation.bracket"]   = { fg = colors.text },
+			["@punctuation.delimiter"] = { fg = colors.peach },
+
+			}
+	end,
+	highlight_overrides = {
+		all = function(colors)
+			return {
+				["@punctuation.delimiter"] = { fg = colors.peach },
+				-- or
+			}
+		end,
+	},
+}
+vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#3e4456", bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#2e3343" })
+vim.cmd.colorscheme 'catppuccin-latte'
+
+-- WhichKey.nvim
+require("which-key").setup {
+	preset = "modern",
+	layout = {
+		height = { min = 4, max = 25 }, -- min and max height of the columns
+		width = { min = 20, max = 50 }, -- min and max width of the columns
+		spacing = 3, -- spacing between columns
+		align = "center", -- align columns left, center or right
+	},
+}
+
+-- noice.nvim
+local palette = require("catppuccin.palettes").get_palette()
+require("noice").setup({
+	views = {
+		cmdline_popup = {
+			border = {
+				style = "rounded",
+			},
+			win_options = {
+				winblend = 20,	-- set this > 0 to also simulate fading
+			},
+		},
+	},
+	lsp = {
+		-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+		override = {
+			["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+			["vim.lsp.util.stylize_markdown"] = true,
+			["cmp.entry.get_documentation"] = true,
+		},
+	},
+	-- you can enable a preset for easier configuration
+	presets = {
+		bottom_search = true, -- use a classic bottom cmdline for search
+		command_palette = true, -- position the cmdline and popupmenu together
+		long_message_to_split = true, -- long messages will be sent to a split
+		inc_rename = false, -- enables an input dialog for inc-rename.nvim
+		lsp_doc_border = false, -- add a border to hover docs and signature help
+	},
+})
+
+-- Notify
+require("notify").setup({
+	background_colour = "#000000",
+	stages = "fade",
+	})
+
+-- indentscope
+require('mini.indentscope').setup({
+	symbol='│',
+})
+
+-- Treesitter
+require("nvim-treesitter.install").update({ with_sync = true })()
+require'nvim-treesitter.configs'.setup {
+	-- A list of parser names, or "all" (the five listed parsers should always be installed)
+	ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "latex", "bibtex" },
+
+	-- Install parsers synchronously (only applied to `ensure_installed`)
+	sync_install = false,
+
+	-- Automatically install missing parsers when entering buffer
+	-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+	auto_install = true,
+
+	-- List of parsers to ignore installing (or "all")
+	ignore_install = {},
+
+	---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
+	-- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+
+	highlight = {
+		enable = true,
+
+		-- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+		-- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+		-- the name of the parser)
+		-- list of language that will be disabled
+		disable = {},
+		-- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
+		disable = function(lang, buf)
+			local max_filesize = 100 * 1024 -- 100 KB
+			local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+			if ok and stats and stats.size > max_filesize then
+					return true
+			end
+		end,
+
+		-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+		-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+		-- Using this option may slow down your editor, and you may see some duplicate highlights.
+		-- Instead of true it can also be a list of languages
+		additional_vim_regex_highlighting = false,
+	},
+}
+
+-- Vim NerdTree
+vim.cmd[[let NERDTreeShowHidden = 1]]
+
+require('telescope').setup({
+	defaults = {
+		file_ignore_patterns = {"node_modules"},
+		preview = {
+			treesitter = true,
+		},
+	},
+}) 
+-- Mappings
+-- Open NERDTree
+vim.keymap.set('n','<C-o>',":NERDTreeToggle<CR>")
+vim.g.NERDTreeHijackNetrw = 1
+vim.keymap.set ('n', '<C-e>', ":e.<CR>")
+-- Tab manipulation
+vim.keymap.set('n','<Tab>', ":bnext<CR>")
+vim.keymap.set('n','<S-Tab>', ":bprev<CR>")
+vim.keymap.set('n','<M-w>', ":bdel<CR>")
+vim.keymap.set('n','<M-t>', ":enew<CR>")
+-- Clear search highlighting
+vim.keymap.set('n', '<C-f>', ':let @/ = "" <CR>')
+-- Warped line motion 
+vim.keymap.set('n', '<C-j>', 'gj')
+vim.keymap.set('n', '<C-k>', 'gk')
+
+-- cmp mapping for autocompletion, instead of CoC
+local cmp = require("cmp")
+local luasnip = require("luasnip")
+
+-- Check if backspace is needed
+local has_words_before = function()
+	local col = vim.fn.col('.') - 1
+	return col ~= 0 and vim.fn.getline('.'):sub(col, col):match("%s") == nil
+end
+
+cmp.setup({
+	snippet = {
+		expand = function(args)
+			luasnip.lsp_expand(args.body)
+		end,
+	},
+	mapping = cmp.mapping.preset.insert({
+		-- Your CoC-like <Tab> behavior
+		["<Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item()
+			elseif luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+			elseif has_words_before() then
+				cmp.complete()
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+
+		["<S-Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item()
+			elseif luasnip.jumpable(-1) then
+				luasnip.jump(-1)
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+
+		["<CR>"] = cmp.mapping.confirm({ select = true }),
+		["<C-Space>"] = cmp.mapping.complete(),
+	}),
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
+	},
+	sources = {
+		{ name = "nvim_lsp" },
+		{ name = "luasnip" },
+		{ name = "buffer" },
+		{ name = "path" },
+	},
+})
+
+-- Telescope mappings
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', ":Telescope find_files hidden=true <CR>", default_opts) -- Find Files
+vim.keymap.set('n', '<leader>fr', ":Telescope oldfiles hidden=true <CR>", default_opts)
+vim.keymap.set('n', '<leader>fg', ":Telescope live_grep<CR>", default_opts)
+vim.keymap.set('n', '<leader>fb', ":Telescope buffers<CR>", default_opts)
+vim.keymap.set('n', '<leader>fh', ":Telescope help_tags<CR>", default_opts)
+vim.keymap.set('n', '<leader>fn', ":Telescope notify<CR>", default_opts)
+
+-- Obsidian mappings
+vim.keymap.set('n', '<leader>fo', ":ObsidianQuickSwitch<CR>", default_opts)
+
+-- PrevimOpen
+vim.cmd[[let g:previm_open_cmd = 'firefox']]
+
+-- Markview deactivate
+vim.keymap.set('n', '<leader>m', ":Markview<CR>", default_opts)
+
+-- Vimtex
+vim.g.vimtex_compiler_latexmk = {
+	build_dir = '',
+	callback = 1,
+	continuous = 1,
+	executable = 'latexmk',
+	options = {
+		'-pdf',								 -- generate PDF
+		'-pdflatex=lualatex -synctex=1 -interaction=nonstopmode',	-- use lualatex as pdflatex cmd
+	}
+}
+
+-- Mason
+require("mason").setup()
+require("mason-lspconfig").setup({
+	ensure_installed = {
+		"lua_ls",		 -- Lua
+		"pyright",		-- Python
+		"ts_ls",	 -- JavaScript / TypeScript
+		"clangd",		 -- C / C++
+		"html",
+		"cssls",
+		"jsonls",
+	"texlab",
+	"marksman",
+	"yamlls",
+	"jsonls",
+	},
+	automatic_installation = true,
+})
+
+-- LSP
+local lspconfig = require("lspconfig")
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+-- Set up all LSPs with default capabilities
+local servers = {
+	"lua_ls", "pyright", "ts_ls", "clangd",
+	"html", "cssls", "jsonls", "texlab", "marksman",
+	"yamlls", "jsonls"
+}
+
+for _, server in ipairs(servers) do
+	local ok, lsp = pcall(function() return lspconfig[server] end)
+	if ok and lsp then
+		lsp:setup({
+			capabilities = capabilities,
+		})
+	else
+		print("LSP server not found:", server)
+	end
+end
+
+-- lsp automatic show diagnostic on hovering cursor for 2s on line
+vim.diagnostic.config({
+  float = {
+    border = "rounded",
+  },
+})
+vim.o.updatetime = 2000
+vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })]]
+
+-- toggleterm
+require("toggleterm").setup({
+	direction = 'float',
+	close_on_exit = false,
+	open_mapping = [[<C-CR>]],
+	persist_mode = true,
+	persist_size = true,
+	start_in_insert = true,
+	hidden = false,
+})
+-- Exit toggleterm
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { noremap = true })
+vim.keymap.set('t', '<C-x>', [[<C-\><C-n>]], { noremap = true })
+
+-- LuaSnip
+local ls = require("luasnip")
+local s = ls.snippet
+local t = ls.text_node
+local i = ls.insert_node
+local f = ls.function_node
+local fmt = require("luasnip.extras.fmt").fmt
+local rep = require("luasnip.extras").rep
+
+vim.keymap.set({"i"}, "<C-K>", function() ls.expand() end, {silent = true})
+vim.keymap.set({"i", "s"}, "<C-L>", function() ls.jump(1) end, {silent = true})
+vim.keymap.set({"i", "s"}, "<C-H>", function() ls.jump(-1) end, {silent = true})
+vim.keymap.set({"i", "s"}, "<C-E>", function()
+	if ls.choice_active() then
+		ls.change_choice(1)
+	end
+end, {silent = true})
+
+ls.add_snippets("cpp", {
+	s("main", {
+		t({
+			"#include <iostream>",
+			"",
+			"int main() {",
+			"		",
+		}),
+		i(1, "// code here"),
+		t({
+			"",
+			"		return 0;",
+			"}",
+		}),
+	}),
+
+	s("deal2basic", fmt([[
+#include <deal.II/grid/tria.h>
+#include <deal.II/grid/grid_generator.h>
+#include <deal.II/dofs/dof_handler.h>
+#include <deal.II/fe/fe_q.h>
+
+using namespace dealii;
+
+template <int dim>
+class {}
+{{
+public:
+	{}();
+	void run();
+
+private:
+	void setup_system();
+	void assemble_system();
+	void solve();
+	void output_results();
+
+	Triangulation<dim> triangulation;
+	FE_Q<dim> fe;
+	DoFHandler<dim> dof_handler;
+}};
+
+template <int dim>
+{}<dim>::{}()
+	: fe({})
+	, dof_handler(triangulation)
+{{}}
+
+template <int dim>
+void {}<dim>::run()
+{{
+	setup_system();
+	assemble_system();
+	solve();
+	output_results();
+}}
+
+template <int dim>
+void {}<dim>::setup_system()
+{{
+	GridGenerator::{}(triangulation);
+	dof_handler.distribute_dofs(fe);
+}}
+
+template <int dim>
+void {}<dim>::assemble_system()
+{{
+	// TODO: assemble system
+}}
+
+template <int dim>
+void {}<dim>::solve()
+{{
+	// TODO: solve system
+}}
+
+template <int dim>
+void {}<dim>::output_results()
+{{
+	// TODO: output results
+}}
+
+int main()
+{{
+	{}<{}> model;
+	model.run();
+	return 0;
+}}
+]], {
+	i(1, "MyDeal2Model"), -- class name (used multiple times)
+	rep(1),							 -- constructor name (same as class)
+	rep(1),							 -- class name again (for constructor definition)
+	rep(1),							 -- constructor name again
+	rep(1),							 -- class name for run method
+	rep(1),							 -- class name for setup_system
+	i(2, "hyper_cube"),	 -- grid generator
+	rep(1),							 -- class name for assemble_system
+	rep(1),							 -- class name for solve
+	rep(1),							 -- class name for output_results
+	rep(1),							 -- class name for main instantiation
+	rep(1),							 -- class name (e.g., MyDeal2Model)
+	i(3, "2")						 -- dimension
+	}))
+})
+-- Function to get current UTC date/time
+local function get_date()
+	return os.date("%d %B, %Y")
+end
+
+ls.add_snippets("markdown", {
+	s("notes", fmt([[
+title: "{}"
+author: "Sundar Gurumurthy"
+institute: "Cranfield University"
+topic: "{}"
+theme: "Boadilla"
+colortheme: "rose"
+fonttheme: "professionalfonts"
+mainfont: "Iosevka Nerd Font"
+fontsize: 12pt
+urlcolor: orchid
+linkcolor: violet
+citecolor: maroon
+linkstyle: bold
+aspectratio: 169
+date: {}
+lang: en-GB
+section-titles: false
+toc: true
+]], {
+		i(1, "MyTitle"),	-- Title
+		i(2, "MyTopic"),	-- Topic
+		f(get_date),			-- Get date with function
+	})
+	)
+})
+
+-- Function to get current date/time and time zone
+local function get_datetime()
+	local utc = os.time(os.date("!*t"))
+	local localt = os.time()
+	local diff = os.difftime(localt, utc)
+
+	local sign = diff >= 0 and "+" or "-"
+	diff = math.abs(diff)
+
+	local hours = math.floor(diff / 3600)
+	local mins = math.floor((diff % 3600) / 60)
+
+	return os.date("%Y-%m-%d %H:%M:%S") .. string.format(" %s%02d%02d", sign, hours, mins)
+end
+
+ls.add_snippets("markdown", {
+	s("blogpost", fmt([[
+---
+layout: post
+title: {}
+date: {}
+description: {}
+tags: {}
+categories: self, 2025
+toc:
+	sidebar: left
+---
+]], {
+		i(1, "What I do & why"),										 -- title
+		f(get_datetime),														 -- date & time
+		i(2, "description"),												 -- description
+	i(3, "tag1, tag2")													 -- tags
+	}))
+})
+
+
+-- Reference to catppuccin color palette
+
+-- Markview config
+local spec = require("markview.spec");
+spec.config = spec.default;
+
+require("markview").setup({
+	auto_start = true,
+	preview = {
+				icon_provider = "devicons", -- "mini" or "devicons"
+	},
+})
+
+-- Obsidian config
+require("obsidian").setup({
+	workspaces = {
+		{
+			name = "personal",
+			path = "~/Notes",
+		},
+	},
+	notes_subdir = "",
+	templates = {
+		folder = "Templates",
+		date_format = "%Y-%m-%d",
+		time_format = "%H:%M",
+		-- A map for custom variables, the key should be the variable and the value a function
+		substitutions = {},
+	},
+	daily_notes = {
+		folder = "journal",
+		date_format = "%Y-%m-%d",
+		alias_format = "%d %B, %Y",
+		default_tags = {"daily_journal"},
+		template = "daily.md",
+	},
+	completion = {
+		nvim_cmp = true,
+		min_chars = 2,
+	},
+	-- Optional, configure key mappings. These are the defaults. If you don't want to set any keymappings this
+	-- way then set 'mappings = {}'.
+	mappings = {
+		-- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
+		["gf"] = {
+			action = function()
+				return require("obsidian").util.gf_passthrough()
+			end,
+			opts = { noremap = false, expr = true, buffer = true },
+		},
+		-- Toggle check-boxes.
+		["<leader>ch"] = {
+			action = function()
+				return require("obsidian").util.toggle_checkbox()
+			end,
+			opts = { buffer = true },
+		},
+		-- Smart action depending on context, either follow link or toggle checkbox.
+		["<cr>"] = {
+			action = function()
+				return require("obsidian").util.smart_action()
+			end,
+			opts = { buffer = true, expr = true },
+		}
+	},
+	new_notes_location = "notes_subdir",
+	-- Optional, customize how note IDs are generated given an optional title.
+	---@param title string|?
+	---@return string
+	note_id_func = function(title)
+		-- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
+		-- In this case a note with the title 'My new note' will be given an ID that looks
+		-- like '1657296016-my-new-note', and therefore the file name '1657296016-my-new-note.md'
+		local note_prefix = ""
+		if title ~= nil then
+			-- If title is given, transform it into valid file name.
+			note_prefix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+		else
+			-- If title is nil, just add 4 random uppercase letters to the suffix.
+			for _ = 1, 4 do
+				note_prefix = note_prefix .. string.char(math.random(65, 90))
+			end
+		end
+		return note_prefix .. "-" .. tostring(os.time())
+	end,
+	-- Optional, customize how note file names are generated given the ID, target directory, and title.
+	---@param spec { id: string, dir: obsidian.Path, title: string|? }
+	---@return string|obsidian.Path The full path to the new note.
+	note_path_func = function(spec)
+		-- This is equivalent to the default behavior.
+		local path = spec.dir / tostring(spec.id)
+		return path:with_suffix(".md")
+	end,
+	-- Optional, customize how wiki links are formatted. You can set this to one of:
+	--	* "use_alias_only", e.g. '[[Foo Bar]]'
+	--	* "prepend_note_id", e.g. '[[foo-bar|Foo Bar]]'
+	--	* "prepend_note_path", e.g. '[[foo-bar.md|Foo Bar]]'
+	--	* "use_path_only", e.g. '[[foo-bar.md]]'
+	-- Or you can set it to a function that takes a table of options and returns a string, like this:
+	wiki_link_func = "use_alias_only",
+	markdown_link_func = "use_alias_only",
+	preffered_link_style = "wiki",
+	diable_frontmatter = "false",
+	-- Optional, by default when you use `:ObsidianFollowLink` on a link to an external
+	-- URL it will be ignored but you can customize this behavior here.
+	---@param url string
+	follow_url_func = function(url)
+		-- Open the URL in the default web browser.
+		-- vim.fn.jobstart({"open", url})	-- Mac OS
+		 vim.fn.jobstart({"xdg-open", url})	-- linux
+		-- vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
+		-- vim.ui.open(url) -- need Neovim 0.10.0+
+	end,
+	picker = {
+		-- Set your preferred picker. Can be one of 'telescope.nvim', 'fzf-lua', or 'mini.pick'.
+		name = "telescope.nvim",
+		-- Optional, configure key mappings for the picker. These are the defaults.
+		-- Not all pickers support all mappings.
+		note_mappings = {
+			-- Create a new note from your query.
+			new = "<C-x>",
+			-- Insert a link to the selected note.
+			insert_link = "<C-l>",
+		},
+		tag_mappings = {
+			-- Add tag(s) to current note.
+			tag_note = "<C-x>",
+			-- Insert a tag at the current location.
+			insert_tag = "<C-l>",
+		},
+	},
+	-- Optional, sort search results by "path", "modified", "accessed", or "created". The recommend value is "modified" and `true` for `sort_reversed`, which means, for example,
+	-- that `:ObsidianQuickSwitch` will show the notes sorted by latest modified time
+	sort_by = "accessed",
+	sort_reversed = true,
+	ui = {
+		enable = false;
+	}
+})
+
+require('markdown').setup({
+	-- Disable all keymaps by setting mappings field to 'false'.
+	-- Selectively disable keymaps by setting corresponding field to 'false'.
+	mappings = {
+		inline_surround_toggle = "gs", -- (string|boolean) toggle inline style
+		inline_surround_toggle_line = "gss", -- (string|boolean) line-wise toggle inline style
+		inline_surround_delete = "ds", -- (string|boolean) delete emphasis surrounding cursor
+		inline_surround_change = "cs", -- (string|boolean) change emphasis surrounding cursor
+		link_add = "gl", -- (string|boolean) add link
+		link_follow = "gx", -- (string|boolean) follow link
+		go_curr_heading = "]c", -- (string|boolean) set cursor to current section heading
+		go_parent_heading = "]p", -- (string|boolean) set cursor to parent section heading
+		go_next_heading = "]]", -- (string|boolean) set cursor to next section heading
+		go_prev_heading = "[[", -- (string|boolean) set cursor to previous section heading
+	},
+	inline_surround = {
+		-- For the emphasis, strong, strikethrough, and code fields:
+		-- * 'key': used to specify an inline style in toggle, delete, and change operations
+		-- * 'txt': text inserted when toggling or changing to the corresponding inline style
+		emphasis = {
+			key = "i",
+			txt = "*",
+		},
+		strong = {
+			key = "b",
+			txt = "**",
+		},
+		strikethrough = {
+			key = "s",
+			txt = "~~",
+		},
+		code = {
+			key = "c",
+			txt = "`",
+		},
+	},
+	link = {
+		paste = {
+			enable = true, -- whether to convert URLs to links on paste
+		},
+	},
+	toc = {
+		-- Comment text to flag headings/sections for omission in table of contents.
+		omit_heading = "toc omit heading",
+		omit_section = "toc omit section",
+		-- Cycling list markers to use in table of contents.
+		-- Use '.' and ')' for ordered lists.
+		markers = { "-" },
+	},
+	-- Hook functions allow for overriding or extending default behavior.
+	-- Called with a table of options and a fallback function with default behavior.
+	-- Signature: fun(opts: table, fallback: fun())
+	hooks = {
+		-- Called when following links. Provided the following options:
+		-- * 'dest' (string): the link destination
+		-- * 'use_default_app' (boolean|nil): whether to open the destination with default application
+		--	 (refer to documentation on <Plug> mappings for explanation of when this option is used)
+		follow_link = nil,
+	},
+	on_attach = function(bufnr)
+	  local function toggle(key)
+	    return "<Esc>gv<Cmd>lua require'markdown.inline'"
+	      .. ".toggle_emphasis_visual'" .. key .. "'<CR>"
+	  end
+	
+	  vim.keymap.set("x", "<C-b>", toggle("b"), { buffer = bufnr })
+	  vim.keymap.set("x", "<C-i>", toggle("i"), { buffer = bufnr })
+	end,
+})
+
+vim.schedule(function()
+  require("papis").setup({
+    enable_keymaps = true,
+    init_filetypes = { "markdown", "yaml", "tex", "norg" },
+    -- other optional settings
+  })
+end)

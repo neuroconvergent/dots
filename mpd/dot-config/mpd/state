@@ -1,0 +1,24 @@
+sw_volume: 100
+audio_device_state:1:default detected output
+state: pause
+current: 1
+time: 530.83
+random: 0
+repeat: 0
+single: 0
+consume: 0
+crossfade: 0
+mixrampdb: 0
+mixrampdelay: -1
+lastloadedplaylist: 
+playlist_begin
+0:Agalloch/[2002] Agalloch - The Mantle/01 A Celebration for the Death of Man….flac
+1:Agalloch/[2002] Agalloch - The Mantle/02 In The Shadow Of Our Pale Companion.flac
+2:Agalloch/[2002] Agalloch - The Mantle/03 Odal.flac
+3:Agalloch/[2002] Agalloch - The Mantle/04 I Am The Wooden Doors.flac
+4:Agalloch/[2002] Agalloch - The Mantle/05 The Lodge.flac
+5:Agalloch/[2002] Agalloch - The Mantle/06 You Were But A Ghost In My Arms.flac
+6:Agalloch/[2002] Agalloch - The Mantle/07 The Hawthorne Passage.flac
+7:Agalloch/[2002] Agalloch - The Mantle/08 …and the Great Cold Death of the Earth.flac
+8:Agalloch/[2002] Agalloch - The Mantle/09 A Desolation Song.flac
+playlist_end

@@ -1,0 +1,30 @@
+return {
+	"vim-airline/vim-airline",
+	lazy = false,
+	dependencies = {
+		"vim-airline/vim-airline-themes",
+		"catppuccin/nvim",
+	},
+	init = function()
+		vim.g["airline#extensions#tabline#enabled"] = 0
+		vim.g["airline#extensions#tabline#left_sep"] = ""
+		vim.g["airline#extensions#tabline#left_sep_alt"] = ""
+		vim.g["airline_powerline_fonts"] = 1
+		vim.g["airline_theme"] = "catppuccin"
+		vim.g["airline#extensions#tabline#formatter"] = "unique_tail_improved"
+
+		-- Enable airline extensions
+		vim.g["airline#extensions#branch#enabled"] = 1
+		vim.g["airline#extensions#whitespace#enabled"] = 1
+		vim.g["airline#extensions#languageclient#enabled"] = 1
+		vim.g["airline#extensions#nvimlsp#enabled"] = 1
+
+		-- Clear middle section (optional)
+
+		-- Set right sections: filetype icon, cursor position
+
+		-- Optional: show LSP diagnostics explicitly (warning + error)
+		--		vim.g.airline_section_warning = "%{airline#extensions#nvimlsp#get_warnings()}"
+		--		vim.g.airline_section_error = "%{airline#extensions#nvimlsp#get_errors()}"
+	end,
+}

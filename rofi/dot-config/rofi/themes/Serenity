@@ -1,0 +1,165 @@
+/**
+ * Author: Hyp0thet1cal
+ */
+* {
+	rofi-color-enabled: true;
+	fixed-num-lines: 0;
+    text-color:                  #f2f2f2;
+    background-color:            #262a3500;
+    background:                  #262a35bb;
+    red:                         #f15d22;
+    blue:                        #48b9c7;
+    pink:                        #dfafaf;
+    foreground:                  #ffffff;
+
+    selected-normal-foreground:  @foreground;
+    normal-foreground:           @foreground;
+    alternate-normal-background: @background-color;
+    selected-urgent-foreground:  @foreground;
+    urgent-foreground:           @foreground;
+    alternate-urgent-background: @background;
+    active-foreground:           @foreground;
+    selected-active-foreground:  @foreground;
+    alternate-normal-foreground: @foreground;
+    alternate-active-background: @blue;
+    bordercolor:                 @pink;
+    normal-background:           @background-color;
+    selected-normal-background:  @pink;
+    separatorcolor:              @pink;
+    spacing:                     0;
+    urgent-background:           @red;
+    alternate-urgent-foreground: @foreground;
+    selected-urgent-background:  @red;
+    alternate-active-foreground: @foreground;
+    selected-active-background:  @pink;
+    active-background:           @pink;
+    font: "IosevkaTerm Nerd Font 18";
+	display-run: "Command";
+}
+window {
+    tansparency: "real";
+	fixed-height: 0;
+	dynamic: true;
+    width: 25em;
+	position: center;
+    border: 0;
+	border-radius: 15;
+	border-color: @pink;
+    padding:    0;
+    text-color: @bordercolor;
+    background-color: @background-color;
+}
+mainbox {
+    border:  0;
+    padding: 0;
+}
+message {
+    border:     1px dash 0px 0px ;
+    text-color: @separatorcolor;
+    padding:    2px 0px 0px ;
+}
+textbox {
+    text-color: @foreground;
+}
+listview {
+    fixed-height: 0;
+    dynamic: true;
+	expand: true;
+    border: 3px ;
+	border-color: @pink;
+	margin: 5px;
+	border-radius: 15px;
+    padding: 10px;
+    text-color: @separatorcolor;
+	background-color: @background;
+}
+element {
+    border: 0px 0px 3px 0px;
+	border-radius: 12px;
+	border: 3px;
+	margin: 2px;
+	border-color: @pink;
+}
+element.normal.normal {
+    text-color: @normal-foreground;
+    background-color: @normal-background;
+}
+element.normal.urgent {
+    text-color: @urgent-foreground;
+    background-color: @urgent-background;
+}
+element.normal.active {
+    text-color: @active-foreground;
+    background-color: @active-background;
+}
+element.selected.normal {
+    text-color: @selected-normal-foreground;
+    background-color: @selected-normal-background;
+}
+element.selected.urgent {
+    text-color: @selected-urgent-foreground;
+    background-color: @selected-urgent-background;
+}
+element.selected.active {
+    text-color: @selected-active-foreground;
+    background-color: @selected-active-background;
+}
+element.alternate.normal {
+    text-color: @alternate-normal-foreground;
+    background-color: @alternate-normal-background;
+}
+element.alternate.urgent {
+    text-color: @alternate-urgent-foreground;
+    background-color: @alternate-urgent-background;
+}
+element.alternate.active {
+    text-color: @alternate-active-foreground;
+    background-color: @alternate-active-background;
+}
+mode-switcher {
+    border: 1px dash 0px 0px ;
+}
+button selected {
+    text-color: @selected-normal-foreground;
+    background-color: @selected-normal-background;
+}
+inputbar {
+    spacing: 5;
+	margin: 5px 5px 5px 5px;
+    border: 3px 3px 3px 3px;
+	padding: 0px 0px 5px 0px;
+	border-radius: 15px 15px 15px 15px;
+	border-color: @pink;
+	background-color: @background;
+}
+button normal {
+    text-color: @foreground;
+}
+
+inputbar {
+    children:   [ icon-search,textbox-prompt-colon,entry,case-indicator ];
+}
+textbox-prompt-colon {
+    expand:     false;
+    str:        ":";
+    margin:     0px 0.3em 0em 0em ;
+    text-color: @normal-foreground;
+}
+element-text, element-icon {
+    background-color: inherit;
+    text-color:       inherit;
+	size: 1.0em;
+}
+
+icon-search {
+  expand:   false;
+  text-color: @foreground;
+  filename: "search";
+  size: 1em;
+  vertical-align: 0.5;
+}
+
+entry {
+  placeholder:        "Search";
+  placeholder-color:  @foreground;
+}

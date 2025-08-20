@@ -1,0 +1,26 @@
+
+   :root {
+  --background-image: url('https://images.wallpapersden.com/image/download/serenity-in-low-poly_a2hlaWiUmZqaraWkpJRmbmdlrWZlbWU.jpg'); /* Main background image | URL MUST BE A DIRECT LINK (ending in .jpg, .jpeg, .png, .gif) */
+
+  --serverlist-brightness: 0.7; /* Brightness for serverlist | 0 - 1 (decimals allowed) | DEFAULT: 0.8 */
+  --left-brightness: 0.7; /* Channels and DM list brightness | 0 - 1 (decimals allowed) | DEFAULT: 0.8 */
+  --middle-brightness: 0.6; /* Chat brightness | 0 - 1 (decimals allowed) | DEFAULT: 0.6 */
+  --right-brightness: 0.0; /* Members and Now Playing brightness | 0 - 1 (decimals allowed) | DEFAULT: 0 */
+  --overlay-brightness: 0.75; /* Brightness for popouts and modals | 0 - 1 (decimals allowed) | DEFAULT: 0.75 */
+
+  --gradient-primary: 223, 175, 175; /* DEFAULT: 103,58,183 */
+  --gradient-secondary: 215, 135, 95; /* DEFAULT: 63,81,181 */
+  --gradient-direction: 230deg; /* DEFAULT: 320deg */
+  --tint-colour: 255, 255, 255; /* Colour of tint | DEAFULT: 255,51,159 */
+  --tint-brightness: 0.5; /* Brightness of --tint-colour | 0 - 1 (decimals allowed) | DEFAULT: 0 */
+  --window-padding: 0px; /* Spacing around the Discord window | DEFAULT: 20px */
+  --window-roundness: 0px; /* Roundness of Discord | DEFAULT: 10px */
+  --scrollbar-colour: rgb(255, 255, 255, 0.2); /* DEFAULT: rgb(255,255,255,0.05) */
+  --link-colour: #d7875f; /* DEFAULT: #00b0f4 */
+  --font: "Iosevka Nerd Font";
+}
+
+
+  
+
+

@@ -1,0 +1,4 @@
+rofi.theme: {~/.config/rofi/themes/Serenity_Power}
+rofi.xoffset: -80
+rofi.yoffset: -50
+rofi.line-margin: 0

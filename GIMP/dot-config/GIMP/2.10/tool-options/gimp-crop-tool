@@ -1,0 +1,10 @@
+# GIMP gimp-crop-tool options
+
+(aspect-denominator 4)
+(aspect-numerator 3)
+(fixed-rule-active yes)
+(guide thirds)
+(overridden-fixed-aspect yes)
+(pattern "Pine")
+
+# end of gimp-crop-tool options
