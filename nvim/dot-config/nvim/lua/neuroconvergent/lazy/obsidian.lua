@@ -101,8 +101,8 @@ return {
 		--	* "prepend_note_path", e.g. '[[foo-bar.md|Foo Bar]]'
 		--	* "use_path_only", e.g. '[[foo-bar.md]]'
 		-- Or you can set it to a function that takes a table of options and returns a string, like this:
-		wiki_link_func = "use_alias_only",
-		markdown_link_func = "use_alias_only",
+		wiki_link_func = "prepend_note_id",
+		markdown_link_func = "prepend_note_id",
 		preffered_link_style = "wiki",
 		diable_frontmatter = "false",
 		-- Optional, by default when you use `:ObsidianFollowLink` on a link to an external

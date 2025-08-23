@@ -12,7 +12,7 @@ vim.keymap.set("n", "<C-j>", "gj")
 vim.keymap.set("n", "<C-k>", "gk")
 
 vim.g.mapleader = " "
-vim.g.maplocalleade = "\\"
+vim.g.maplocalleader = "\\"
 
 -- Telescope
 local builtin = require("telescope.builtin")
@@ -37,8 +37,11 @@ vim.api.nvim_set_keymap(
 	{ noremap = true, silent = true }
 )
 
--- Diagnostics
+-- lsp
+-- NOTE: Load Telescope ui select extension for code actions in telescope
+require("telescope").load_extension("ui-select")
 vim.keymap.set("n", "<leader>cd", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Open code actions" })
 
 -- Markview deactivate
 vim.keymap.set("n", "<leader>m", ":Markview<CR>", default_opts)
@@ -89,8 +92,21 @@ vim.keymap.set("n", "<C-S-N>", function()
 	harpoon:list():next()
 end)
 
+-- TODO comments
+vim.keymap.set("n", "<leader>ftd", ":TodoTelescope <CR>")
+vim.keymap.set("n", "]t", function()
+  require("todo-comments").jump_next()
+end, { desc = "Next todo comment" })
+
+vim.keymap.set("n", "[t", function()
+  require("todo-comments").jump_prev()
+end, { desc = "Previous todo comment" })
+
+-- You can also specify a list of valid jump keywords
+
 -- HACK: Manage Markdown tasks in Neovim similar to Obsidian | Create weekly task management notes with
 -- automatic links to daily journals of all days in the week
+-- Inspired by Linkarzu on Youtube
 --
 -- ObsidianNewFromTemplate can be used with the template substitution option but this is easier
 --
@@ -123,14 +139,14 @@ vim.keymap.set("n", "<leader>tdw", function()
 		end
 
 		-- --- Build daily links for the week ---
-		local function iso_week_monday(year, week)
+		local function iso_week_monday(currentYear, currentWeek)
 			-- January 4th is always in week 1
-			local jan4 = os.time({ year = year, month = 1, day = 4 })
+			local jan4 = os.time({ year = currentYear, month = 1, day = 4 })
 			local jan4_wday = tonumber(os.date("%w", jan4))
 			-- Compute offset to Monday (ISO: Monday=1, Sunday=7)
 			local offset = (jan4_wday == 0 and -6 or 1 - jan4_wday)
 			local first_monday = jan4 + offset * 24 * 60 * 60
-			return first_monday + (week - 1) * 7 * 24 * 60 * 60
+			return first_monday + (currentWeek - 1) * 7 * 24 * 60 * 60
 		end
 
 		local week_monday = iso_week_monday(tonumber(year), tonumber(week))
@@ -188,14 +204,14 @@ vim.keymap.set("n", "<leader>tdn", function()
 		end
 
 		-- --- Build daily links for the week ---
-		local function iso_week_monday(year, week)
+		local function iso_week_monday(currentYear, currentWeek)
 			-- January 4th is always in week 1
-			local jan4 = os.time({ year = year, month = 1, day = 4 })
+			local jan4 = os.time({ year = currentYear, month = 1, day = 4 })
 			local jan4_wday = tonumber(os.date("%w", jan4))
 			-- Compute offset to Monday (ISO: Monday=1, Sunday=7)
 			local offset = (jan4_wday == 0 and -6 or 1 - jan4_wday)
 			local first_monday = jan4 + offset * 24 * 60 * 60
-			return first_monday + (week - 1) * 7 * 24 * 60 * 60
+			return first_monday + (currentWeek - 1) * 7 * 24 * 60 * 60
 		end
 
 		local week_monday = iso_week_monday(tonumber(year), tonumber(week))
@@ -218,7 +234,7 @@ vim.keymap.set("n", "<leader>tdn", function()
 		vim.cmd("ObsidianTemplate " .. template)
 		require("conform").format()
 	end)
-end, { desc = "New weekly tasks note with daily links and template" })
+end, { desc = "New weekly tasks note for next week" })
 
 -- HACK: Manage Markdown tasks in Neovim similar to Obsidian | Telescope to List Completed and Pending Tasks
 -- https://youtu.be/59hvZl077hM
@@ -296,7 +312,7 @@ vim.keymap.set("n", "<leader>tdc", function()
 			end,
 		})
 		:find()
-end, { desc = "[P]Search for completed tasks with week number" })
+end, { desc = "Search for completed tasks with week number" })
 
 -- -- Iterate through incomplete tasks in telescope
 -- -- You can confirm in your teminal lamw25wmal with:
@@ -364,7 +380,7 @@ vim.keymap.set("n", "<leader>tdt", function()
 			end,
 		})
 		:find()
-end, { desc = "[P]Search for incomplete tasks with week numbers" })
+end, { desc = "Search for incomplete tasks with week numbers" })
 
 -- <leader>tdf : pick weekly task files under ~/Notes/tasks/<year>/<week>-randomtag.md
 local scan = require("plenary.scandir")
@@ -431,7 +447,7 @@ vim.keymap.set("n", "<leader>tdf", function()
 			end,
 		})
 		:find()
-end, { desc = "Pick weekly task files" })
+end, { desc = "Search weekly task files" })
 -- Commented these 2 as I couldn't clear search results with escape
 -- I want to close split panes with escape, the default is "q"
 -- vim.keymap.set("n", "<esc>", "<cmd>close<cr>", { desc = "Close split pane" })
