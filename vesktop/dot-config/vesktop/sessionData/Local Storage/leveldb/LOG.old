@@ -1,9 +1,0 @@
-2025/08/19-11:12:01.484 a18c Reusing MANIFEST /home/sundar/.config/vesktop/sessionData/Local Storage/leveldb/MANIFEST-000001
-2025/08/19-11:12:01.489 a18c Recovering log #335
-2025/08/19-11:12:01.489 a18c Reusing old log /home/sundar/.config/vesktop/sessionData/Local Storage/leveldb/000335.log 
-2025/08/19-12:34:55.006 a18c Level-0 table #339: started
-2025/08/19-12:34:55.010 a18c Level-0 table #339: 39379 bytes OK
-2025/08/19-12:34:55.013 a18c Delete type=0 #335
-2025/08/19-16:45:06.836 a18d Level-0 table #341: started
-2025/08/19-16:45:06.842 a18d Level-0 table #341: 50533 bytes OK
-2025/08/19-16:45:06.845 a18d Delete type=0 #338
