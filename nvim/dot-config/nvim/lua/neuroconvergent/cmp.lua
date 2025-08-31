@@ -1,11 +1,12 @@
 -- cmp mapping for autocompletion, instead of CoC
 local cmp = require("cmp")
 local luasnip = require("luasnip")
+local lspkind = require("lspkind")
 
 -- Check if backspace is needed
 local has_words_before = function()
-	local col = vim.fn.col('.') - 1
-	return col ~= 0 and vim.fn.getline('.'):sub(col, col):match("%s") == nil
+	local col = vim.fn.col(".") - 1
+	return col ~= 0 and vim.fn.getline("."):sub(col, col):match("%s") == nil
 end
 
 cmp.setup({
@@ -50,5 +51,19 @@ cmp.setup({
 		{ name = "luasnip" },
 		{ name = "buffer" },
 		{ name = "path" },
+		{ name = "papis" },
+	},
+	formatting = {
+		format = lspkind.cmp_format({
+			mode = "symbol_text",
+			menu = {
+				buffer = "[Buffer]",
+				nvim_lsp = "[LSP]",
+				luasnip = "[LuaSnip]",
+				nvim_lua = "[Lua]",
+				obsidian = "[Obsidian]",
+				latex_symbols = "[Latex]",
+			},
+		}),
 	},
 })

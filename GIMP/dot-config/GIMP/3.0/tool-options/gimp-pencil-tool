@@ -4,7 +4,7 @@
 (dynamics "Pressure Size")
 (pattern "Pine")
 (gradient "FG to BG (RGB)")
-(palette "Color History")
+(palette "Standard")
 (brush-size 51)
 (brush-hardness 0.5)
 

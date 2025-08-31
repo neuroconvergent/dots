@@ -40,47 +40,77 @@ vim.api.nvim_set_keymap(
 -- lsp
 -- NOTE: Load Telescope ui select extension for code actions in telescope
 require("telescope").load_extension("ui-select")
-vim.keymap.set("n", "<leader>cd", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
-vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Open code actions" })
+local telescope = require("telescope.builtin")
+
+-- Goto (under <leader>g for "goto")
+vim.keymap.set("n", "<leader>gd", telescope.lsp_definitions, { desc = "Goto Definition" })
+vim.keymap.set("n", "<leader>gD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
+vim.keymap.set("n", "<leader>gr", telescope.lsp_references, { desc = "Goto References" })
+vim.keymap.set("n", "<leader>gi", telescope.lsp_implementations, { desc = "Goto Implementation" })
+vim.keymap.set("n", "<leader>gt", telescope.lsp_type_definitions, { desc = "Goto Type Definition" })
+
+-- Hover / Info
+vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })
+vim.keymap.set("n", "<leader>k", vim.lsp.buf.signature_help, { desc = "Signature Help" })
+
+-- Refactor
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
+
+-- Diagnostics
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Prev Diagnostic" })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
+vim.keymap.set("n", "<leader>cd", vim.diagnostic.setloclist, { desc = "Diagnostics List" })
+
+-- Workspace management
+vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { desc = "Add Workspace Folder" })
+vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, { desc = "Remove Workspace Folder" })
+vim.keymap.set("n", "<leader>wl", function()
+	print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+end, { desc = "List Workspace Folders" })
 
 -- Markview deactivate
-vim.keymap.set("n", "<leader>m", ":Markview<CR>", default_opts)
+vim.keymap.set("n", "<leader>m", ":Markview<CR>", {desc = "Toggle Markview"})
 
 -- Obsidian mappings
-vim.keymap.set("n", "<leader>of", ":ObsidianQuickSwitch<CR>", default_opts)
-vim.keymap.set("n", "<leader>on", ":ObsidianNew<CR>", default_opts)
-vim.keymap.set("n", "<leader>ot", ":ObsidianNewFromTemplate<CR>", default_opts)
-vim.keymap.set("n", "<leader>od", ":ObsidianDailies<CR>", default_opts)
+vim.keymap.set("n", "<leader>of", ":Obsidian quick_switch<CR>", {desc = "Pick Obsidian notes"})
+vim.keymap.set("n", "<leader>os", ":Obsidian search<CR>", {desc = "Search through Obsidian notes"})
+vim.keymap.set("n", "<leader>on", ":Obsidian new<CR>", {desc = "Create note"})
+vim.keymap.set("n", "<leader>oT", ":Obsidian new_from_template<CR>", {desc = "Create note from template"})
+vim.keymap.set("n", "<leader>od", ":Obsidian dailies -30 0<CR><Esc>", {desc = "Search journal"})
+vim.keymap.set("n", "<leader>ot", ":Obsidian tags<CR><Esc>", {desc = "Search Obsidian tags"})
 
 -- lazygit mapping
-vim.keymap.set("n", "<leader>gl", ":lua require('snacks').lazygit()<CR>", default_opts)
+vim.keymap.set("n", "<leader>gl", ":lua require('snacks').lazygit()<CR>", {desc = "Lazygit"})
 
 -- undotree
-vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, {desc = "Open undotree"})
 
 local harpoon = require("harpoon")
 harpoon:setup()
 -- harpoon
 vim.keymap.set("n", "<leader>ha", function()
 	harpoon:list():add()
-end)
+end, {desc = "Add to harpoon"})
 vim.keymap.set("n", "<leader>hd", function()
 	harpoon:list():remove()
-end)
+end, {desc = "Remove from harpoon"})
 vim.keymap.set("n", "<leader>hl", function()
 	harpoon.ui:toggle_quick_menu(harpoon:list())
-end)
+end, {desc = "List harpoon buffers"})
+vim.keymap.set("n", "<leader>hc", function()
+    harpoon:list():clear()
+end, {desc = "Clear harpoon buffers"})
 
-vim.keymap.set("n", "<M-1>", function()
+vim.keymap.set("n", "<M-h>", function()
 	harpoon:list():select(1)
 end)
-vim.keymap.set("n", "<M-2>", function()
+vim.keymap.set("n", "<M-j>", function()
 	harpoon:list():select(2)
 end)
-vim.keymap.set("n", "<M-3>", function()
+vim.keymap.set("n", "<M-k>", function()
 	harpoon:list():select(3)
 end)
-vim.keymap.set("n", "<M-4>", function()
+vim.keymap.set("n", "<M-l>", function()
 	harpoon:list():select(4)
 end)
 
@@ -95,11 +125,11 @@ end)
 -- TODO comments
 vim.keymap.set("n", "<leader>ftd", ":TodoTelescope <CR>")
 vim.keymap.set("n", "]t", function()
-  require("todo-comments").jump_next()
+	require("todo-comments").jump_next()
 end, { desc = "Next todo comment" })
 
 vim.keymap.set("n", "[t", function()
-  require("todo-comments").jump_prev()
+	require("todo-comments").jump_prev()
 end, { desc = "Previous todo comment" })
 
 -- You can also specify a list of valid jump keywords
@@ -126,7 +156,7 @@ vim.keymap.set("n", "<leader>tdw", function()
 	vim.fn.mkdir(dir, "p")
 
 	-- Create the new note
-	vim.cmd("ObsidianNew " .. filename)
+	vim.cmd("Obsidian new " .. filename)
 
 	-- Schedule buffer operations after file is created
 	vim.schedule(function()
@@ -161,13 +191,22 @@ vim.keymap.set("n", "<leader>tdw", function()
 		-- Append links under ## Dailies
 		vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, { "", "## Dailies" })
 		vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, links)
-
+		-- === NEW PART: prepend "Week " before the last word of line 4 ===
+		local line_nr = 3 -- Lua index 0-based, line 4 is index 3
+		local line = vim.api.nvim_buf_get_lines(bufnr, line_nr, line_nr + 1, false)[1]
+		if line then
+			local new_line = line:gsub("(%S+)$", "Week %1") -- add "Week " before last word
+			vim.api.nvim_buf_set_lines(bufnr, line_nr, line_nr + 1, false, { new_line })
+			-- optional: move cursor to end of the line
+			vim.api.nvim_win_set_cursor(0, { line_nr + 1, #new_line })
+		end
 		-- Move cursor to new line after line 4 (where template will be inserted)
 		vim.api.nvim_win_set_cursor(0, { 5, 0 })
 
 		-- Trigger template picker
-		vim.cmd("ObsidianTemplate " .. template)
+		vim.cmd("Obsidian template " .. template)
 		require("conform").format()
+		vim.api.nvim_win_set_cursor(0, { 13, 0 })
 	end)
 end, { desc = "New weekly tasks note with daily links and template" })
 
@@ -191,7 +230,7 @@ vim.keymap.set("n", "<leader>tdn", function()
 	vim.fn.mkdir(dir, "p")
 
 	-- Create the new note
-	vim.cmd("ObsidianNew " .. filename)
+	vim.cmd("Obsidian new " .. filename)
 
 	-- Schedule buffer operations after file is created
 	vim.schedule(function()
@@ -227,12 +266,22 @@ vim.keymap.set("n", "<leader>tdn", function()
 		vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, { "", "## Dailies" })
 		vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, links)
 
+		-- === NEW PART: prepend "Week " before the last word of line 4 ===
+		local line_nr = 3 -- Lua index 0-based, line 4 is index 3
+		local line = vim.api.nvim_buf_get_lines(bufnr, line_nr, line_nr + 1, false)[1]
+		if line then
+			local new_line = line:gsub("(%S+)$", "Week %1") -- add "Week " before last word
+			vim.api.nvim_buf_set_lines(bufnr, line_nr, line_nr + 1, false, { new_line })
+			-- optional: move cursor to end of the line
+			vim.api.nvim_win_set_cursor(0, { line_nr + 1, #new_line })
+		end
 		-- Move cursor to new line after line 4 (where template will be inserted)
 		vim.api.nvim_win_set_cursor(0, { 5, 0 })
 
 		-- Trigger template picker
-		vim.cmd("ObsidianTemplate " .. template)
+		vim.cmd("Obsidian template " .. template)
 		require("conform").format()
+		vim.api.nvim_win_set_cursor(0, { 13, 0 })
 	end)
 end, { desc = "New weekly tasks note for next week" })
 

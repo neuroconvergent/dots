@@ -7,7 +7,7 @@
 (mybrush "100% Opaque")
 (pattern "Pine")
 (gradient "FG to BG (RGB)")
-(palette "Color History")
+(palette "Standard")
 (font "Sans-serif")
 (tool-preset "Core Pointer")
 

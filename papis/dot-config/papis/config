@@ -1,8 +1,12 @@
 [settings]
 default-library = Notes
+opentool = evince
+
+[tui]
+editmode = vi
 
 [Notes]
-dir = /home/sundar/Notes/references
+dir = /home/sundar/references
 opentool = kitty -e nvim
 editor = nvim
 use-git = False

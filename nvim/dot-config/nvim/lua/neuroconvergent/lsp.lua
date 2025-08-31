@@ -40,3 +40,6 @@ vim.diagnostic.config({
 vim.o.updatetime = 2000
 vim.cmd([[autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })]])
 
+lspconfig.clangd.setup{
+    cmd = {"clangd", "--compile-commands-dir=build"}
+}

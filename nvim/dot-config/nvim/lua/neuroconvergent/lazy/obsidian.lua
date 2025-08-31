@@ -1,8 +1,9 @@
+local colors = require("catppuccin.palettes").get_palette()
 return {
-	"epwalsh/obsidian.nvim",
+	"obsidian-nvim/obsidian.nvim",
 	version = "*", -- recommended, use latest release instead of latest commit
 	lazy = false,
-	--ft = "markdown",
+	ft = "markdown",
 	-- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
 	-- event = {
 	--   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
@@ -11,26 +12,17 @@ return {
 	--   "BufReadPre path/to/my-vault/*.md",
 	--   "BufNewFile path/to/my-vault/*.md",
 	-- },
-	dependencies = {
-		-- Required.
-		"nvim-lua/plenary.nvim",
-
-		-- see below for full list of optional dependencies 👇
-	},
 	opts = {
 		workspaces = {
 			{
 				name = "personal",
 				path = "~/Notes",
 			},
-			{
-				name = "quartz",
-				path = "~/quartz",
-			},
 		},
 		notes_subdir = ".",
+		legacy_commands = false,
 		templates = {
-			folder = "~/Notes/.Templates",
+			folder = ".Templates",
 			date_format = "%Y-%m-%d",
 			time_format = "%H:%M",
 			-- A map for custom variables, the key should be the variable and the value a function
@@ -46,31 +38,7 @@ return {
 		completion = {
 			nvim_cmp = true,
 			min_chars = 2,
-		},
-		-- Optional, configure key mappings. These are the defaults. If you don't want to set any keymappings this
-		-- way then set 'mappings = {}'.
-		mappings = {
-			-- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
-			["gf"] = {
-				action = function()
-					return require("obsidian").util.gf_passthrough()
-				end,
-				opts = { noremap = false, expr = true, buffer = true },
-			},
-			-- Toggle check-boxes.
-			["<leader>ch"] = {
-				action = function()
-					return require("obsidian").util.toggle_checkbox()
-				end,
-				opts = { buffer = true },
-			},
-			-- Smart action depending on context, either follow link or toggle checkbox.
-			["<cr>"] = {
-				action = function()
-					return require("obsidian").util.smart_action()
-				end,
-				opts = { buffer = true, expr = true },
-			},
+			create_new = false,
 		},
 		new_notes_location = "notes_subdir",
 		-- Optional, customize how note IDs are generated given an optional title.
@@ -96,11 +64,14 @@ return {
 			return path:with_suffix(".md")
 		end,
 		-- Optional, customize how wiki links are formatted. You can set this to one of:
-		--	* "use_alias_only", e.g. '[[Foo Bar]]'
-		--	* "prepend_note_id", e.g. '[[foo-bar|Foo Bar]]'
-		--	* "prepend_note_path", e.g. '[[foo-bar.md|Foo Bar]]'
-		--	* "use_path_only", e.g. '[[foo-bar.md]]'
+		-- _ "use_alias_only", e.g. '[[Foo Bar]]'
+		-- _ "prepend*note_id", e.g. '[[foo-bar|Foo Bar]]'
+		-- * "prepend*note_path", e.g. '[[foo-bar.md|Foo Bar]]'
+		-- * "use_path_only", e.g. '[[foo-bar.md]]'
 		-- Or you can set it to a function that takes a table of options and returns a string, like this:
+		-- wiki_link_func = function(opts)
+		-- 	return require("obsidian.util").wiki_link_id_prefix(opts)
+		-- end,
 		wiki_link_func = "prepend_note_id",
 		markdown_link_func = "prepend_note_id",
 		preffered_link_style = "wiki",
@@ -139,8 +110,46 @@ return {
 		sort_reversed = true,
 		ui = {
 			enable = false,
+			ignore_conceal_warn = true, -- set to true to disable conceallevel specific warning
+			update_debounce = 200, -- update delay after a text change (in milliseconds)
+			max_file_length = 5000, -- disable UI features for files with more than this many lines
+			-- Use bullet marks for non-checkbox lists.
+			bullets = { char = "•", hl_group = "ObsidianBullet" },
+			external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
+			-- Replace the above with this if you don't have a patched font:
+			-- external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
+			reference_text = { hl_group = "ObsidianRefText" },
+			highlight_text = { hl_group = "ObsidianHighlightText" },
+			tags = { hl_group = "ObsidianTag" },
+			block_ids = { hl_group = "ObsidianBlockID" },
+			hl_groups = {
+				-- The options are passed directly to `vim.api.nvim_set_hl()`. See `:help nvim_set_hl`.
+				ObsidianTodo = { bold = true, fg = colors.mantle },
+				ObsidianDone = { bold = true, fg = colors.sky },
+				ObsidianRightArrow = { bold = true, fg = colors.mantle },
+				ObsidianTilde = { bold = true, fg = colors.yellow },
+				ObsidianImportant = { bold = true, fg = colors.red },
+				ObsidianBullet = { bold = true, fg = colors.sky },
+				ObsidianRefText = { underline = true, fg = colors.mauve },
+				ObsidianExtLinkIcon = { fg = colors.mauve },
+				ObsidianTag = { italic = true, fg = colors.sky },
+				ObsidianBlockID = { italic = true, fg = colors.sky },
+				ObsidianHighlightText = { bg = "#5c5453" },
+			},
 		},
 
-		-- see below for full list of options 👇
+		footer = {
+			enabled = true,
+			format = "{{backlinks}} backlinks  {{properties}} properties  {{words}} words  {{chars}} chars",
+			hl_group = "Comment",
+			separator = string.rep("-", 80),
+		},
+		---@class obsidian.config.CheckboxOpts
+		---
+		---Order of checkbox state chars, e.g. { " ", "x" }
+		---@field order? string[]
+		checkbox = {
+			order = { " ", "x", "!", "~", ">" },
+		},
 	},
 }
