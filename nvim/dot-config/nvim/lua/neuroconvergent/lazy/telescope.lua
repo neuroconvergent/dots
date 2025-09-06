@@ -14,6 +14,7 @@ return {
 			preview = {
 				treesitter = true,
 			},
+			layout_strategy = "horizontal",
 		},
 		extensions = {
 			["ui-select"] = ui_input_theme,

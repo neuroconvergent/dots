@@ -52,6 +52,7 @@ vim.keymap.set("n", "<leader>gt", telescope.lsp_type_definitions, { desc = "Goto
 -- Hover / Info
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })
 vim.keymap.set("n", "<leader>k", vim.lsp.buf.signature_help, { desc = "Signature Help" })
+vim.keymap.set("n", "<Esc>", "<cmd>fclose<CR>", { desc = "Close LSP hover window", remap = false })
 
 -- Refactor
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
@@ -69,37 +70,37 @@ vim.keymap.set("n", "<leader>wl", function()
 end, { desc = "List Workspace Folders" })
 
 -- Markview deactivate
-vim.keymap.set("n", "<leader>m", ":Markview<CR>", {desc = "Toggle Markview"})
+vim.keymap.set("n", "<leader>m", ":Markview<CR>", { desc = "Toggle Markview" })
 
 -- Obsidian mappings
-vim.keymap.set("n", "<leader>of", ":Obsidian quick_switch<CR>", {desc = "Pick Obsidian notes"})
-vim.keymap.set("n", "<leader>os", ":Obsidian search<CR>", {desc = "Search through Obsidian notes"})
-vim.keymap.set("n", "<leader>on", ":Obsidian new<CR>", {desc = "Create note"})
-vim.keymap.set("n", "<leader>oT", ":Obsidian new_from_template<CR>", {desc = "Create note from template"})
-vim.keymap.set("n", "<leader>od", ":Obsidian dailies -30 0<CR><Esc>", {desc = "Search journal"})
-vim.keymap.set("n", "<leader>ot", ":Obsidian tags<CR><Esc>", {desc = "Search Obsidian tags"})
+vim.keymap.set("n", "<leader>of", ":Obsidian quick_switch<CR>", { desc = "Pick Obsidian notes" })
+vim.keymap.set("n", "<leader>os", ":Obsidian search<CR>", { desc = "Search through Obsidian notes" })
+vim.keymap.set("n", "<leader>on", ":Obsidian new<CR>", { desc = "Create note" })
+vim.keymap.set("n", "<leader>oT", ":Obsidian new_from_template<CR>", { desc = "Create note from template" })
+vim.keymap.set("n", "<leader>od", ":Obsidian dailies -30 0<CR><Esc>", { desc = "Search journal" })
+vim.keymap.set("n", "<leader>ot", ":Obsidian tags<CR><Esc>", { desc = "Search Obsidian tags" })
 
 -- lazygit mapping
-vim.keymap.set("n", "<leader>gl", ":lua require('snacks').lazygit()<CR>", {desc = "Lazygit"})
+vim.keymap.set("n", "<leader>gl", ":lua require('snacks').lazygit()<CR>", { desc = "Lazygit" })
 
 -- undotree
-vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, {desc = "Open undotree"})
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Open undotree" })
 
 local harpoon = require("harpoon")
 harpoon:setup()
 -- harpoon
 vim.keymap.set("n", "<leader>ha", function()
 	harpoon:list():add()
-end, {desc = "Add to harpoon"})
+end, { desc = "Add to harpoon" })
 vim.keymap.set("n", "<leader>hd", function()
 	harpoon:list():remove()
-end, {desc = "Remove from harpoon"})
+end, { desc = "Remove from harpoon" })
 vim.keymap.set("n", "<leader>hl", function()
 	harpoon.ui:toggle_quick_menu(harpoon:list())
-end, {desc = "List harpoon buffers"})
+end, { desc = "List harpoon buffers" })
 vim.keymap.set("n", "<leader>hc", function()
-    harpoon:list():clear()
-end, {desc = "Clear harpoon buffers"})
+	harpoon:list():clear()
+end, { desc = "Clear harpoon buffers" })
 
 vim.keymap.set("n", "<M-h>", function()
 	harpoon:list():select(1)
@@ -185,7 +186,7 @@ vim.keymap.set("n", "<leader>tdw", function()
 			local day_time = week_monday + i * 24 * 60 * 60
 			local day_link = os.date("%Y-%m-%d", day_time)
 			local day_display = os.date("%A - %d %b, %Y", day_time)
-			table.insert(links, string.format("[[%s|%s]]", day_link, day_display))
+			table.insert(links, string.format("- [[%s|%s]]", day_link, day_display))
 		end
 
 		-- Append links under ## Dailies
@@ -259,7 +260,7 @@ vim.keymap.set("n", "<leader>tdn", function()
 			local day_time = week_monday + i * 24 * 60 * 60
 			local day_link = os.date("%Y-%m-%d", day_time)
 			local day_display = os.date("%A - %d %b, %Y", day_time)
-			table.insert(links, string.format("[[%s|%s]]", day_link, day_display))
+			table.insert(links, string.format("- [[%s|%s]]", day_link, day_display))
 		end
 
 		-- Append links under ## Dailies
@@ -328,7 +329,7 @@ vim.keymap.set("n", "<leader>tdc", function()
 	local opts = themes.get_dropdown({
 		prompt_title = "Completed Tasks",
 		initial_mode = "normal",
-		previewer = true,
+		previewer = false,
 	})
 
 	-- Simple reverse alphanumeric sort
@@ -464,7 +465,7 @@ vim.keymap.set("n", "<leader>tdf", function()
 	end)
 
 	pickers
-		.new({}, {
+		.new(themes.get_dropdown({ previewer = false }), {
 			prompt_title = "Weekly Task Files",
 			finder = finders.new_table({
 				results = results,

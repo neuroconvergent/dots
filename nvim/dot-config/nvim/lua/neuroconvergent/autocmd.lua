@@ -14,7 +14,6 @@ end, { nargs = "+" })
 
 vim.keymap.set('n', '<leader>sh', ':Shell ')
 
-
 -- Auto set current working directory to focussed buffer
 -- vim.api.nvim_create_autocmd("BufEnter", {
 --   callback = function()

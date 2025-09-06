@@ -1,6 +1,6 @@
 return {
 	"jghauser/papis.nvim",
-	ft = { "markdown", "latex", "norg", "typst" },
+	ft = { "markdown", "yaml", "tex", "norg", "typst" },
 	dependencies = {
 		"kkharji/sqlite.lua",
 		"MunifTanjim/nui.nvim",
@@ -16,7 +16,7 @@ return {
 	config = function()
 		require("papis").setup({
 			enable_keymaps = true,
-			init_filetypes = { "markdown", "tex", "norg", "typst" },
+			init_filetypes = { "markdown", "yaml", "tex", "norg", "typst" },
 			cite_formats = {
 				markdown = {
 					start_str = "[",

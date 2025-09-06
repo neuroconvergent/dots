@@ -1,5 +1,7 @@
 return {
 	"jmbuhr/otter.nvim",
+    lazy = true,
+    ft = {"markdown"},
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",
 	},
@@ -64,11 +66,6 @@ return {
 		---@param diagnostics boolean|nil Enable diagnostics for otter buffers. Default: true
 		---@param tsquery string|nil Explicitly provide a treesitter query. If nil, the injections query for the current filetyepe will be used. See :h treesitter-language-injections.
 		-- Autocommand to only activate otter in markdown and norg files
-		vim.api.nvim_create_autocmd("BufEnter", {
-			pattern = { "*.md", "*.norg" },
-			callback = function(args)
-				otter.activate(nil, true, true) -- enable completion & diagnostics
-			end,
-		})
+        otter.activate(nil, true, true)
 	end,
 }

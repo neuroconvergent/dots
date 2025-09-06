@@ -6,7 +6,7 @@ opentool = evince
 editmode = vi
 
 [Notes]
-dir = /home/sundar/references
+dir = ~/Notes/references
 opentool = kitty -e nvim
 editor = nvim
 use-git = False

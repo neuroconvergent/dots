@@ -73,12 +73,6 @@ return {
 			},
 			-- item field formatters
 			formats = {
-				icon = function(item)
-					if item.file and item.icon == "file" or item.icon == "directory" then
-						return Snacks.util.icon(item.file, item.icon)
-					end
-					return { item.icon, width = 2, hl = "icon" }
-				end,
 				footer = { "%s", align = "center" },
 				header = { "%s", align = "center" },
 				file = function(item, ctx)
