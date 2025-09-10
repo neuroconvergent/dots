@@ -2,21 +2,23 @@ return {
     "mason-org/mason-lspconfig.nvim",
     opts = {
         ensure_installed = {
-	    	"lua_ls",		 -- Lua
-	    	"pyright",		-- Python
-	    	"ts_ls",	 -- JavaScript / TypeScript
-	    	"clangd",		 -- C / C++
-	    	"html",
-	    	"cssls",
-	    	"jsonls",
-	        "texlab",
-	        "marksman",
-	        "yamlls",
-	        "jsonls",
+            "lua_ls",
+            "rust_analyzer",
+            "shopify_theme_ls",
+            "pyright",
+            "ts_ls",
+            "clangd",
+            "html",
+            "cssls",
+            "texlab",
+            "marksman",
+            "yamlls",
+            "jsonls",
+            "taplo",
             "tinymist",
-	        },
-	    automatic_installation = true,
         },
+        automatic_installation = true,
+    },
     dependencies = {
         { "mason-org/mason.nvim", opts = {} },
         "neovim/nvim-lspconfig",
