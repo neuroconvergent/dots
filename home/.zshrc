@@ -19,7 +19,7 @@ zstyle ':completion:*' menu select=1
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' substitute 1
 zstyle ':completion:*' verbose false
-zstyle :compinstall filename '/home/sundar/.zshrc'
+zstyle :compinstall filename '/home/neuroconvergent/.zshrc'
 
 autoload -Uz compinit
 compinit
@@ -96,7 +96,7 @@ export PATH="$HOME/gems/bin:$PATH"
 export PATH=$PATH:$(ruby -e 'print Gem.user_dir')/bin
 
 # Created by `pipx` on 2024-12-30 16:52:30
-export PATH="$PATH:/home/sundar/.local/bin"
+export PATH="$PATH:/home/neuroconvergent/.local/bin"
 
 # zoxide
 eval "$(zoxide init --cmd cd zsh)"

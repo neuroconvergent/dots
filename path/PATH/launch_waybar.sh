@@ -4,4 +4,4 @@ if pgrep waybar
 then
 	killall waybar
 fi
-setsid -f waybar -c /home/sundar/.config/waybar/waybar.conf -s /home/sundar/.config/waybar/style.css
+setsid -f waybar -c $HOME/.config/waybar/waybar.conf -s $HOME/.config/waybar/style.css

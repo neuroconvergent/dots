@@ -2,7 +2,7 @@
 #
 
 ### Wallpaper with hyprpaper
-hyprpaper &
+#hyprpaper &
 
 ### Waybar launch script
 $HOME/PATH/launch_waybar.sh &
@@ -61,7 +61,7 @@ kanata -c ~/.config/kanata/config.kbd
 # Use mpd and mpdris2-rs user sevices instead
 
 ###Polkit
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+systemctl --user start hyprpolkitagent.service &
 
 ###Automounting drives with udiskie (password prompt with zenity)
 udiskie -a --smart-tray -p "zenity --entry --hide-text --text 'Enter password for {device_presentation}:' --title 'Authentication for Disk Operation'" -f pcmanfm-qt&
