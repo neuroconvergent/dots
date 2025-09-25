@@ -1,96 +1,94 @@
--- LSP
-local lspconfig = require("lspconfig")
+-- Capabilities for completion
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
--- Set up all LSPs with default capabilities
-local servers = {
-    "lua_ls",
-    "pyright",
-    "ts_ls",
-    "clangd",
-    "html",
-    "cssls",
-    "texlab",
-    "marksman",
-    "yamlls",
-    "jsonls",
-    "taplo",
-    "tinymist",
-    "ruff",
-}
-
-for _, server in ipairs(servers) do
-    local ok, lsp = pcall(function()
-        return lspconfig[server]
-    end)
-    if ok and lsp then
-        lsp:setup({
-            capabilities = capabilities,
-        })
-    else
-        print("LSP server not found:", server)
-    end
-end
-
--- lsp automatic show diagnostic on hovering cursor for 2s on line
+-- Diagnostic configuration
 vim.diagnostic.config({
-    float = {
-        border = "rounded",
-    },
+	float = { border = "rounded" },
 })
 vim.o.updatetime = 2000
-vim.cmd([[autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })]])
+vim.cmd([[
+  autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+]])
 
-lspconfig.clangd.setup({
-    keys = {
-        { "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
-    },
-    root_dir = function(fname)
-        return require("lspconfig.util").root_pattern(
-            "Makefile",
-            "configure.ac",
-            "configure.in",
-            "config.h.in",
-            "meson.build",
-            "meson_options.txt",
-            "build.ninja"
-        )(fname) or require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(fname) or
-        require(
-            "lspconfig.util"
-        ).find_git_ancestor(fname)
-    end,
-    capabilities = {
-        offsetEncoding = { "utf-16" },
-    },
-    cmd = {
-        "clangd",
-        "--background-index",
-        "--clang-tidy",
-        "--header-insertion=iwyu",
-        "--completion-style=detailed",
-        "--function-arg-placeholders",
-        "--fallback-style=llvm",
-    },
-    init_options = {
-        usePlaceholders = true,
-        completeUnimported = true,
-        clangdFileStatus = true,
-    },
-})
+-- Generic servers with default capabilities
+local generic_servers = {
+	"lua_ls",
+	"ts_ls",
+	"html",
+	"cssls",
+	"texlab",
+	"marksman",
+	"yamlls",
+	"jsonls",
+	"taplo",
+	"tinymist",
+	"solargraph",
+}
 
-lspconfig.pyright.setup({
-    capabilities = capabilities,
-    settings = {
-        pyright = {
-            -- Using Ruff's import organizer
-            disableOrganizeImports = true,
-        },
-        python = {
-            analysis = {
-                -- Ignore all files for analysis to exclusively use Ruff for linting
-                ignore = { "*" },
-            },
-        },
-    },
-})
-lspconfig.ruff.setup({})
+for _, name in ipairs(generic_servers) do
+	vim.lsp.config[name] = {
+		default_config = {
+			cmd = { name },
+			filetypes = nil,
+			root_dir = vim.loop.cwd,
+			capabilities = capabilities,
+		},
+	}
+	vim.lsp.enable(name)
+end
+
+-- Clangd setup
+vim.lsp.config.clangd = {
+	default_config = {
+		cmd = {
+			"clangd",
+			"--background-index",
+			"--clang-tidy",
+			"--header-insertion=iwyu",
+			"--completion-style=detailed",
+			"--function-arg-placeholders",
+			"--fallback-style=llvm",
+		},
+		capabilities = { offsetEncoding = { "utf-16" } },
+		init_options = { usePlaceholders = true, completeUnimported = true, clangdFileStatus = true },
+		root_dir = function(fname)
+			local util = require("lspconfig.util")
+			return util.root_pattern(
+				"Makefile",
+				"configure.ac",
+				"configure.in",
+				"config.h.in",
+				"meson.build",
+				"meson_options.txt",
+				"build.ninja"
+			)(fname) or util.root_pattern("compile_commands.json", "compile_flags.txt")(fname) or util.find_git_ancestor(
+				fname
+			)
+		end,
+		on_attach = function(client, bufnr)
+			vim.keymap.set("n", "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", { buffer = bufnr, silent = true })
+		end,
+	},
+}
+vim.lsp.enable("clangd")
+
+-- Pyright setup
+vim.lsp.config.pyright = {
+	default_config = {
+		cmd = { "pyright-langserver", "--stdio" },
+		capabilities = capabilities,
+		settings = {
+			pyright = { disableOrganizeImports = true },
+			python = { analysis = { ignore = { "*" } } },
+		},
+	},
+}
+vim.lsp.enable("pyright")
+
+-- Ruff setup
+vim.lsp.config.ruff = {
+	default_config = {
+		capabilities = capabilities,
+	},
+}
+vim.lsp.enable("ruff")

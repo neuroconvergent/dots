@@ -2,7 +2,7 @@
 #
 
 ### Wallpaper with hyprpaper
-#hyprpaper &
+hyprpaper &
 
 ### Waybar launch script
 $HOME/PATH/launch_waybar.sh &
