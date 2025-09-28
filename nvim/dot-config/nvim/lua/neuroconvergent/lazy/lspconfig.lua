@@ -5,7 +5,7 @@ return {
             "lua_ls",
             "rust_analyzer",
             "shopify_theme_ls",
-            "pyright",
+            "basedpyright",
             "ts_ls",
             "clangd",
             "html",

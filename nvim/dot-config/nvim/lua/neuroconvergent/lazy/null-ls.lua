@@ -14,10 +14,21 @@ return {
 				null_ls.builtins.formatting.clang_format,
 				null_ls.builtins.formatting.stylua,
 				null_ls.builtins.formatting.typstyle,
-                null_ls.builtins.formatting.shfmt,
+				null_ls.builtins.formatting.shfmt,
+				null_ls.builtins.formatting.rubocop,
 
 				-- Linters / Diagnostics
-				null_ls.builtins.diagnostics.mypy, -- Python type checker
+				null_ls.builtins.diagnostics.mypy.with({
+					command = "mypy",
+					args = {
+						"--show-column-numbers",
+						"--ignore-missing-imports",
+						"--strict", -- or relax this if you want
+						"--python-executable",
+						vim.fn.exepath("python"),
+						"$FILENAME",
+					},
+				}),
 				-- you can add more here, like eslint_d for JS/TS
 
 				-- Code actions

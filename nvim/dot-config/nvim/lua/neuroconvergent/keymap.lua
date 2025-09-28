@@ -731,3 +731,10 @@ end, { desc = "[P]Toggle task and move it to 'done'" })
 --     vim.api.nvim_buf_set_lines(current_buffer, row, row + 1, false, { line })
 --   end
 -- end, { desc = "Toggle bullet point at the beginning of the current line" })
+
+-- Toggle LSP inlay hints (Neovim ≥0.10)
+vim.keymap.set("n", "<leader>ci", function()
+  local bufnr = 0 -- 0 = current buffer
+  local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+  vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })
+end, { desc = "Toggle Inlay Hints" })

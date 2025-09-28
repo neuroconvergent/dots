@@ -5,7 +5,7 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 vim.diagnostic.config({
 	float = { border = "rounded" },
 })
-vim.o.updatetime = 2000
+vim.o.updatetime = 1000
 vim.cmd([[
   autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 ]])
@@ -72,18 +72,26 @@ vim.lsp.config.clangd = {
 }
 vim.lsp.enable("clangd")
 
--- Pyright setup
-vim.lsp.config.pyright = {
-	default_config = {
-		cmd = { "pyright-langserver", "--stdio" },
-		capabilities = capabilities,
-		settings = {
-			pyright = { disableOrganizeImports = true },
-			python = { analysis = { ignore = { "*" } } },
+-- Basedpyright setup
+vim.lsp.config.basedpyright = {
+	capabilities = capabilities,
+	settings = {
+		basedpyright = {
+			settings = {
+				disableOrganizeImports = true,
+				basedpyright = {
+					analysis = {
+						-- ignore = { "*" },
+						typeCheckingMode = "standard",
+						diagnosticMode = "openFilesOnly",
+						useLibraryCodeForTypes = true,
+					},
+				},
+			},
 		},
 	},
 }
-vim.lsp.enable("pyright")
+vim.lsp.enable("basedpyright")
 
 -- Ruff setup
 vim.lsp.config.ruff = {
