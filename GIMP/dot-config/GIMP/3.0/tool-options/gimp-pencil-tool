@@ -4,8 +4,8 @@
 (dynamics "Pressure Size")
 (pattern "Pine")
 (gradient "FG to BG (RGB)")
-(palette "Standard")
+(palette "Color History")
 (brush-size 51)
-(brush-hardness 0.5)
+(brush-hardness 0.502)
 
 # end of gimp-pencil-tool options

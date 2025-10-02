@@ -6,7 +6,7 @@ local config = wezterm.config_builder()
 
 
 config.font = wezterm.font_with_fallback {
-  'Iosevka Nerd Font',
+  'IosevkaTerm Nerd Font',
   'Noto Color Emoji',
 }
 config.font_size = 16

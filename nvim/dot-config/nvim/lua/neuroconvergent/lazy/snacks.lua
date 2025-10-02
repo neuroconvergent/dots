@@ -100,6 +100,37 @@ return {
 			},
 		},
 		explorer = { enabled = false },
+		image = {
+			enabled = true,
+			doc = {
+				max_width = 100,
+				max_height = 40,
+				-- Set to `true`, to conceal the image text when rendering inline.
+				-- (experimental)
+				---@param lang string tree-sitter language
+				---@param type snacks.image.Type image type
+				conceal = function(lang, type)
+					return false
+				end,
+				inline = true,
+			},
+            ---@class snacks.image.convert.Config
+			convert = {
+				notify = true, -- show a notification on error
+				---@type snacks.image.args
+				mermaid = function()
+					local theme = vim.o.background == "light" and "neutral" or "dark"
+					return { "-i", "{src}", "-o", "{file}", "-b", "transparent", "-t", theme, "-s", "{scale}" }
+				end,
+				---@type table<string,snacks.image.args>
+				magick = {
+					default = { "{src}[0]", "-scale", "1920x1080>" }, -- default for raster images
+					vector = { "-density", 192, "{src}[0]" }, -- used by vector images like svg
+					math = { "-density", 192, "{src}[0]", "-trim" },
+					pdf = { "-density", 192, "{src}[0]", "-background", "white", "-alpha", "remove", "-trim" },
+				},
+			},
+		},
 		indent = { enabled = true },
 		input = { enabled = true },
 		lazygit = { enabled = true },
