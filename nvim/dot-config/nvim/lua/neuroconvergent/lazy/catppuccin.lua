@@ -112,6 +112,13 @@ return {
 				MarkviewTableHeader = { fg = colors.mantle, bold = true },
 				["@punctuation.bracket"] = { fg = colors.text },
 				["@punctuation.delimiter"] = { fg = colors.peach },
+				MarkviewPalette0fg = { fg = colors.text },
+                MarkviewPalette1fg = {fg = colors.red},
+				MarkviewPalette2fg = { fg = colors.lavender },
+				MarkviewPalette3fg = { fg = colors.mauve },
+				MarkviewPalette4fg = { fg = colors.green },
+				MarkviewPalette5fg = { fg = colors.sky },
+				MarkviewPalette6fg = { fg = colors.peach },
 			}
 		end,
 	},

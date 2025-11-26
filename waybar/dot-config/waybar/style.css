@@ -262,6 +262,11 @@ window#waybar.empty #window {
     background: @background1;
     color: @text1;
 	border: 3px solid @border1;
+    border-right: none;
+    border-radius: 12px 0px 0px 12px;
+    margin: 8px 0px 0px 8px;
+    padding: 2px 0px 0px 10px;
+	opacity: 0.8;
 }
 
 #custom-notifications, #idle_inhibitor {

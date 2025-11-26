@@ -57,6 +57,7 @@ export EDITOR=nvim
 export VISUAL EDITOR=nvim
 export PATH="$HOME/PATH:$PATH"
 export PATH="$HOME/.emacs.d/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 alias dotfiles="/usr/bin/git --git-dir=$HOME/arch_dotfiles/ --work-tree=$HOME"
 alias hyprland-config="/usr/bin/git --git-dir=$HOME/hyprland-config --work-tree=$HOME"

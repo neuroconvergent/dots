@@ -75,7 +75,7 @@ udiskie -a --smart-tray -p "zenity --entry --hide-text --text 'Enter password fo
 #optimus-manager-qt &
 
 ###Proton mail bridge
-protonmail-bridge --noninteractive &
+protonmail-bridge-core -n -g &
 
 ###Screensharing Nuclear Method
 sleep 1

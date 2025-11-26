@@ -2,3 +2,4 @@ spicetify/dot-config/spicetify/Themes/
 vesktop/dot-config/vesktop/sessionData/Cache/Cache_Data
 vesktop/dot-config/vesktop/sessionData
 tmux/dot-config/tmux/plugins
+nvim/dot-config/nvim/lazy-lock.json
