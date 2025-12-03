@@ -155,7 +155,7 @@ vim.keymap.set("n", "<leader>of", ":Obsidian quick_switch<CR>", { desc = "Pick O
 vim.keymap.set("n", "<leader>os", ":Obsidian search<CR>", { desc = "Search through Obsidian notes" })
 vim.keymap.set("n", "<leader>on", ":Obsidian new<CR>", { desc = "Create note" })
 vim.keymap.set("n", "<leader>oT", ":Obsidian new_from_template<CR>", { desc = "Create note from template" })
-vim.keymap.set("n", "<leader>od", ":Obsidian dailies -30 0<CR><Esc>", { desc = "Search journal" })
+vim.keymap.set("n", "<leader>od", ":Obsidian dailies -30 1<CR><Esc>", { desc = "Search journal" })
 vim.keymap.set("n", "<leader>ot", ":Obsidian tags<CR><Esc>", { desc = "Search Obsidian tags" })
 
 -- lazygit mapping
