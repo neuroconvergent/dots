@@ -63,6 +63,7 @@ alias dotfiles="/usr/bin/git --git-dir=$HOME/arch_dotfiles/ --work-tree=$HOME"
 alias hyprland-config="/usr/bin/git --git-dir=$HOME/hyprland-config --work-tree=$HOME"
 alias pacfind="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 alias parufind="paru -Slq | fzf --multi --preview 'paru -Si {1}' | xargs -ro paru -S"
+alias yayfind="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
 alias calibre-launch='QT_QPA_PLATFORM="xcb" calibre' 
 alias nvidia-env='DRI_PRIME=pci-0000_01_00_0 __VK_LAYER_NV_optimus=NVIDIA_only __GLX_VENDOR_LIBRARY_NAME=nvidia'
 alias davinciresolve='QT_QPA_PLATFORM=xcb DRI_PRIME=pci-0000_01_00_0 __VK_LAYER_NV_optimus=NVIDIA_only __GLX_VENDOR_LIBRARY_NAME=nvidia /opt/resolve/bin/resolve'
@@ -110,3 +111,9 @@ function y() {
 	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
 	rm -f -- "$tmp"
 }
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /home/neuroconvergent/.dart-cli-completion/zsh-config.zsh ]] && . /home/neuroconvergent/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+

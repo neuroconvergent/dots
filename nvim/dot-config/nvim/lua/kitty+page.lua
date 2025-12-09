@@ -1,7 +1,7 @@
 return function(INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN)
 	-- print("INPUT_LINE_NUMBER:", INPUT_LINE_NUMBER, "CURSOR_LINE:", CURSOR_LINE, "CURSOR_COLUMN:", CURSOR_COLUMN)
 	vim.opt.encoding = "utf-8"
-	vim.opt.clipboard = "unnamed"
+	vim.opt.clipboard = "unnamedplus"
 	vim.opt.compatible = false
 	vim.opt.number = false
 	vim.opt.relativenumber = false

@@ -1,11 +1,23 @@
+-- Terminal mode
+vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", { noremap = true, desc = "Exit terminal mode" })
+vim.keymap.set("t", "<C-q>", "<C-\\><C-n>", { noremap = true, desc = "Exit terminal mode" })
+
+-- Remap scroll to centre window
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
 -- Tab manipulation
 vim.keymap.set("n", "<Tab>", ":bnext<CR>")
 vim.keymap.set("n", "<S-Tab>", ":bprev<CR>")
 vim.keymap.set("n", "<M-w>", ":bdel<CR>")
 vim.keymap.set("n", "<M-t>", ":enew<CR>")
 
--- Clear search highlighting
+-- Clear search completely
 vim.keymap.set("n", "<C-f>", ':let @/ = "" <CR>')
+-- Remove highlight search
+vim.keymap.set("n", "<Esc>", "<Cmd>noh<CR>", { desc = "Remove search highlight", remap = false })
 
 -- Warped line motion
 vim.keymap.set("n", "<C-j>", "gj")
@@ -93,7 +105,7 @@ local function big_hover()
 			width = width,
 			height = height,
 		})
-        vim.cmd("Markview HybridDisable")
+		vim.cmd("Markview HybridDisable")
 
 		-- Use q or <Esc> to close
 		-- mapping exists only for `buf` and is removed automatically when the buffer is deleted.
@@ -155,9 +167,19 @@ vim.keymap.set("n", "<leader>of", ":Obsidian quick_switch<CR>", { desc = "Pick O
 vim.keymap.set("n", "<leader>os", ":Obsidian search<CR>", { desc = "Search through Obsidian notes" })
 vim.keymap.set("n", "<leader>on", ":Obsidian new<CR>", { desc = "Create note" })
 vim.keymap.set("n", "<leader>oT", ":Obsidian new_from_template<CR>", { desc = "Create note from template" })
-vim.keymap.set("n", "<leader>od", ":Obsidian dailies -30 1<CR><Esc>", { desc = "Search journal" })
 vim.keymap.set("n", "<leader>ot", ":Obsidian tags<CR><Esc>", { desc = "Search Obsidian tags" })
 
+-- open Obsidian dailies, put picker in normal mode and go to today
+vim.keymap.set("n", "<leader>od", function()
+  vim.cmd("Obsidian dailies -30 1")
+
+  -- delay long enough for picker to fully initialize
+  vim.defer_fn(function()
+    vim.api.nvim_input("<Esc>")
+    vim.api.nvim_input("k")
+  end, 20)  -- adjust if picker loads slow
+
+end, { desc = "Search journal" })
 -- lazygit mapping
 vim.keymap.set("n", "<leader>gl", ":lua require('snacks').lazygit()<CR>", { desc = "Lazygit" })
 

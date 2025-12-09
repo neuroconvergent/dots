@@ -1,0 +1,88 @@
+{
+    "hints": {
+        "hint_height": 30,
+        "hint_width_padding": 10,
+        "hint_font_size": 12,
+        "hint_font_face": "Sans",
+        "hint_font_r": 0,
+        "hint_font_g": 0,
+        "hint_font_b": 0,
+        "hint_font_a": 1,
+        "hint_pressed_font_r": 0.7,
+        "hint_pressed_font_g": 0.7,
+        "hint_pressed_font_b": 0.4,
+        "hint_pressed_font_a": 1,
+        "hint_upercase": true,
+        "hint_background_r": 1,
+        "hint_background_g": 1,
+        "hint_background_b": 0.5,
+        "hint_background_a": 0.5
+    },
+    "backends": {
+        "enable": ["atspi", "opencv"],
+        "atspi": {
+            "application_rules": {
+                "default": {
+                    "scale_factor": 1,
+                    "states": [
+                        "SENSITIVE",
+                        "SHOWING",
+                        "VISIBLE"
+                    ],
+                    "states_match_type": 2,
+                    "attributes": {},
+                    "attributes_match_type": 2,
+                    "roles": [
+                        "PANEL",
+                        "SECTION",
+                        "HTML_CONTAINER",
+                        "FRAME",
+                        "MENU_BAR",
+                        "TOOL_BAR",
+                        "LIST",
+                        "PAGE_TAB_LIST",
+                        "DESCRIPTION_LIST",
+                        "STATIC",
+                        "HEADING",
+                        "PARAGRAPH",
+                        "DESCRIPTION_VALUE",
+                        "LANDMARK",
+                        "FILLER",
+                        "DESCRIPTION_TERM"
+                    ],
+                    "roles_match_type": 3
+                }
+            }
+        },
+        "opencv": {
+            "application_rules": {
+                "default": {
+                    "kernel_size": 6,
+                    "canny_min_val": 100,
+                    "canny_max_val": 200
+                }
+            }
+        }
+    },
+    "alphabet": "asdfgqwertzxcvbhjklyuiopnm",
+    "mouse_move_left": "h",
+    "mouse_move_right": "l",
+    "mouse_move_up": "k",
+    "mouse_move_down": "j",
+    "mouse_scroll_left": "h",
+    "mouse_scroll_right": "l",
+    "mouse_scroll_up": "k",
+    "mouse_scroll_down": "j",
+    "mouse_move_pixel": 10,
+    "mouse_move_pixel_sensitivity": 10,
+    "mouse_move_rampup_time": 0.5,
+    "mouse_scroll_pixel": 5,
+    "mouse_scroll_pixel_sensitivity": 5,
+    "mouse_scroll_rampup_time": 0.5,
+    "exit_key": 65307,
+    "hover_modifier": 4,
+    "grab_modifier": 8,
+    "overlay_x_offset": 0,
+    "overlay_y_offset": -60,
+    "window_system": ""
+}
