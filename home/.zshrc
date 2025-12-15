@@ -72,6 +72,7 @@ alias ll='exa -la'
 alias cat='bat'
 alias lstree="exa -aR | grep ":$" | perl -pe 's/:$//;s/[^-][^\/]*\//    /g;s/^    (\S)/└── \1/;s/(^    |    (?= ))/│   /g;s/    (\S)/└── \1/'"
 alias histfind="cat ~/.histfile| fzf | wl-copy"
+alias myip="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
 
 export NEXTCLOUD_PHP_CONFIG=/etc/webapps/nextcloud/php.ini
 

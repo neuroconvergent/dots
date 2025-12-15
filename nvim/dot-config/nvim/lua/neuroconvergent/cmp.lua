@@ -1,5 +1,6 @@
 -- cmp mapping for autocompletion, instead of CoC
 local cmp = require("cmp")
+local compare = cmp.config.compare
 local luasnip = require("luasnip")
 local lspkind = require("lspkind")
 
@@ -47,11 +48,21 @@ cmp.setup({
 		documentation = cmp.config.window.bordered(),
 	},
 	sources = {
+		{ name = "jupynium", priority = 1000 }, -- consider higher priority than LSP
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 		{ name = "buffer" },
 		{ name = "path" },
 		{ name = "papis" },
+	},
+	sorting = {
+		priority_weight = 1.0,
+		comparators = {
+			compare.score, -- Jupyter kernel completion shows prior to LSP
+			compare.recently_used,
+			compare.locality,
+			-- ...
+		},
 	},
 	formatting = {
 		format = lspkind.cmp_format({
@@ -63,6 +74,7 @@ cmp.setup({
 				nvim_lua = "[Lua]",
 				obsidian = "[Obsidian]",
 				latex_symbols = "[Latex]",
+                jupynium = "[Jupynium]",
 			},
 		}),
 	},

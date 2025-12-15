@@ -55,15 +55,15 @@ return {
 			require("opencode").ask("@visible: ", { submit = true })
 		end, { desc = "Ask opencode with visible text as context" })
 
-		vim.keymap.set({ "n", "t" }, "<C-.>", function()
+		vim.keymap.set({ "n", "t" }, "<M-o>", function()
 			require("opencode").toggle()
 		end, { desc = "Toggle opencode" })
 
-		vim.keymap.set("n", "<S-C-u>", function()
+		vim.keymap.set("n", "<M-u>", function()
 			require("opencode").command("session.half.page.up")
 		end, { desc = "opencode half page up" })
 
-		vim.keymap.set("n", "<S-C-d>", function()
+		vim.keymap.set("n", "<M-d>", function()
 			require("opencode").command("session.half.page.down")
 		end, { desc = "opencode half page down" })
 

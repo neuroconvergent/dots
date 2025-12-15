@@ -4,8 +4,82 @@
   "permission": {
     "edit": "ask",
     "bash": "ask",
-    "webfetch": "allow",
-    "doom_loop": "ask",
+    "webfetch": "deny",
+    "doom_loop": "deny",
     "external_directory": "ask"
+  },
+  "tools": {
+    "write": true,
+    "bash": false,
+    "webfetch": false
+  },
+  "watcher": {
+    "ignore": [
+      "node_modules/**",
+      "build/**",
+      "*.log",
+      "typings/**",
+      "*.pyc",
+      "__pycache__/**",
+      "_site/**",
+      "target/**",
+      "dist/**",
+      "docs/**"
+    ]
+  },
+  "model": "opencode/grok-code",
+  "share": "manual",
+  "autoupdate": false,
+  "provider": {
+    "opencode": {
+      "models": {
+        "gpt-5.1-low": {
+          "id": "gpt-5.1",
+          "options": {
+            "reasoningEffort": "low",
+            "textVerbosity": "low",
+            "reasoningSummary": "never"
+          }
+        },
+        "gpt-5.1-mid": {
+          "id": "gpt-5.1",
+          "options": {
+            "reasoningEffort": "medium",
+            "textVerbosity": "low"
+          }
+        },
+        "gpt-5.1-high": {
+          "id": "gpt-5.1",
+          "options": {
+            "reasoningEffort": "high",
+            "textVerbosity": "medium"
+          }
+        },
+
+        "gpt-codex-low": {
+          "id": "gpt-5.1-codex",
+          "options": {
+            "reasoningEffort": "low",
+            "textVerbosity": "low"
+          }
+        },
+        "gpt-codex-mid": {
+          "id": "gpt-5.1-codex",
+          "options": {
+            "reasoningEffort": "medium",
+            "textVerbosity": "low"
+          }
+        },
+        "gpt-codex-high": {
+          "id": "gpt-5.1-codex",
+          "options": {
+            "reasoningEffort": "high",
+            "textVerbosity": "medium"
+          }
+        }
+      }
+    }
   }
 }
+
+

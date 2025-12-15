@@ -18,7 +18,7 @@ return {
 		},
 		color_overrides = {
 			all = {
-				base = "#eff1f6",
+				base = "#262a35",
 				text = "#ffffff",
 				mantle = "#dfafaf",
 				crust = "#d7875f",
@@ -43,7 +43,7 @@ return {
 				subtext0 = "#6c6f86",
 				subtext1 = "#5c5f78",
 				surface0 = "#262a35",
-				surface1 = "#3c3f4a",
+				surface1 = "#2a2c34",
 				surface2 = "#acb0bf",
 			},
 			latte = {},

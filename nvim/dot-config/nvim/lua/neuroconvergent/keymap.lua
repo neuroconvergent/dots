@@ -1,6 +1,7 @@
 -- Terminal mode
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", { noremap = true, desc = "Exit terminal mode" })
 vim.keymap.set("t", "<C-q>", "<C-\\><C-n>", { noremap = true, desc = "Exit terminal mode" })
+vim.keymap.set("t", "<C-w>", "<C-\\><C-n><C-w>", { noremap = true, desc = "Exit terminal mode and manipulate buffer" })
 
 -- Remap scroll to centre window
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
@@ -32,11 +33,194 @@ vim.keymap.set("n", "<leader>ff", ":Telescope find_files hidden=true <CR>", defa
 vim.keymap.set("n", "<leader>fr", ":Telescope oldfiles hidden=true <CR>", default_opts)
 vim.keymap.set("n", "<leader>fb", ":Telescope buffers<CR>", default_opts)
 vim.keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>", default_opts)
-vim.keymap.set("n", "<leader>fn", ":Telescope notify<CR>", default_opts)
 vim.keymap.set("n", "<leader>fgc", ":Telescope git_bcommits<CR>", default_opts)
 vim.keymap.set("n", "<leader>fgs", ":Telescope git_status<CR>", default_opts)
 vim.keymap.set("n", "<leader>fss", ":Telescope grep_string<CR>", default_opts)
 vim.keymap.set("n", "<leader>fsg", ":Telescope live_grep<CR>", default_opts)
+
+-- Snacks Notifications (Telescope)
+local pickers = require("telescope.pickers")
+local finders = require("telescope.finders")
+local previewers = require("telescope.previewers")
+local actions = require("telescope.actions")
+local action_state = require("telescope.actions.state")
+local entry_display = require("telescope.pickers.entry_display")
+local conf = require("telescope.config").values
+local widths = {
+	time = 8,
+	title = 15,
+	icon = nil,
+	level = nil,
+	message = nil,
+}
+
+local displayer = entry_display.create({
+	separator = " ",
+	items = {
+		{ width = widths.time },
+		{ width = widths.title },
+		{ width = widths.icon },
+		{ width = widths.level },
+		{ width = widths.message },
+	},
+})
+local levels = { "Info", "Warn", "Error", "Debug", "Trace" }
+for _, lvl in ipairs(levels) do
+	vim.api.nvim_set_hl(0, "SnacksNotifierIcon" .. lvl, { link = "DiagnosticSign" .. lvl })
+	vim.api.nvim_set_hl(0, "SnacksNotifierTitle" .. lvl, { link = "DiagnosticVirtualText" .. lvl })
+	vim.api.nvim_set_hl(0, "SnacksNotifierBorder" .. lvl, { link = "FloatBorder" })
+	vim.api.nvim_set_hl(0, "SnacksNotifierFooter" .. lvl, { link = "Comment" })
+	vim.api.nvim_set_hl(0, "SnacksNotifier" .. lvl, { link = "NormalFloat" })
+end
+local function snacks_notifications(opts)
+	opts = opts or {}
+	local notifications = Snacks.notifier.get_history() or {} -- Fallback to empty if no history
+
+	-- Reverse so newest is at the bottom
+	local reversed = {}
+	for i = #notifications, 1, -1 do
+		table.insert(reversed, notifications[i])
+	end
+	notifications = reversed
+
+	pickers
+		.new(opts, {
+			prompt_title = "Snacks Notifications",
+			finder = finders.new_table({
+				results = notifications,
+				entry_maker = function(entry)
+					local time = os.date("%T", entry.added)
+					local sev = (entry.severity or entry.level) or ""
+					local title = entry.title or ""
+					local msg = entry.msg or ""
+					local icon = entry.icon or ""
+					local short_msg = string.sub(msg, 1, 30) .. (#msg > 30 and "..." or "")
+					return {
+						value = entry,
+						display = function(_)
+							return displayer({
+								{ time, "SnacksPickerTime" },
+								{ title, "SnacksNotifierHistoryTitle" },
+								{
+									icon,
+									"SnacksNotifierIcon"
+										.. (entry.level and entry.level:gsub("^%l", string.upper) or "Info"),
+								},
+								{
+									string.upper(sev),
+									"SnacksNotifierTitle"
+										.. (entry.level and entry.level:gsub("^%l", string.upper) or "Info"),
+								},
+								{ short_msg, "SnacksPickerNotificationMessage" },
+							})
+						end,
+						ordinal = (entry.title or "") .. " " .. (entry.msg or ""), -- Match nvim-notify ordinal formatting
+					}
+				end,
+			}),
+			sorter = conf.generic_sorter(opts),
+			attach_mappings = function(prompt_bufnr, map)
+				actions.select_default:replace(function()
+					actions.close(prompt_bufnr)
+					local selection = action_state.get_selected_entry()
+					if not selection or not selection.value then
+						return
+					end
+
+					local notif = selection.value
+					local msg = notif.msg or ""
+					local title = notif.title or "Notification"
+					local level = notif.level or notif.severity or "info"
+					local icon = notif.icon or ""
+					local time = os.date("%T", notif.added or os.time())
+					local Level = level:gsub("^%l", string.upper)
+
+					-- Prepare content
+					local body_lines = vim.split(msg, "\n")
+					local content_width = 0
+					for _, line in ipairs(body_lines) do
+						content_width = math.max(content_width, vim.fn.strdisplaywidth(line))
+					end
+
+					-- Header: icon level title time
+					local header_text = string.format("%s %s   %s   %s", icon, Level, title, time)
+					content_width = math.max(content_width, vim.fn.strdisplaywidth(header_text))
+					local header_line = header_text
+						.. string.rep(" ", content_width - vim.fn.strdisplaywidth(header_text))
+					local separator_line = string.rep("─", content_width)
+
+					-- Create buffer
+					local buf = vim.api.nvim_create_buf(false, true)
+					vim.api.nvim_buf_set_lines(buf, 0, -1, false, { header_line, separator_line, unpack(body_lines) })
+					vim.bo[buf].filetype = "markdown"
+
+					-- Highlight header parts
+					local ns = vim.api.nvim_create_namespace("SnacksNotifFloat")
+					local col = 0
+					vim.api.nvim_buf_add_highlight(buf, ns, "SnacksNotifierIcon" .. Level, 0, col, col + #icon)
+					col = col + #icon + 1
+					vim.api.nvim_buf_add_highlight(buf, ns, "SnacksNotifierTitle" .. Level, 0, col, col + #Level)
+					col = col + #Level + 3
+					vim.api.nvim_buf_add_highlight(buf, ns, "SnacksNotifierHistoryTitle", 0, col, col + #title)
+					col = col + #title + 3
+					vim.api.nvim_buf_add_highlight(buf, ns, "SnacksPickerTime", 0, col, col + #time)
+
+					-- Floating window size
+					local width = content_width + 2
+					local height = #body_lines + 2
+					local row = math.floor((vim.o.lines - height) / 2)
+					local col = math.floor((vim.o.columns - width) / 2)
+
+					-- Border highlight
+					local border_hl = "SnacksNotifBorder" .. Level
+					vim.api.nvim_set_hl(0, border_hl, {
+						fg = vim.api.nvim_get_hl_by_name("DiagnosticSign" .. Level, true).foreground,
+					})
+
+					-- Open floating window
+					local title_text = title or "Message" -- fallback if empty
+					local win = vim.api.nvim_open_win(buf, true, {
+						relative = "editor",
+						row = row,
+						col = col,
+						width = width,
+						height = height,
+						border = "rounded",
+						title = " " .. icon .. (title_text ~= "" and " " .. title_text or "") .. " ",
+						title_pos = "center",
+					})
+					vim.api.nvim_win_set_option(
+						win,
+						"winhl",
+						table.concat({
+							"FloatBorder:" .. border_hl,
+							"NormalFloat:SnacksNotifier" .. Level,
+							"FloatTitle:SnacksNotifierTitle" .. Level,
+						}, ",")
+					)
+					-- Disable line numbers
+					vim.api.nvim_win_set_option(win, "number", false)
+					vim.api.nvim_win_set_option(win, "relativenumber", false)
+					vim.api.nvim_win_set_option(win, "cursorline", false)
+					vim.api.nvim_win_set_option(win, "cursorcolumn", false)
+					vim.api.nvim_win_set_option(win, "statuscolumn", "")
+					vim.api.nvim_win_set_option(win, "signcolumn", "no")
+					vim.api.nvim_win_set_option(win, "foldcolumn", "0")
+				end)
+
+				return true
+			end,
+			previewer = previewers.new_buffer_previewer({
+				define_preview = function(self, entry, status)
+					vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, vim.split(entry.value.msg or "", "\n"))
+					vim.bo[self.state.bufnr].filetype = "markdown"
+				end,
+			}),
+		})
+		:find()
+end
+
+vim.keymap.set("n", "<leader>fn", snacks_notifications, { desc = "Snacks Notifications (Telescope)" })
 
 -- Oil
 vim.keymap.set("n", "<leader>x", ":Oil<CR>")
@@ -171,14 +355,13 @@ vim.keymap.set("n", "<leader>ot", ":Obsidian tags<CR><Esc>", { desc = "Search Ob
 
 -- open Obsidian dailies, put picker in normal mode and go to today
 vim.keymap.set("n", "<leader>od", function()
-  vim.cmd("Obsidian dailies -30 1")
+	vim.cmd("Obsidian dailies -30 1")
 
-  -- delay long enough for picker to fully initialize
-  vim.defer_fn(function()
-    vim.api.nvim_input("<Esc>")
-    vim.api.nvim_input("k")
-  end, 20)  -- adjust if picker loads slow
-
+	-- delay long enough for picker to fully initialize
+	vim.defer_fn(function()
+		vim.api.nvim_input("<Esc>")
+		vim.api.nvim_input("k")
+	end, 20) -- adjust if picker loads slow
 end, { desc = "Search journal" })
 -- lazygit mapping
 vim.keymap.set("n", "<leader>gl", ":lua require('snacks').lazygit()<CR>", { desc = "Lazygit" })
@@ -841,3 +1024,6 @@ vim.keymap.set("n", "<leader>ci", function()
 	local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
 	vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })
 end, { desc = "Toggle Inlay Hints" })
+
+-- Typst preview
+vim.keymap.set("n", "<leader>tp", ":TypstPreview<CR>", { desc = "Typst Preview" })

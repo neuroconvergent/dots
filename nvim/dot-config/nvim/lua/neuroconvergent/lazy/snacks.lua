@@ -18,7 +18,16 @@ return {
 			preset = {
 				-- Defaults to a picker that supports `fzf-lua`, `telescope.nvim` and `mini.pick`
 				---@type fun(cmd:string, opts:table)|nil
-				pick = nil,
+				pick = function(cmd, opts)
+					local telescope = require("telescope.builtin")
+					local map = {
+						files = "find_files",
+						live_grep = "live_grep",
+						oldfiles = "oldfiles",
+					}
+					local func = map[cmd] or cmd
+					telescope[func](opts)
+				end,
 				-- Used by the `keys` section to show keymaps.
 				-- Set your custom keymaps here.
 				-- When using a function, the `items` argument are the default keymaps.
@@ -114,7 +123,7 @@ return {
 				end,
 				inline = true,
 			},
-            ---@class snacks.image.convert.Config
+			---@class snacks.image.convert.Config
 			convert = {
 				notify = true, -- show a notification on error
 				---@type snacks.image.args
@@ -134,8 +143,11 @@ return {
 		indent = { enabled = true },
 		input = { enabled = true },
 		lazygit = { enabled = true },
-		picker = { enabled = false },
-		notifier = { enabled = false },
+		picker = {
+			enabled = true,
+			ui_select = false,
+		},
+		notifier = { enabled = true },
 		quickfile = { enabled = true },
 		scope = { enabled = true },
 		scroll = { enabled = true },
