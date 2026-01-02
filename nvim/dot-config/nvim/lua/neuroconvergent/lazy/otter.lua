@@ -1,7 +1,7 @@
 return {
 	"jmbuhr/otter.nvim",
     lazy = true,
-    ft = {"markdown"},
+    ft = {"markdown", "quarto"},
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",
 	},
