@@ -3,7 +3,7 @@
     "minimizeToTray": true,
     "arRPC": true,
     "splashColor": "rgb(221, 221, 221)",
-    "splashBackground": "rgba(0, 0, 0, 0)",
+    "splashBackground": "rgb(18, 18, 20)",
     "spellCheckLanguages": [
         "en-US",
         "en",
