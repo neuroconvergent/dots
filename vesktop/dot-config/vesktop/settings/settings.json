@@ -5,12 +5,10 @@
     "themeLinks": [
         "https://raw.githubusercontent.com/DiscordStyles/FrostedGlass/deploy/FrostedGlass.theme.css"
     ],
-    "enabledThemes": [
-        "FrostedGlass.theme.css"
-    ],
+    "enabledThemes": [],
     "enableReactDevtools": false,
     "frameless": false,
-    "transparent": false,
+    "transparent": true,
     "winCtrlQ": false,
     "disableMinSize": false,
     "winNativeTitleBar": false,
@@ -55,7 +53,7 @@
             "enabled": false
         },
         "AlwaysExpandRoles": {
-            "enabled": false
+            "enabled": true
         },
         "AlwaysTrust": {
             "enabled": false
@@ -94,7 +92,10 @@
             "enabled": false
         },
         "BetterSettings": {
-            "enabled": false
+            "enabled": true,
+            "disableFade": true,
+            "eagerLoad": true,
+            "organizeMenu": true
         },
         "BetterUploadButton": {
             "enabled": false
@@ -600,7 +601,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1767366075120
+        "settingsSyncVersion": 1767394742169
     },
     "eagerPatches": false,
     "uiElements": {

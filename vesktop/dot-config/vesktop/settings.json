@@ -9,5 +9,8 @@
         "en",
         "en-GB",
         "en-GB-oxendict"
-    ]
+    ],
+    "hardwareVideoAcceleration": true,
+    "customTitleBar": false,
+    "staticTitle": false
 }
