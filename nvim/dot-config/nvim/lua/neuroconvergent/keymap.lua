@@ -355,7 +355,7 @@ vim.keymap.set("n", "<leader>ot", ":Obsidian tags<CR><Esc>", { desc = "Search Ob
 
 -- open Obsidian dailies, put picker in normal mode and go to today
 vim.keymap.set("n", "<leader>od", function()
-	vim.cmd("Obsidian dailies -30 1")
+	vim.cmd("Obsidian dailies 1 -30")
 
 	-- delay long enough for picker to fully initialize
 	vim.defer_fn(function()
@@ -446,10 +446,10 @@ vim.keymap.set("n", "<leader>tdw", function()
 	vim.schedule(function()
 		local bufnr = vim.api.nvim_get_current_buf()
 
-		-- Delete from line 5 to end of buffer (Lua index is 0-based)
+		-- Delete from line 4 to end of buffer (Lua index is 0-based)
 		local line_count = vim.api.nvim_buf_line_count(bufnr)
-		if line_count >= 5 then
-			vim.api.nvim_buf_set_lines(bufnr, 4, line_count, false, {})
+		if line_count >= 4 then
+			vim.api.nvim_buf_set_lines(bufnr, 3, line_count, false, {})
 		end
 
 		-- --- Build daily links for the week ---
@@ -473,17 +473,17 @@ vim.keymap.set("n", "<leader>tdw", function()
 		end
 
 		-- Append links under ## Dailies
-		vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, { "", "## Dailies" })
-		vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, links)
-		-- === NEW PART: prepend "Week " before the last word of line 4 ===
-		local line_nr = 3 -- Lua index 0-based, line 4 is index 3
-		local line = vim.api.nvim_buf_get_lines(bufnr, line_nr, line_nr + 1, false)[1]
-		if line then
-			local new_line = line:gsub("(%S+)$", "Week %1") -- add "Week " before last word
-			vim.api.nvim_buf_set_lines(bufnr, line_nr, line_nr + 1, false, { new_line })
-			-- optional: move cursor to end of the line
-			vim.api.nvim_win_set_cursor(0, { line_nr + 1, #new_line })
-		end
+ 		vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, { "", "## Dailies" })
+ 		vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, links)
+ 		-- === NEW PART: replace the last word of line 3 with "Week <week number>,<year>" ===
+ 		local line_nr = 2 -- Lua index 0-based, line 3 is index 2
+ 		local line = vim.api.nvim_buf_get_lines(bufnr, line_nr, line_nr + 1, false)[1]
+ 		if line then
+ 			local new_line = line:gsub("(%S+)$", "Week " .. week .. "," .. year) -- replace last word
+ 			vim.api.nvim_buf_set_lines(bufnr, line_nr, line_nr + 1, false, { new_line })
+ 			-- optional: move cursor to end of the line
+ 			vim.api.nvim_win_set_cursor(0, { line_nr + 1, #new_line })
+ 		end
 		-- Move cursor to new line after line 4 (where template will be inserted)
 		vim.api.nvim_win_set_cursor(0, { 5, 0 })
 
@@ -502,8 +502,8 @@ vim.keymap.set("n", "<leader>tdn", function()
 	-- Get next Monday
 	local next_monday = today + ((8 - tonumber(os.date("%w", today))) % 7) * 24 * 60 * 60
 	-- ISO year and week of next Monday
-	local year = tonumber(os.date("%G", next_monday)) -- ISO year
-	local week = tonumber(os.date("%V", next_monday)) -- ISO week number
+	local year = os.date("%G", next_monday) -- ISO year
+	local week = os.date("%V", next_monday) -- ISO week number
 
 	-- Build directory and filename
 	local dir = "tasks/" .. year
@@ -520,10 +520,10 @@ vim.keymap.set("n", "<leader>tdn", function()
 	vim.schedule(function()
 		local bufnr = vim.api.nvim_get_current_buf()
 
-		-- Delete from line 5 to end of buffer (Lua index is 0-based)
+		-- Delete from line 4 to end of buffer (Lua index is 0-based)
 		local line_count = vim.api.nvim_buf_line_count(bufnr)
-		if line_count >= 5 then
-			vim.api.nvim_buf_set_lines(bufnr, 4, line_count, false, {})
+		if line_count >= 4 then
+			vim.api.nvim_buf_set_lines(bufnr, 3, line_count, false, {})
 		end
 
 		-- --- Build daily links for the week ---
@@ -550,15 +550,15 @@ vim.keymap.set("n", "<leader>tdn", function()
 		vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, { "", "## Dailies" })
 		vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, links)
 
-		-- === NEW PART: prepend "Week " before the last word of line 4 ===
-		local line_nr = 3 -- Lua index 0-based, line 4 is index 3
-		local line = vim.api.nvim_buf_get_lines(bufnr, line_nr, line_nr + 1, false)[1]
-		if line then
-			local new_line = line:gsub("(%S+)$", "Week %1") -- add "Week " before last word
-			vim.api.nvim_buf_set_lines(bufnr, line_nr, line_nr + 1, false, { new_line })
-			-- optional: move cursor to end of the line
-			vim.api.nvim_win_set_cursor(0, { line_nr + 1, #new_line })
-		end
+ 		-- === NEW PART: replace the last word of line 3 with "Week <week number>,<year>" ===
+ 		local line_nr = 2 -- Lua index 0-based, line 3 is index 2
+ 		local line = vim.api.nvim_buf_get_lines(bufnr, line_nr, line_nr + 1, false)[1]
+ 		if line then
+ 			local new_line = line:gsub("(%S+)$", "Week " .. week .. "," .. year) -- replace last word
+ 			vim.api.nvim_buf_set_lines(bufnr, line_nr, line_nr + 1, false, { new_line })
+ 			-- optional: move cursor to end of the line
+ 			vim.api.nvim_win_set_cursor(0, { line_nr + 1, #new_line })
+ 		end
 		-- Move cursor to new line after line 4 (where template will be inserted)
 		vim.api.nvim_win_set_cursor(0, { 5, 0 })
 
