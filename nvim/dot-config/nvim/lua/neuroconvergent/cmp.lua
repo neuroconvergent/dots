@@ -54,6 +54,9 @@ cmp.setup({
 		{ name = "buffer" },
 		{ name = "path" },
 		{ name = "papis" },
+		{ name = "obsidian" },
+		{ name = "obsidian_tags" },
+		{ name = "cmdline" },
 	},
 	sorting = {
 		priority_weight = 1.0,
@@ -73,6 +76,8 @@ cmp.setup({
 				luasnip = "[LuaSnip]",
 				nvim_lua = "[Lua]",
 				obsidian = "[Obsidian]",
+				obsidian_tags = "[Tags]",
+                cmdline = "[cmd]",
 				latex_symbols = "[Latex]",
                 jupynium = "[Jupynium]",
 			},

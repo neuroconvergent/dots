@@ -352,6 +352,7 @@ vim.keymap.set("n", "<leader>os", ":Obsidian search<CR>", { desc = "Search throu
 vim.keymap.set("n", "<leader>on", ":Obsidian new<CR>", { desc = "Create note" })
 vim.keymap.set("n", "<leader>oT", ":Obsidian new_from_template<CR>", { desc = "Create note from template" })
 vim.keymap.set("n", "<leader>ot", ":Obsidian tags<CR><Esc>", { desc = "Search Obsidian tags" })
+vim.keymap.set("n", "<leader>ob", ":Obsidian backlinks<CR><Esc>", { desc = "Search Obsidian backlinks" })
 
 -- open Obsidian dailies, put picker in normal mode and go to today
 vim.keymap.set("n", "<leader>od", function()
@@ -363,6 +364,7 @@ vim.keymap.set("n", "<leader>od", function()
 		vim.api.nvim_input("k")
 	end, 20) -- adjust if picker loads slow
 end, { desc = "Search journal" })
+
 -- lazygit mapping
 vim.keymap.set("n", "<leader>gl", ":lua require('snacks').lazygit()<CR>", { desc = "Lazygit" })
 
