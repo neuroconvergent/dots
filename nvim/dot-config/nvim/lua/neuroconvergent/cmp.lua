@@ -56,7 +56,6 @@ cmp.setup({
 		{ name = "papis" },
 		{ name = "obsidian" },
 		{ name = "obsidian_tags" },
-		{ name = "cmdline" },
 	},
 	sorting = {
 		priority_weight = 1.0,
@@ -77,10 +76,45 @@ cmp.setup({
 				nvim_lua = "[Lua]",
 				obsidian = "[Obsidian]",
 				obsidian_tags = "[Tags]",
-                cmdline = "[cmd]",
+				cmdline = "[cmd]",
 				latex_symbols = "[Latex]",
-                jupynium = "[Jupynium]",
+				jupynium = "[Jupynium]",
 			},
 		}),
 	},
+})
+
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline({ "/", "?" }, {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = {
+		{ name = "buffer" },
+	},
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(":", {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = cmp.config.sources({
+		{ name = "path" },
+	}, {
+		{ name = "cmdline" },
+	}),
+	matching = { disallow_symbol_nonprefix_matching = false },
+})
+
+-- If you want insert `(` after select function or method item
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
+-- Auto complete cmdline on command window
+vim.api.nvim_create_autocmd("CmdwinEnter", {
+	callback = function()
+		cmp.setup.buffer({
+			sources = {
+				{ name = "cmdline" },
+				{ name = "path" },
+			},
+		})
+	end,
 })
