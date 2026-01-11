@@ -8,6 +8,7 @@ return {
 			treesitter = true,
             barbar= true,
 			telescope = true,
+            snacks = true,
 		},
 		float = {
 			transparent = true,

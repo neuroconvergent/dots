@@ -10,8 +10,8 @@ return {
 		"hrsh7th/nvim-cmp",
 
 		-- Choose one of the following two if not already installed:
-		"nvim-telescope/telescope.nvim",
-		-- "folke/snacks.nvim",
+		-- "nvim-telescope/telescope.nvim",
+		"folke/snacks.nvim",
 	},
 	config = function()
 		require("papis").setup({
@@ -33,7 +33,7 @@ return {
 			},
 			["search"] = {
 				enable = true,
-				provider = "telescope",
+				provider = "snacks",
 			},
 			["completion"] = {
 				enable = true,

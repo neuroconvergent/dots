@@ -18,16 +18,16 @@ return {
 			preset = {
 				-- Defaults to a picker that supports `fzf-lua`, `telescope.nvim` and `mini.pick`
 				---@type fun(cmd:string, opts:table)|nil
-				pick = function(cmd, opts)
-					local telescope = require("telescope.builtin")
-					local map = {
-						files = "find_files",
-						live_grep = "live_grep",
-						oldfiles = "oldfiles",
-					}
-					local func = map[cmd] or cmd
-					telescope[func](opts)
-				end,
+				-- pick = function(cmd, opts)
+				-- 	local telescope = require("telescope.builtin")
+				-- 	local map = {
+				-- 		files = "find_files",
+				-- 		live_grep = "live_grep",
+				-- 		oldfiles = "oldfiles",
+				-- 	}
+				-- 	local func = map[cmd] or cmd
+				-- 	telescope[func](opts)
+				-- end,
 				-- Used by the `keys` section to show keymaps.
 				-- Set your custom keymaps here.
 				-- When using a function, the `items` argument are the default keymaps.
@@ -145,7 +145,7 @@ return {
 		lazygit = { enabled = true },
 		picker = {
 			enabled = true,
-			ui_select = false,
+			ui_select = true,
 		},
 		notifier = { enabled = true },
 		quickfile = { enabled = true },
