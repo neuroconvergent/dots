@@ -24,32 +24,9 @@
             "application_rules": {
                 "default": {
                     "scale_factor": 1,
-                    "states": [
-                        "SENSITIVE",
-                        "SHOWING",
-                        "VISIBLE"
-                    ],
                     "states_match_type": 2,
                     "attributes": {},
                     "attributes_match_type": 2,
-                    "roles": [
-                        "PANEL",
-                        "SECTION",
-                        "HTML_CONTAINER",
-                        "FRAME",
-                        "MENU_BAR",
-                        "TOOL_BAR",
-                        "LIST",
-                        "PAGE_TAB_LIST",
-                        "DESCRIPTION_LIST",
-                        "STATIC",
-                        "HEADING",
-                        "PARAGRAPH",
-                        "DESCRIPTION_VALUE",
-                        "LANDMARK",
-                        "FILLER",
-                        "DESCRIPTION_TERM"
-                    ],
                     "roles_match_type": 3
                 }
             }
