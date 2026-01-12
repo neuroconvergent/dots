@@ -72,12 +72,12 @@ end, { noremap = true, silent = true, desc = "Format file with null-ls" })
 -- lsp
 -- Goto (under <leader>g for "goto")
 vim.keymap.set("n", "<leader>gd", Snacks.picker.lsp_definitions, { desc = "Goto Definition" })
-vim.keymap.set("n", "<leader>gD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
+vim.keymap.set("n", "<leader>gD", Snacks.picker.lsp_declarations, { desc = "Goto Declaration" })
 vim.keymap.set("n", "<leader>gr", Snacks.picker.lsp_references, { desc = "Goto References" })
 vim.keymap.set("n", "<leader>gi", Snacks.picker.lsp_implementations, { desc = "Goto Implementation" })
 vim.keymap.set("n", "<leader>gt", Snacks.picker.lsp_type_definitions, { desc = "Goto Type Definition" })
 vim.keymap.set("n", "<leader>gs", Snacks.picker.lsp_symbols, { desc = "Goto Symbols" })
-vim.keymap.set("n", "<leader>gw", Snacks.picker.lsp_workspace_symbols, { desc = "Goto Symbols" })
+vim.keymap.set("n", "<leader>gw", Snacks.picker.lsp_workspace_symbols, { desc = "Goto Workspace Symbols" })
 
 -- Hover / Info
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })
@@ -321,7 +321,7 @@ vim.keymap.set("n", "<leader>tdw", function()
 		local line_nr = 2 -- Lua index 0-based, line 3 is index 2
 		local line = vim.api.nvim_buf_get_lines(bufnr, line_nr, line_nr + 1, false)[1]
 		if line then
-			local new_line = line:gsub("(%S+)$", "Week " .. week .. "," .. year) -- replace last word
+			local new_line = line:gsub("(%S+)$", "Week " .. week .. ", " .. year) -- replace last word
 			vim.api.nvim_buf_set_lines(bufnr, line_nr, line_nr + 1, false, { new_line })
 			-- optional: move cursor to end of the line
 			vim.api.nvim_win_set_cursor(0, { line_nr + 1, #new_line })
@@ -396,7 +396,7 @@ vim.keymap.set("n", "<leader>tdn", function()
 		local line_nr = 2 -- Lua index 0-based, line 3 is index 2
 		local line = vim.api.nvim_buf_get_lines(bufnr, line_nr, line_nr + 1, false)[1]
 		if line then
-			local new_line = line:gsub("(%S+)$", "Week " .. week .. "," .. year) -- replace last word
+			local new_line = line:gsub("(%S+)$", "Week " .. week .. ", " .. year) -- replace last word
 			vim.api.nvim_buf_set_lines(bufnr, line_nr, line_nr + 1, false, { new_line })
 			-- optional: move cursor to end of the line
 			vim.api.nvim_win_set_cursor(0, { line_nr + 1, #new_line })
