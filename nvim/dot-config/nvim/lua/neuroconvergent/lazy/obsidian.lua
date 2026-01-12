@@ -98,8 +98,10 @@ return {
 		},
 		-- Optional, sort search results by "path", "modified", "accessed", or "created". The recommend value is "modified" and `true` for `sort_reversed`, which means, for example,
 		-- that `:ObsidianQuickSwitch` will show the notes sorted by latest modified time
-		sort_by = "accessed",
-		sort_reversed = true,
+		search = {
+			sort_by = "accessed",
+			sort_reversed = true,
+		},
 		ui = {
 			enable = false,
 			ignore_conceal_warn = true, -- set to true to disable conceallevel specific warning
