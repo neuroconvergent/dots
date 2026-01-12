@@ -4,10 +4,10 @@ vim.keymap.set("t", "<C-q>", "<C-\\><C-n>", { noremap = true, desc = "Exit termi
 vim.keymap.set("t", "<C-w>", "<C-\\><C-n><C-w>", { noremap = true, desc = "Exit terminal mode and manipulate buffer" })
 
 -- Remap scroll to centre window
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+-- vim.keymap.set("n", "<C-d>", "<C-d>zz")
+-- vim.keymap.set("n", "<C-u>", "<C-u>zz")
+-- vim.keymap.set("n", "n", "nzzzv")
+-- vim.keymap.set("n", "N", "Nzzzv")
 
 -- Tab manipulation
 vim.keymap.set("n", "<Tab>", ":bnext<CR>")
@@ -24,8 +24,8 @@ vim.keymap.set("n", "<Esc>", "<Cmd>noh<CR>", { desc = "Remove search highlight",
 vim.keymap.set("n", "<C-j>", "gj")
 vim.keymap.set("n", "<C-k>", "gk")
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+-- vim.g.mapleader = " "
+-- vim.g.maplocalleader = "\\"
 
 -- Snacks pickers
 vim.keymap.set("n", "<leader>ff", function()
@@ -171,7 +171,8 @@ vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action
 -- Diagnostics
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Prev Diagnostic" })
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
-vim.keymap.set("n", "<leader>cd", vim.diagnostic.setloclist, { desc = "Diagnostics List" })
+vim.keymap.set("n", "<leader>cd", Snacks.picker.diagnostics_buffer, { desc = "Diagnostics" })
+vim.keymap.set("n", "<leader>cp", Snacks.picker.diagnostics, { desc = "Diagnostics (Project)" })
 
 -- Workspace management
 vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { desc = "Add Workspace Folder" })
@@ -438,7 +439,7 @@ vim.keymap.set("n", "<leader>tdc", function()
 						task = task:gsub("%s*%[%[(https?://.-)%]%]$", "")
 						table.insert(results, {
 							year = year or "????",
-							week = week or "??",
+							week = tonumber(week) or 0,
 							lnum = tonumber(lnum),
 							path = filepath,
 							-- Store parts separately for the formatter
@@ -465,7 +466,10 @@ vim.keymap.set("n", "<leader>tdc", function()
 			local ret = {}
 			-- 1. Format the Date (using a comment or constant highlight)
 			table.insert(ret, { "󰃭 ", "SnacksPickerIconDate" }) -- Optional icon
-			table.insert(ret, { item.date_str, "Special" }) -- Pink/Orange in most themes
+			local meta = string.format("%s - Week %02d", item.year, item.week)
+			table.insert(ret, { meta, "Special" }) -- Pink/Orange in most themes
+			table.insert(ret, { "  ", "NonText" })
+			table.insert(ret, { item.date_str, "Keyword" })
 
 			-- 2. Add a separator
 			table.insert(ret, { " — ", "NonText" })
