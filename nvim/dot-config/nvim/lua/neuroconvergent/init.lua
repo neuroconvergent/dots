@@ -6,6 +6,3 @@ require("neuroconvergent.cmp")
 require("neuroconvergent/lsp")
 require("neuroconvergent/snips")
 require("neuroconvergent/autocmd")
-
-vim.cmd.colorscheme 'catppuccin-latte'
-

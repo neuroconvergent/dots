@@ -10,9 +10,3 @@ require("markview").setup({
 
 vim.cmd.colorscheme 'catppuccin-mocha'
 
--- vim.cmd [[augroup DebugWrite
---   autocmd!
---   autocmd BufWritePre,BufWritePost *.md echom "Write:" expand('%:p')
--- augroup END]]
---
-
