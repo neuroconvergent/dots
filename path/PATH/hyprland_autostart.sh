@@ -5,7 +5,7 @@
 hyprpaper &
 
 ### Waybar launch script
-$HOME/PATH/launch_waybar.sh &
+"$HOME"/PATH/launch_waybar.sh &
 
 ### System tray applets
 nm-applet &
@@ -31,7 +31,7 @@ then
 	killall swaync
 fi
 swaync &
-$HOME/PATH/battery-notifier.sh &
+"$HOME"/PATH/battery-notifier.sh &
 
 ###Automatic screen temperature with gammastep
 gammastep-indicator &
@@ -59,6 +59,9 @@ kanata -c ~/.config/kanata/config.kbd
 #mpd $HOME/.config/mpd/mpd.conf &
 #mpDris2 &
 # Use mpd and mpdris2-rs user sevices instead
+
+###ydotool for rofimoji
+ydotoold&
 
 ###Polkit
 systemctl --user start hyprpolkitagent.service &
