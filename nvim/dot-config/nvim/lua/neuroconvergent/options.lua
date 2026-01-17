@@ -38,9 +38,9 @@ vim.cmd([[set shortmess+=c]])
 vim.o.signcolumn = "yes"
 -- vim.o.winborder = 'rounded'
 vim.g.vim_markdown_folding_disabled = 1
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
-vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "#ffffff" })
+-- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "#ffffff" })
 vim.cmd([[highlight Normal guibg=NONE]])
 
 vim.o.autoread = true
@@ -93,3 +93,17 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt_local.colorcolumn = "100"
 	end,
 })
+
+-- diff
+-- Reset to a clean base first
+vim.opt.diffopt = { "internal", "filler", "closeoff", "indent-heuristic" }
+
+-- Use the "histogram" algorithm (smoother for Jekyll/Markdown)
+vim.opt.diffopt:append("algorithm:histogram")
+
+-- Enable word/character level highlighting (What you asked for)
+pcall(function() vim.opt.diffopt:append("inline:char") end)
+
+-- Precise line alignment (The "tensor" algorithm)
+-- Note: Setting this to 60 aligns most Jekyll front-matter perfectly
+vim.opt.diffopt:append("linematch:60")
