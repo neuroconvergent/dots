@@ -64,7 +64,7 @@ end, { desc = "Search Notifications" })
 local oil = require("oil")
 vim.keymap.set("n", "<leader>.", function()
 	oil.open_float()
-	vim.defer_fn(oil.open_preview, 50)
+	vim.defer_fn(oil.open_preview, 75)
 end, { desc = "Open parent directory" })
 vim.keymap.set(
 	"n",
@@ -74,9 +74,6 @@ vim.keymap.set(
 )
 vim.keymap.set("n", "<leader>-o", ":e ~/Projects/", { desc = "Open project home" })
 vim.keymap.set("n", "<Esc>", function()
-	oil.close()
-end, { remap = false })
-vim.keymap.set("n", "q", function()
 	oil.close()
 end, { remap = false })
 
