@@ -1,3 +1,13 @@
+#+title: Config
+
+* Table of Contents :toc:
+- [[#defaults][Defaults]]
+- [[#catpuccin-theme][Catpuccin Theme]]
+
+* Defaults
+
+#+begin_src emacs-lisp
+
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 ;; Place your private configuration here! Remember, you do not need to run 'doom
@@ -75,6 +85,17 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+#+end_src
+
+* Catpuccin Theme
+
+#+begin_src emacs-lisp
 (setq doom-theme 'catppuccin)
 (setq catppuccin-flavor 'mocha)
 (catppuccin-reload)
+#+end_src
+
+*** TODO Create config :ATTACH:
+:PROPERTIES:
+:ID:       ce21f2a9-9338-4e57-bf41-a0fc2b3fd40a
+:END:
