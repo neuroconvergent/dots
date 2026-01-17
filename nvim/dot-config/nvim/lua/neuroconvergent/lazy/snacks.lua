@@ -56,7 +56,10 @@ return {
 						icon = " ",
 						key = "c",
 						desc = "Config",
-						action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.expand('$HOME/dots/nvim/dot-config/nvim/')})",
+						action = function()
+							vim.api.nvim_set_current_dir(vim.fn.expand('$HOME/dots/nvim/dot-config/nvim/'))
+							Snacks.dashboard.pick('files')
+						end,
 					},
 					{ icon = " ", key = "s", desc = "Restore Session", section = "session" },
 					{
