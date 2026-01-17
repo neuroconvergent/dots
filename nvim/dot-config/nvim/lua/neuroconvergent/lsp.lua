@@ -120,19 +120,23 @@ vim.lsp.enable("clangd")
 
 -- Basedpyright setup
 vim.lsp.config.basedpyright = {
-	capabilities = capabilities,
+	default_config = {
+		cmd = { "basedpyright-langserver", "--stdio" },
+		filetypes = { "python" },
+		root_dir = function(fname)
+			local util = require("lspconfig.util")
+			return util.root_pattern("pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json")(fname) or util.find_git_ancestor(fname)
+		end,
+		capabilities = capabilities,
+	},
 	settings = {
 		basedpyright = {
-			settings = {
-				disableOrganizeImports = true,
-				basedpyright = {
-					analysis = {
-						-- ignore = { "*" },
-						typeCheckingMode = "standard",
-						diagnosticMode = "openFilesOnly",
-						useLibraryCodeForTypes = true,
-					},
-				},
+			disableOrganizeImports = true,
+			analysis = {
+				autoSearchPaths = true,
+				typeCheckingMode = "standard",
+				diagnosticMode = "workspace",
+				useLibraryCodeForTypes = true,
 			},
 		},
 	},

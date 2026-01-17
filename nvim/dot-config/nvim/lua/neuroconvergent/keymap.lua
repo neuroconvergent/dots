@@ -61,13 +61,17 @@ vim.keymap.set("n", "<leader>fn", function()
 end, { desc = "Search Notifications" })
 
 -- Oil
-vim.keymap.set("n", "<leader>x", ":Oil<CR>")
+vim.keymap.set("n", "<leader>.", ":Oil<CR>")
 vim.keymap.set("n", "<C-O>", ":Oil<CR>")
 
 -- Format with null-ls
+-- vim.keymap.set("n", "<leader>cf", function()
+-- 	vim.lsp.buf.format({ async = true })
+-- end, { noremap = true, silent = true, desc = "Format file with null-ls" })
+-- Format with conform
 vim.keymap.set("n", "<leader>cf", function()
-	vim.lsp.buf.format({ async = true })
-end, { noremap = true, silent = true, desc = "Format file with null-ls" })
+	require("conform").format({ async = true })
+end, { noremap = true, silent = true, desc = "Format file with conform" })
 
 -- lsp
 -- Goto (under <leader>g for "goto")
@@ -160,7 +164,7 @@ local function big_hover()
 	end)
 end
 
--- Keymap (no conflicts)
+-- Keymap
 vim.keymap.set("n", "<leader>gk", big_hover, {
 	desc = "Large Hover (scroll/search)",
 })
@@ -247,9 +251,12 @@ vim.keymap.set("n", "<C-S-N>", function()
 end)
 
 -- TODO comments
-vim.keymap.set("n", "<leader>ftd", function()
+vim.keymap.set("n", "<leader>st", function()
 	Snacks.picker.todo_comments()
 end, { desc = "Find TODO comments" })
+vim.keymap.set("n", "<leader>sT", function()
+	Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } })
+end, { desc = "Find Todo/Fix/Fixme" })
 vim.keymap.set("n", "]t", function()
 	require("todo-comments").jump_next()
 end, { desc = "Next todo comment" })
@@ -257,6 +264,55 @@ end, { desc = "Next todo comment" })
 vim.keymap.set("n", "[t", function()
 	require("todo-comments").jump_prev()
 end, { desc = "Previous todo comment" })
+
+-- Jupynium
+vim.keymap.set(
+	{ "n", "x" },
+	"<leader>jx",
+	"<cmd>JupyniumExecuteSelectedCells<CR>",
+	{ buffer = buf_id, desc = "Jupynium execute selected cells" }
+)
+vim.keymap.set(
+	{ "n", "x" },
+	"<leader>jc",
+	"<cmd>JupyniumClearSelectedCellsOutputs<CR>",
+	{ buffer = buf_id, desc = "Jupynium clear selected cells" }
+)
+vim.keymap.set(
+	{ "n" },
+	"<leader>jK",
+	"<cmd>JupyniumKernelHover<cr>",
+	{ buffer = buf_id, desc = "Jupynium hover (inspect a variable)" }
+)
+vim.keymap.set(
+	{ "n", "x" },
+	"<leader>jg",
+	"<cmd>JupyniumScrollToCell<cr>",
+	{ buffer = buf_id, desc = "Jupynium scroll to cell" }
+)
+vim.keymap.set(
+	{ "n", "x" },
+	"<leader>jo",
+	"<cmd>JupyniumToggleSelectedCellsOutputsScroll<cr>",
+	{ buffer = buf_id, desc = "Jupynium toggle selected cell output scroll" }
+)
+vim.keymap.set(
+	{ "n" },
+	"<leader>ja",
+	"<cmd>JupyniumStartAndAttachToServer<cr>",
+	{ buffer = buf_id, desc = "Jupynium start and attach to server" }
+)
+-- JupyniumStartSync [filename / tab_index]
+vim.keymap.set({ "n" }, "<leader>js", function()
+	vim.ui.input({ prompt = "Enter filename or tab index: " }, function(input)
+		if input and input ~= "" then
+			vim.cmd("JupyniumStartSync " .. input)
+		end
+	end)
+end, { buffer = buf_id, desc = "Jupynium start sync (enter tab/path to file)" })
+vim.keymap.set({ "n" }, "<leader>jw", "<cmd>JupyniumStopSync<cr>", { buffer = buf_id, desc = "Jupynium stop sync" })
+vim.keymap.set("", "<PageUp>", "<cmd>JupyniumScrollUp<cr>", { buffer = buf_id, desc = "Jupynium scroll up" })
+vim.keymap.set("", "<PageDown>", "<cmd>JupyniumScrollDown<cr>", { buffer = buf_id, desc = "Jupynium scroll down" })
 
 -- You can also specify a list of valid jump keywords
 

@@ -54,8 +54,6 @@ cmp.setup({
 		{ name = "buffer" },
 		{ name = "path" },
 		{ name = "papis" },
-		{ name = "obsidian" },
-		{ name = "obsidian_tags" },
 	},
 	sorting = {
 		priority_weight = 1.0,
@@ -84,6 +82,26 @@ cmp.setup({
 	},
 })
 
+cmp.setup.filetype({ "markdown" }, {
+	sources = {
+		{ name = "nvim_lsp" },
+		{ name = "luasnip" },
+		{ name = "buffer" },
+		{ name = "path" },
+		{ name = "papis" },
+		{ name = "obsidian" },
+		{ name = "obsidian_tags" },
+	},
+})
+cmp.setup.filetype({ "yaml" }, {
+	sources = {
+		{ name = "nvim_lsp" },
+		{ name = "luasnip" },
+		{ name = "buffer" },
+		{ name = "path" },
+		{ name = "obsidian_tags" },
+	},
+})
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ "/", "?" }, {
 	mapping = cmp.mapping.preset.cmdline(),
@@ -114,6 +132,7 @@ vim.api.nvim_create_autocmd("CmdwinEnter", {
 			sources = {
 				{ name = "cmdline" },
 				{ name = "path" },
+				{ name = "buffer" },
 			},
 		})
 	end,

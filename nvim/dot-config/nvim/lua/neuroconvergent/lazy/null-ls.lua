@@ -8,7 +8,7 @@ return {
 			sources = {
 				-- Formatting
 				null_ls.builtins.formatting.prettier.with({
-					filetypes = { "markdown", "html", "liquid", "toml", "yaml", "json" },
+					filetypes = { "markdown", "html", "liquid", "toml", "yaml", "json", "quarto" },
 				}),
 				null_ls.builtins.formatting.black,
 				null_ls.builtins.formatting.clang_format,
@@ -30,6 +30,10 @@ return {
 					},
 				}),
 				-- you can add more here, like eslint_d for JS/TS
+				-- Add cbfmt for markdown and quarto
+				null_ls.builtins.formatting.cbfmt.with({
+					filetypes = { "markdown", "quarto" },
+				}),
 
 				-- Code actions
 				null_ls.builtins.code_actions.gitsigns,
