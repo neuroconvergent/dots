@@ -108,7 +108,7 @@ return {
 		kernel_hover = {
 			floating_win_opts = {
 				max_width = 84,
-				border = "none",
+				border = "rounded",
 			},
 		},
 

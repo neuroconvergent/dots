@@ -6,9 +6,9 @@ return {
 		transparent_background = true,
 		integrations = {
 			treesitter = true,
-            barbar= true,
+			barbar = true,
 			telescope = true,
-            snacks = true,
+			snacks = true,
 		},
 		float = {
 			transparent = true,
@@ -114,12 +114,15 @@ return {
 				["@punctuation.bracket"] = { fg = colors.text },
 				["@punctuation.delimiter"] = { fg = colors.peach },
 				MarkviewPalette0fg = { fg = colors.text },
-                MarkviewPalette1fg = {fg = colors.red},
+				MarkviewPalette1fg = { fg = colors.red },
 				MarkviewPalette2fg = { fg = colors.lavender },
 				MarkviewPalette3fg = { fg = colors.mauve },
 				MarkviewPalette4fg = { fg = colors.green },
 				MarkviewPalette5fg = { fg = colors.sky },
 				MarkviewPalette6fg = { fg = colors.peach },
+
+				-- git-signs
+				GitSignsCurrentLineBlame = { fg = colors.surface1, bg = colors.overlay0 },
 			}
 		end,
 	},

@@ -61,8 +61,24 @@ vim.keymap.set("n", "<leader>fn", function()
 end, { desc = "Search Notifications" })
 
 -- Oil
-vim.keymap.set("n", "<leader>.", ":Oil<CR>")
-vim.keymap.set("n", "<C-O>", ":Oil<CR>")
+local oil = require("oil")
+vim.keymap.set("n", "<leader>.", function()
+	oil.open_float()
+	vim.defer_fn(oil.open_preview, 50)
+end, { desc = "Open parent directory" })
+vim.keymap.set(
+	"n",
+	"<leader>-o",
+	":e oil-ssh//s406763@delta2.central.cranfield.ac.uk:/gpfs/home/",
+	{ desc = "Open SSH" }
+)
+vim.keymap.set("n", "<leader>-o", ":e ~/Projects/", { desc = "Open project home" })
+vim.keymap.set("n", "<Esc>", function()
+	oil.close()
+end, { remap = false })
+vim.keymap.set("n", "q", function()
+	oil.close()
+end, { remap = false })
 
 -- Format with null-ls
 -- vim.keymap.set("n", "<leader>cf", function()
@@ -85,7 +101,7 @@ vim.keymap.set("n", "<leader>gw", Snacks.picker.lsp_workspace_symbols, { desc = 
 
 -- Hover / Info
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })
-vim.keymap.set("n", "<leader>k", vim.lsp.buf.signature_help, { desc = "Signature Help" })
+vim.keymap.set("n", "<leader>gh", vim.lsp.buf.signature_help, { desc = "Signature Help" })
 vim.keymap.set("n", "<Esc>", "<cmd>fclose<CR>", { desc = "Close LSP hover window", remap = false })
 -- BIG Hover window (60% screen)
 local function big_hover()
@@ -268,49 +284,49 @@ end, { desc = "Previous todo comment" })
 -- Jupynium
 vim.keymap.set(
 	{ "n", "x" },
-	"<leader>jx",
+	"<leader>nx",
 	"<cmd>JupyniumExecuteSelectedCells<CR>",
 	{ buffer = buf_id, desc = "Jupynium execute selected cells" }
 )
 vim.keymap.set(
 	{ "n", "x" },
-	"<leader>jc",
+	"<leader>nc",
 	"<cmd>JupyniumClearSelectedCellsOutputs<CR>",
 	{ buffer = buf_id, desc = "Jupynium clear selected cells" }
 )
 vim.keymap.set(
 	{ "n" },
-	"<leader>jK",
+	"<leader>nK",
 	"<cmd>JupyniumKernelHover<cr>",
 	{ buffer = buf_id, desc = "Jupynium hover (inspect a variable)" }
 )
 vim.keymap.set(
 	{ "n", "x" },
-	"<leader>jg",
+	"<leader>ng",
 	"<cmd>JupyniumScrollToCell<cr>",
 	{ buffer = buf_id, desc = "Jupynium scroll to cell" }
 )
 vim.keymap.set(
 	{ "n", "x" },
-	"<leader>jo",
+	"<leader>no",
 	"<cmd>JupyniumToggleSelectedCellsOutputsScroll<cr>",
 	{ buffer = buf_id, desc = "Jupynium toggle selected cell output scroll" }
 )
 vim.keymap.set(
 	{ "n" },
-	"<leader>ja",
+	"<leader>na",
 	"<cmd>JupyniumStartAndAttachToServer<cr>",
 	{ buffer = buf_id, desc = "Jupynium start and attach to server" }
 )
 -- JupyniumStartSync [filename / tab_index]
-vim.keymap.set({ "n" }, "<leader>js", function()
+vim.keymap.set({ "n" }, "<leader>ns", function()
 	vim.ui.input({ prompt = "Enter filename or tab index: " }, function(input)
 		if input and input ~= "" then
 			vim.cmd("JupyniumStartSync " .. input)
 		end
 	end)
 end, { buffer = buf_id, desc = "Jupynium start sync (enter tab/path to file)" })
-vim.keymap.set({ "n" }, "<leader>jw", "<cmd>JupyniumStopSync<cr>", { buffer = buf_id, desc = "Jupynium stop sync" })
+vim.keymap.set({ "n" }, "<leader>nw", "<cmd>JupyniumStopSync<cr>", { buffer = buf_id, desc = "Jupynium stop sync" })
 vim.keymap.set("", "<PageUp>", "<cmd>JupyniumScrollUp<cr>", { buffer = buf_id, desc = "Jupynium scroll up" })
 vim.keymap.set("", "<PageDown>", "<cmd>JupyniumScrollDown<cr>", { buffer = buf_id, desc = "Jupynium scroll down" })
 
