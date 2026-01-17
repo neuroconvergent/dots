@@ -55,10 +55,15 @@ end, { desc = "Search Word" })
 vim.keymap.set("n", "<leader>fsg", function()
 	Snacks.picker.grep()
 end, { desc = "Search Text" })
-
 vim.keymap.set("n", "<leader>fn", function()
 	Snacks.picker.notifications()
 end, { desc = "Search Notifications" })
+vim.keymap.set("n", "<leader>fm", function()
+	Snacks.picker.man()
+end, { desc = "Search Manpages" })
+vim.keymap.set("n", "<leader>fi", function()
+	Snacks.picker.icons()
+end, { desc = "Search Icons" })
 
 -- Oil
 local oil = require("oil")
@@ -69,10 +74,10 @@ end, { desc = "Open parent directory" })
 vim.keymap.set(
 	"n",
 	"<leader>-o",
-	":e oil-ssh//s406763@delta2.central.cranfield.ac.uk:/gpfs/home/",
+	":e oil-ssh//s406763@delta2.central.cranfield.ac.uk:/gpfs/home/<CR>",
 	{ desc = "Open SSH" }
 )
-vim.keymap.set("n", "<leader>-o", ":e ~/Projects/", { desc = "Open project home" })
+vim.keymap.set("n", "<leader>-h", ":e ~/Projects/<CR>", { desc = "Open project home" })
 vim.keymap.set("n", "<Esc>", function()
 	oil.close()
 end, { remap = false })
