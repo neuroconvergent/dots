@@ -74,13 +74,10 @@ end, { desc = "Open parent directory" })
 vim.keymap.set(
 	"n",
 	"<leader>-o",
-	":e oil-ssh//s406763@delta2.central.cranfield.ac.uk:/gpfs/home/<CR>",
+	":e oil-ssh://s406763@delta2.central.cranfield.ac.uk/<CR>",
 	{ desc = "Open SSH" }
 )
 vim.keymap.set("n", "<leader>-h", ":e ~/Projects/<CR>", { desc = "Open project home" })
-vim.keymap.set("n", "<Esc>", function()
-	oil.close()
-end, { remap = false })
 
 -- Format with null-ls
 -- vim.keymap.set("n", "<leader>cf", function()

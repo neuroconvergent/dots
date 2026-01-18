@@ -65,6 +65,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		"latex",
 		"typst",
 		"gitcommit",
+        "fortran",
 	},
 	callback = function()
 		vim.opt_local.textwidth = 80
