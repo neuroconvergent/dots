@@ -77,6 +77,9 @@ alias lg="lazygit"
 
 export NEXTCLOUD_PHP_CONFIG=/etc/webapps/nextcloud/php.ini
 
+# SSH config
+export SSH_ASKPASS=/usr/sbin/ksshaskpass
+
 setopt globdots
 
 # install these plugins with pacman
