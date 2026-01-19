@@ -1,0 +1,22 @@
+[user]
+	email = sundar@sundar.guru
+	name = Sundar Gurumurthy
+[merge]
+	tool = nvimdiff
+	conflictStyle = zdiff3
+[mergetool]
+    prompt = true
+	path = nvim
+[core]
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[include]
+    path = $HOME/catppuccin.gitconfig
+[delta]
+	navigate = true
+    features = catppuccin-mocha
+[rerere]
+	enabled = true
+[alias]
+	tree = log --graph --decorate --pretty=format:'%C(auto)%h%d %s %C(blue)%cr %C(reset)%an' --oneline --all
