@@ -65,6 +65,29 @@ vim.keymap.set("n", "<leader>fi", function()
 	Snacks.picker.icons()
 end, { desc = "Search Icons" })
 
+-- search/grep
+vim.keymap.set("n", "<leader>sw", function()
+	Snacks.picker.grep_word()
+end, { desc = "Search Word" })
+vim.keymap.set("n", "<leader>sl", function()
+	Snacks.picker.grep()
+end, { desc = "Search Text" })
+vim.keymap.set("n", "<leader>sb", function()
+	Snacks.picker.grep_buffers()
+end, { desc = "Search Text in Open Buffers" })
+
+-- git
+vim.keymap.set("n", "<leader>gc", function()
+	Snacks.picker.git_log_file()
+end, { desc = "Git File Commit History" })
+vim.keymap.set("n", "<leader>gs", function()
+	Snacks.picker.git_status()
+end, { desc = "Search Git Status" })
+vim.keymap.set("n", "<leader>gd", function()
+	Snacks.picker.git_diff()
+end, { desc = "Git Diff" })
+vim.keymap.set("n", "<leader>gg", ":Git<CR>", {desc="Git Status"})
+
 -- Oil
 local oil = require("oil")
 vim.keymap.set("n", "<leader>.", function()
