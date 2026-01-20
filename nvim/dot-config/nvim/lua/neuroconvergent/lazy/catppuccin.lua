@@ -61,9 +61,12 @@ return {
 				Whitespace = { fg = "#c9cacc" },
 				-- Diff highlights
 				DiffAdd = { bg = "#465850" },
-				DiffChange = { bg = "#5c5453" },
+				DiffChange = { bg = "#4a4f67" },
 				DiffDelete = { bg = "#60444d" },
-				DiffText = { bg = "#4f4761" },
+				DiffText = { fg = colors.text, bg = "#baab8b" },
+				DiffAdded = { fg = colors.text, bg = "#465850" },
+				DiffChanged = { fg = colors.text, bg = "#5c5453" },
+				DiffRemoved = { fg = colors.text, bg = "#60444d" },
 
 				-- Telescope
 				TelescopeSelection = { bg = colors.surface1 },
