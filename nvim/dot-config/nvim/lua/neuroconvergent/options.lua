@@ -65,7 +65,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		"latex",
 		"typst",
 		"gitcommit",
-        "fortran",
+		"fortran",
 	},
 	callback = function()
 		vim.opt_local.textwidth = 80
@@ -101,9 +101,6 @@ vim.opt.diffopt = { "internal", "filler", "closeoff", "indent-heuristic" }
 
 -- Use the "histogram" algorithm (smoother for Jekyll/Markdown)
 vim.opt.diffopt:append("algorithm:histogram")
-
--- Enable word/character level highlighting (What you asked for)
-pcall(function() vim.opt.diffopt:append("inline:char") end)
 
 -- Precise line alignment (The "tensor" algorithm)
 -- Note: Setting this to 60 aligns most Jekyll front-matter perfectly
