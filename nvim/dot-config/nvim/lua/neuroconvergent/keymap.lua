@@ -113,17 +113,17 @@ end, { noremap = true, silent = true, desc = "Format file with conform" })
 
 -- lsp
 -- Goto (under <leader>g for "goto")
-vim.keymap.set("n", "<leader>gd", Snacks.picker.lsp_definitions, { desc = "Goto Definition" })
-vim.keymap.set("n", "<leader>gD", Snacks.picker.lsp_declarations, { desc = "Goto Declaration" })
-vim.keymap.set("n", "<leader>gr", Snacks.picker.lsp_references, { desc = "Goto References" })
-vim.keymap.set("n", "<leader>gi", Snacks.picker.lsp_implementations, { desc = "Goto Implementation" })
-vim.keymap.set("n", "<leader>gt", Snacks.picker.lsp_type_definitions, { desc = "Goto Type Definition" })
-vim.keymap.set("n", "<leader>gs", Snacks.picker.lsp_symbols, { desc = "Goto Symbols" })
-vim.keymap.set("n", "<leader>gw", Snacks.picker.lsp_workspace_symbols, { desc = "Goto Workspace Symbols" })
+vim.keymap.set("n", "<leader>ld", Snacks.picker.lsp_definitions, { desc = "Goto Definition" })
+vim.keymap.set("n", "<leader>lD", Snacks.picker.lsp_declarations, { desc = "Goto Declaration" })
+vim.keymap.set("n", "<leader>lr", Snacks.picker.lsp_references, { desc = "Goto References" })
+vim.keymap.set("n", "<leader>li", Snacks.picker.lsp_implementations, { desc = "Goto Implementation" })
+vim.keymap.set("n", "<leader>lt", Snacks.picker.lsp_type_definitions, { desc = "Goto Type Definition" })
+vim.keymap.set("n", "<leader>ls", Snacks.picker.lsp_symbols, { desc = "Goto Symbols" })
+vim.keymap.set("n", "<leader>lw", Snacks.picker.lsp_workspace_symbols, { desc = "Goto Workspace Symbols" })
 
 -- Hover / Info
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })
-vim.keymap.set("n", "<leader>gh", vim.lsp.buf.signature_help, { desc = "Signature Help" })
+vim.keymap.set("n", "<leader>lh", vim.lsp.buf.signature_help, { desc = "Signature Help" })
 vim.keymap.set("n", "<Esc>", "<cmd>fclose<CR>", { desc = "Close LSP hover window", remap = false })
 -- BIG Hover window (60% screen)
 local function big_hover()
@@ -203,7 +203,7 @@ local function big_hover()
 end
 
 -- Keymap
-vim.keymap.set("n", "<leader>gk", big_hover, {
+vim.keymap.set("n", "<leader>lk", big_hover, {
 	desc = "Large Hover (scroll/search)",
 })
 
