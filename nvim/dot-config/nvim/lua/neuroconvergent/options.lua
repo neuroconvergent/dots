@@ -10,6 +10,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.mouse = "a"
 vim.o.termguicolors = true
+vim.o.winborder = "rounded"
 vim.cmd([[let &t_8f = "\e[38;2;%lu;%lu;%lum"]])
 vim.cmd([[let &t_8b = "\e[48;2;%lu;%lu;%lum"]])
 vim.o.encoding = "UTF-8"
@@ -105,3 +106,4 @@ vim.opt.diffopt:append("algorithm:histogram")
 -- Precise line alignment (The "tensor" algorithm)
 -- Note: Setting this to 60 aligns most Jekyll front-matter perfectly
 vim.opt.diffopt:append("linematch:60")
+
