@@ -70,7 +70,7 @@ local generic_servers = {
 	"tinymist",
 	"solargraph",
 	"fortls",
-    "bash-language-server",
+	"bashls",
 }
 
 for _, name in ipairs(generic_servers) do
@@ -87,37 +87,60 @@ end
 
 -- Clangd setup
 vim.lsp.config.clangd = {
-	default_config = {
-		cmd = {
-			"clangd",
-			"--background-index",
-			"--clang-tidy",
-			"--header-insertion=iwyu",
-			"--completion-style=detailed",
-			"--function-arg-placeholders",
-			"--fallback-style=llvm",
-		},
-		capabilities = { offsetEncoding = { "utf-16" } },
-		init_options = { usePlaceholders = true, completeUnimported = true, clangdFileStatus = true },
-		root_dir = function(fname)
-			local util = require("lspconfig.util")
-			return util.root_pattern(
-				"Makefile",
-				"configure.ac",
-				"configure.in",
-				"config.h.in",
-				"meson.build",
-				"meson_options.txt",
-				"build.ninja"
-			)(fname) or util.root_pattern("compile_commands.json", "compile_flags.txt")(fname) or util.find_git_ancestor(
-				fname
-			)
-		end,
-		on_attach = function(client, bufnr)
-			vim.keymap.set("n", "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", { buffer = bufnr, silent = true })
-		end,
+	cmd = {
+		"clangd",
+		"--background-index",
+		"--clang-tidy",
+		"--header-insertion=iwyu",
+		"--completion-style=detailed",
+		"--fallback-style=llvm",
+	},
+	capabilities = { offsetEncoding = { "utf-16" } },
+	init_options = { usePlaceholders = true, completeUnimported = true, clangdFileStatus = true },
+	root_markers = {
+		"Makefile",
+		"configure.ac",
+		"configure.in",
+		"config.h.in",
+		"meson.build",
+		"meson_options.txt",
+		"build.ninja",
+	}, -- end,
+	keys = {
+		{ "<leader>ch", "<cmd>LspClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
 	},
 }
+
+local deal_project_roots = {
+	"/home/neuroconvergent/Programming/KMC-AM",
+}
+
+local cwd = vim.fn.getcwd()
+for _, root in ipairs(deal_project_roots) do
+	if cwd == root then
+		vim.lsp.config.clangd = {
+			cmd = {
+				"docker",
+				"run",
+				"--rm",
+				"-i",
+				"-v",
+				"/home/neuroconvergent:/home/neuroconvergent",
+				"-w",
+				root,
+				"neuroconvergent/deal-ii",
+				"clangd",
+				"--background-index",
+				"--clang-tidy",
+				"--header-insertion=iwyu",
+				"--completion-style=detailed",
+				"--fallback-style=llvm",
+			},
+		}
+		break
+	end
+end
+
 vim.lsp.enable("clangd")
 
 -- Basedpyright setup
