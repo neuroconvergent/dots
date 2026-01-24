@@ -225,7 +225,7 @@ vim.keymap.set("n", "<leader>wl", function()
 end, { desc = "List Workspace Folders" })
 
 -- Markview deactivate
-vim.keymap.set("n", "<leader>m", ":Markview<CR>", { desc = "Toggle Markview" })
+vim.keymap.set("n", "<leader>mv", ":Markview<CR>", { desc = "Toggle Markview" })
 
 -- Obsidian mappings
 vim.keymap.set("n", "<leader>of", ":Obsidian quick_switch<CR>", { desc = "Pick Obsidian notes" })
@@ -364,7 +364,7 @@ vim.keymap.set("", "<PageDown>", "<cmd>JupyniumScrollDown<cr>", { buffer = buf_i
 -- The keymap calls ObsidianNew to create a new file, deletes from line 5 to end of the buffer to remove
 -- automatic level one heading and empty tags field. Then links are added under ## Dailies and the cursor
 -- moves after line 4 to call ObsidianTemplate to choose the template.
-vim.keymap.set("n", "<leader>tdw", function()
+vim.keymap.set("n", "<leader>ftw", function()
 	local year = os.date("%Y")
 	local week = os.date("%V") -- ISO week number
 
@@ -433,7 +433,7 @@ end, { desc = "New weekly tasks note with daily links and template" })
 
 -- Same but for next week
 --
-vim.keymap.set("n", "<leader>tdn", function()
+vim.keymap.set("n", "<leader>ftn", function()
 	-- Get today
 	local today = os.time()
 	-- Get next Monday
@@ -514,7 +514,7 @@ end, { desc = "New weekly tasks note for next week" })
 -- Iterate through completed tasks in telescope lamw25wmal
 local Job = require("plenary.job")
 
-vim.keymap.set("n", "<leader>tdc", function()
+vim.keymap.set("n", "<leader>ftc", function()
 	local search_dirs = { vim.fn.expand("$HOME/Notes/tasks/") }
 	local rg_args = { "--no-ignore", "-n", "-H", "-e", "^\\s*- \\[x\\] `done:" }
 	local results = {}
@@ -587,7 +587,7 @@ end, { desc = "Search for completed tasks with week number" })
 -- -- Iterate through incomplete tasks in telescope
 -- -- You can confirm in your teminal lamw25wmal with:
 -- -- rg "^\s*-\s\[ \]" test-markdown.md
-vim.keymap.set("n", "<leader>tdt", function()
+vim.keymap.set("n", "<leader>ftt", function()
 	local search_dirs = { vim.fn.expand("$HOME/Notes/tasks/") }
 	local rg_args = { "--no-ignore", "-n", "-H", "-e", "^\\s*- \\[ \\]" }
 	local results = {}
@@ -655,10 +655,10 @@ vim.keymap.set("n", "<leader>tdt", function()
 	})
 end, { desc = "Search for incomplete tasks with week numbers" })
 
--- <leader>tdf : pick weekly task files under ~/Notes/tasks/<year>/<week>-randomtag.md
+-- <leader>ftf : pick weekly task files under ~/Notes/tasks/<year>/<week>-randomtag.md
 local scan = require("plenary.scandir")
 
-vim.keymap.set("n", "<leader>tdf", function()
+vim.keymap.set("n", "<leader>ftf", function()
 	local root = vim.fn.expand("~/Notes/tasks")
 
 	-- Recursively collect *.md files (depth=2: year dir + files inside)
