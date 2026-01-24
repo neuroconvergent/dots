@@ -5,9 +5,11 @@
     "themeLinks": [
         "https://raw.githubusercontent.com/DiscordStyles/FrostedGlass/deploy/FrostedGlass.theme.css"
     ],
-    "enabledThemes": [],
+    "enabledThemes": [
+        "FrostedGlass.theme.css"
+    ],
     "enableReactDevtools": false,
-    "frameless": false,
+    "frameless": true,
     "transparent": true,
     "winCtrlQ": false,
     "disableMinSize": false,
@@ -601,7 +603,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1767394742169
+        "settingsSyncVersion": 1769279862433
     },
     "eagerPatches": false,
     "uiElements": {
