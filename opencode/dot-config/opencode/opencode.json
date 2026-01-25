@@ -27,59 +27,12 @@
       "docs/**"
     ]
   },
-  "model": "opencode/grok-code",
+  "model": "opencode/gpt-5.1-codex-mini",
   "share": "manual",
   "autoupdate": false,
   "provider": {
     "opencode": {
-      "models": {
-        "gpt-5.1-low": {
-          "id": "gpt-5.1",
-          "options": {
-            "reasoningEffort": "low",
-            "textVerbosity": "low",
-            "reasoningSummary": "never"
-          }
-        },
-        "gpt-5.1-mid": {
-          "id": "gpt-5.1",
-          "options": {
-            "reasoningEffort": "medium",
-            "textVerbosity": "low"
-          }
-        },
-        "gpt-5.1-high": {
-          "id": "gpt-5.1",
-          "options": {
-            "reasoningEffort": "high",
-            "textVerbosity": "medium"
-          }
-        },
-
-        "gpt-codex-low": {
-          "id": "gpt-5.1-codex",
-          "options": {
-            "reasoningEffort": "low",
-            "textVerbosity": "low"
-          }
-        },
-        "gpt-codex-mid": {
-          "id": "gpt-5.1-codex",
-          "options": {
-            "reasoningEffort": "medium",
-            "textVerbosity": "low"
-          }
-        },
-        "gpt-codex-high": {
-          "id": "gpt-5.1-codex",
-          "options": {
-            "reasoningEffort": "high",
-            "textVerbosity": "medium"
-          }
-        }
-      }
+      "models": {}
     }
   }
 }
-
-
