@@ -18,17 +18,17 @@ return {
 				end
 
 				-- Normal mode
-				map("n", "<C-b>", "<Plug>(MarkdownPlusBold)", { desc = "Toggle bold" })
-				map("n", "<C-i>", "<Plug>(MarkdownPlusItalic)", { desc = "Toggle italic" })
-				map("n", "<C-s>", "<Plug>(MarkdownPlusStrikethrough)", { desc = "Toggle strikethrough" })
-				map("n", "<C-k>", "<Plug>(MarkdownPlusCode)", { desc = "Toggle inline code" })
-				map("n", "<C-z>", "<Plug>(MarkdownPlusClearFormatting)", { desc = "Clear formatting" })
+				map("n", "<A-b>", "<Plug>(MarkdownPlusBold)", { desc = "Toggle bold" })
+				map("n", "<A-i>", "<Plug>(MarkdownPlusItalic)", { desc = "Toggle italic" })
+				map("n", "<A-s>", "<Plug>(MarkdownPlusStrikethrough)", { desc = "Toggle strikethrough" })
+				map("n", "<A-k>", "<Plug>(MarkdownPlusCode)", { desc = "Toggle inline code" })
+				map("n", "<A-z>", "<Plug>(MarkdownPlusClearFormatting)", { desc = "Clear formatting" })
 
 				-- Visual mode
-				map("x", "<C-b>", "<Plug>(MarkdownPlusBold)", { desc = "Toggle bold" })
-				map("x", "<C-i>", "<Plug>(MarkdownPlusItalic)", { desc = "Toggle italic" })
-				map("x", "<C-s>", "<Plug>(MarkdownPlusStrikethrough)", { desc = "Toggle strikethrough" })
-				map("x", "<C-c>", "<Plug>(MarkdownPlusCode)", { desc = "Toggle inline code" })
+				map("x", "<A-b>", "<Plug>(MarkdownPlusBold)", { desc = "Toggle bold" })
+				map("x", "<A-I>", "<Plug>(MarkdownPlusItalic)", { desc = "Toggle italic" })
+				map("x", "<A-s>", "<Plug>(MarkdownPlusStrikethrough)", { desc = "Toggle strikethrough" })
+				map("x", "<A-c>", "<Plug>(MarkdownPlusCode)", { desc = "Toggle inline code" })
 				map("x", "<leader>mw", "<Plug>(MarkdownPlusCodeBlock)", { desc = "Format selection as code block" })
 
 				-- Headers
@@ -45,7 +45,7 @@ return {
 				for i = 1, 6 do
 					map("n", "<leader>" .. i, "<Plug>(MarkdownPlusHeader" .. i .. ")", { desc = "Toggle H" .. i })
 				end
-				map("x", "<C-z>", "<Plug>(MarkdownPlusClearFormatting)", { desc = "Clear formatting" })
+				map("x", "<A-z>", "<Plug>(MarkdownPlusClearFormatting)", { desc = "Clear formatting" })
 
 				-- Links
 				map("n", "<leader>li", "<Plug>(MarkdownPlusInsertLink)", { desc = "Insert link" })
