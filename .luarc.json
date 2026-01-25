@@ -1,6 +1,6 @@
 {
     "diagnostics.globals": [
         "vim",
-        "default_opts"
+        "default_opts",
     ]
 }
