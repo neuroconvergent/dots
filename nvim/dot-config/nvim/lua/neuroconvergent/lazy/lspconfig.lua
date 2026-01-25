@@ -8,8 +8,6 @@ return {
             "basedpyright",
             "ts_ls",
             "clangd",
-            "cmakelang",
-            "cmakelint",
             "fortls",
             "bashls",
             "html",
