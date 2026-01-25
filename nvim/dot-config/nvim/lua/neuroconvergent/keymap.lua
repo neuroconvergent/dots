@@ -961,6 +961,9 @@ end, { desc = "Toggle Inlay Hints" })
 -- Typst preview
 vim.keymap.set("n", "<leader>tp", ":TypstPreview<CR>", { desc = "Typst Preview" })
 
+-- Live preview
+vim.keymap.set("n", "<leader>lp", ":LivePreview start<CR>", { desc = "Live Preview" })
+
 -- -- Snacks Notifications (Telescope)
 -- local pickers = require("telescope.pickers")
 -- local finders = require("telescope.finders")
