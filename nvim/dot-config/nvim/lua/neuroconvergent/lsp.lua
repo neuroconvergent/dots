@@ -138,6 +138,17 @@ local function set_deal_clangd_config()
 				},
 			}
 			break
+		else -- Reset command if moving to dir that is not deal.ii
+			vim.lsp.config.clangd = {
+				cmd = {
+					"clangd",
+					"--background-index",
+					"--clang-tidy",
+					"--header-insertion=iwyu",
+					"--completion-style=detailed",
+					"--fallback-style=llvm",
+				},
+			}
 		end
 	end
 end
