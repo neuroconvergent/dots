@@ -1,5 +1,16 @@
 local scan = require("plenary.scandir")
-local Job = require("plenary.job")
+
+-- --- Build daily links for the week ---
+local function iso_week_monday(currentYear, currentWeek)
+	-- January 4th is always in week 1
+	local jan4 = os.time({ year = currentYear, month = 1, day = 4 })
+	local jan4_wday = tonumber(os.date("%w", jan4))
+	-- Compute offset to Monday (ISO: Monday=1, Sunday=7)
+	local offset = (jan4_wday == 0 and -6 or 1 - jan4_wday)
+	local first_monday = jan4 + offset * 24 * 60 * 60
+	return first_monday + (currentWeek - 1) * 7 * 24 * 60 * 60
+end
+
 local function search_task_files()
 	local root = vim.fn.expand("~/Notes/tasks")
 
@@ -18,11 +29,26 @@ local function search_task_files()
 			local basename = vim.fn.fnamemodify(p, ":t")
 			local year = p:match("/tasks/(%d%d%d%d)/") or "????"
 			local week = (basename:match("^(%d+)%-.+")) or basename:gsub("%.md$", "")
+
+			local week_monday = iso_week_monday(year, week)
+			local day_text = ""
+
+			for i = 0, 6 do
+				local day_time = week_monday + i * 24 * 60 * 60
+				local day_display = os.date("%d %b", day_time)
+                if i>0 then
+                    day_text = string.format("%s, %s", day_text, day_display)
+                else
+                    day_text = string.format(" %s", day_display)
+                end
+			end
+
 			table.insert(results, {
 				path = p,
 				year = year,
 				week = week,
-				text = string.format("%s – Week %s", year, week),
+				day_text = day_text,
+				text = string.format("%s – Week %s - %s", year, week, day_text),
 				file = p,
 			})
 		end
@@ -48,8 +74,8 @@ local function search_task_files()
 		format = function(item, _)
 			local ret = {}
 			table.insert(ret, { "󰃭 ", "SnacksPickerIconDate" })
-			table.insert(ret, { item.year .. " ", "Special" })
-			table.insert(ret, { "Week " .. item.week, "Keyword" }) -- "Keyword" gives it a different color
+			table.insert(ret, { "Week " .. item.week .. ", " .. item.year, "Keyword" }) -- "Keyword" gives it a different color
+			table.insert(ret, { item.day_text, "Comment" })
 			return ret
 		end,
 		confirm = function(picker, item)
@@ -258,6 +284,7 @@ local function toggle_task()
 	vim.cmd("loadview")
 	vim.lsp.buf.format({ async = true })
 end
+
 local function create_weekly()
 	local year = os.date("%Y")
 	local week = os.date("%V") -- ISO week number
@@ -353,17 +380,6 @@ local function create_weekly_next()
 		local line_count = vim.api.nvim_buf_line_count(bufnr)
 		if line_count >= 4 then
 			vim.api.nvim_buf_set_lines(bufnr, 3, line_count, false, {})
-		end
-
-		-- --- Build daily links for the week ---
-		local function iso_week_monday(currentYear, currentWeek)
-			-- January 4th is always in week 1
-			local jan4 = os.time({ year = currentYear, month = 1, day = 4 })
-			local jan4_wday = tonumber(os.date("%w", jan4))
-			-- Compute offset to Monday (ISO: Monday=1, Sunday=7)
-			local offset = (jan4_wday == 0 and -6 or 1 - jan4_wday)
-			local first_monday = jan4 + offset * 24 * 60 * 60
-			return first_monday + (currentWeek - 1) * 7 * 24 * 60 * 60
 		end
 
 		local week_monday = iso_week_monday(tonumber(year), tonumber(week))
