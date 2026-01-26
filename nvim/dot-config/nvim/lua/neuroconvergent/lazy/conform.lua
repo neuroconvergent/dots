@@ -11,6 +11,12 @@ return {
 			-- markdown and quarto code blocks
 			quarto = { "prettier", "injected" },
 
+			-- HTML
+			html = { "prettier" },
+
+			-- Liquid
+			liquid = { "prettier" },
+
 			-- YAML
 			yaml = { "prettier" },
 
@@ -31,6 +37,9 @@ return {
 
 			-- Lua
 			lua = { "stylua" }, -- stylua for Lua
+
+            -- Shell
+            sh = { "beautysh" },
 
 			-- Typst
 			typst = { "typstyle" },

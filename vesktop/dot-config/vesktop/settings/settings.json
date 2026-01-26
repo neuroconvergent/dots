@@ -603,7 +603,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1769342687946
+        "settingsSyncVersion": 1769428137299
     },
     "eagerPatches": false,
     "uiElements": {
