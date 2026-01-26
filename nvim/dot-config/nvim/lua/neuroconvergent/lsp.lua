@@ -115,31 +115,43 @@ local deal_project_roots = {
 	"/home/neuroconvergent/Programming/KMC-AM",
 }
 
-local cwd = vim.fn.getcwd()
-for _, root in ipairs(deal_project_roots) do
-	if cwd == root then
-		vim.lsp.config.clangd = {
-			cmd = {
-				"docker",
-				"run",
-				"--rm",
-				"-i",
-				"-v",
-				"/home/neuroconvergent:/home/neuroconvergent",
-				"-w",
-				root,
-				"neuroconvergent/deal-ii",
-				"clangd",
-				"--background-index",
-				"--clang-tidy",
-				"--header-insertion=iwyu",
-				"--completion-style=detailed",
-				"--fallback-style=llvm",
-			},
-		}
-		break
+local function set_deal_clangd_config()
+	for _, root in ipairs(deal_project_roots) do
+		if vim.fn.getcwd() == root then
+			vim.lsp.config.clangd = {
+				cmd = {
+					"docker",
+					"run",
+					"--rm",
+					"-i",
+					"-v",
+					"/home/neuroconvergent:/home/neuroconvergent",
+					"-w",
+					root,
+					"neuroconvergent/deal-ii",
+					"clangd",
+					"--background-index",
+					"--clang-tidy",
+					"--header-insertion=iwyu",
+					"--completion-style=detailed",
+					"--fallback-style=llvm",
+				},
+			}
+			break
+		end
 	end
 end
+
+-- initial setup
+set_deal_clangd_config()
+
+-- update clangd command on changing cwd
+vim.api.nvim_create_autocmd("DirChanged", {
+	callback = function()
+		set_deal_clangd_config()
+		vim.lsp.enable("clangd")
+	end,
+})
 
 vim.lsp.enable("clangd")
 
