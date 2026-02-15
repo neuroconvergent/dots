@@ -14,5 +14,6 @@ return {
     		'-pdflatex=lualatex -synctex=1 -interaction=nonstopmode',	-- use lualatex as pdflatex cmd
     	}
     }
+    vim.g.vimtex_view_method = "sioyek"
   end
 }
