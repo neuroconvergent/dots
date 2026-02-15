@@ -35,6 +35,11 @@ return {
 			default_tags = { "daily_journal" },
 			template = "daily.md",
 		},
+		---@class obsidian.config.NoteOpts
+		---@field template string|?
+		note = {
+			template = "default.md",
+		},
 		completion = {
 			nvim_cmp = true,
 			min_chars = 2,
