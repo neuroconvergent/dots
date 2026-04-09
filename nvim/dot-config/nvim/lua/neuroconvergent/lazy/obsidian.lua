@@ -77,8 +77,12 @@ return {
 		-- wiki_link_func = function(opts)
 		-- 	return require("obsidian.util").wiki_link_id_prefix(opts)
 		-- end,
-		wiki_link_func = "prepend_note_id",
-		markdown_link_func = "prepend_note_id",
+        link = {
+            style = "wiki",
+            format = "shortest",
+        },
+		-- wiki_link_func = "prepend_note_id",
+		-- markdown_link_func = "prepend_note_id",
 		preffered_link_style = "wiki",
 		diable_frontmatter = "false",
 		-- Optional, by default when you use `:ObsidianFollowLink` on a link to an external
