@@ -3,7 +3,7 @@
   "permission": {
     "edit": "ask",
     "bash": "ask",
-    "webfetch": "deny",
+    "webfetch": "ask",
     "doom_loop": "deny",
     "external_directory": "ask"
   },
@@ -26,7 +26,7 @@
       "docs/**"
     ]
   },
-  "model": "opencode/gpt-5.1-codex-mini",
+  "model": "opencode-go/kimi-k2.5",
   "share": "manual",
   "autoupdate": false,
   "provider": {
