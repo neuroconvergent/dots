@@ -98,6 +98,9 @@ local oil = require("oil")
 vim.keymap.set("n", "<leader>.", ":Oil<CR>", { desc = "Open parent directory" })
 vim.keymap.set("n", "<leader>-o", ":e oil-ssh://s406763@delta2.central.cranfield.ac.uk/<CR>", { desc = "Open SSH" })
 vim.keymap.set("n", "<leader>-h", ":e ~/Projects/<CR>", { desc = "Open project home" })
+vim.keymap.set("n", "<leader>-c", function()
+	oil.open(vim.fn.getcwd())
+end, { desc = "Open cwd in oil" })
 
 -- Format with null-ls
 -- vim.keymap.set("n", "<leader>cf", function()
