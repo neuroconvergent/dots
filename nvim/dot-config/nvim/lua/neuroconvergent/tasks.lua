@@ -337,7 +337,7 @@ local function create_weekly()
 		local line_nr = 2 -- Lua index 0-based, line 3 is index 2
 		local line = vim.api.nvim_buf_get_lines(bufnr, line_nr, line_nr + 1, false)[1]
 		if line then
-			local new_line = line:gsub("(%S+)$", "Week " .. week .. ", " .. year) -- replace last word
+			local new_line = line:gsub("(%S+)$", "aliases: Week " .. week .. ", " .. year) -- replace last word
 			vim.api.nvim_buf_set_lines(bufnr, line_nr, line_nr + 1, false, { new_line })
 			-- optional: move cursor to end of the line
 			vim.api.nvim_win_set_cursor(0, { line_nr + 1, #new_line })
@@ -399,7 +399,7 @@ local function create_weekly_next()
 		local line_nr = 2 -- Lua index 0-based, line 3 is index 2
 		local line = vim.api.nvim_buf_get_lines(bufnr, line_nr, line_nr + 1, false)[1]
 		if line then
-			local new_line = line:gsub("(%S+)$", "Week " .. week .. ", " .. year) -- replace last word
+			local new_line = line:gsub("(%S+)$", "aliases: Week " .. week .. ", " .. year) -- replace last word
 			vim.api.nvim_buf_set_lines(bufnr, line_nr, line_nr + 1, false, { new_line })
 			-- optional: move cursor to end of the line
 			vim.api.nvim_win_set_cursor(0, { line_nr + 1, #new_line })
