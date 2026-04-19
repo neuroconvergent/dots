@@ -2,6 +2,7 @@ return {
 	"sudo-tee/opencode.nvim",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
+		"OXY2DEV/markview.nvim",
 		-- {
 		-- 	"MeanderingProgrammer/render-markdown.nvim",
 		-- 	opts = {

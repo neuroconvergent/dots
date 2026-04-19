@@ -3,7 +3,8 @@
   "permission": {
     "edit": "ask",
     "bash": "ask",
-    "webfetch": "ask",
+    "webfetch": "allow",
+    "websearch": "allow",
     "doom_loop": "deny",
     "external_directory": "ask"
   },
@@ -26,7 +27,8 @@
       "docs/**"
     ]
   },
-  "model": "opencode-go/kimi-k2.5",
+  "model": "opencode-go/qwen3.5-plus",
+  "small_model": "opencode-go/minimax-m2.5",
   "share": "manual",
   "autoupdate": false,
   "provider": {
