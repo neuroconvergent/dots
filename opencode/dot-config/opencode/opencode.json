@@ -32,8 +32,15 @@
   "share": "manual",
   "autoupdate": false,
   "provider": {
-    "opencode": {
-      "models": {}
+    "opencode-go": {
+      "models": {
+        "qwen3.6-plus": {
+          "limit": {
+            "context": 1000000,
+            "output": 65536
+          }
+        }
+      }
     }
   }
 }
