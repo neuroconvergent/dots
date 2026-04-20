@@ -6,7 +6,7 @@ return {
 		{
 			"MeanderingProgrammer/render-markdown.nvim",
 			opts = {
-				anti_conceal = { enabled = true },
+				anti_conceal = { enabled = false },
 				file_types = { "opencode_output" },
 			},
 			ft = { "opencode_output" },

@@ -1,9 +1,11 @@
 local colors = require("catppuccin.palettes").get_palette()
 return {
 	"obsidian-nvim/obsidian.nvim",
+	-- dir = "~/opensource_development/obsidian.nvim",
+	-- dev = true,
 	version = "*", -- recommended, use latest release instead of latest commit
 	lazy = false,
-	ft = "markdown",
+	ft = { "markdown" },
 	-- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
 	-- event = {
 	--   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
@@ -19,6 +21,7 @@ return {
 				path = "~/Notes",
 			},
 		},
+		-- exclude_dir = { ".opencode/**"},
 		notes_subdir = ".",
 		legacy_commands = false,
 		templates = {
@@ -77,10 +80,10 @@ return {
 		-- wiki_link_func = function(opts)
 		-- 	return require("obsidian.util").wiki_link_id_prefix(opts)
 		-- end,
-        link = {
-            style = "wiki",
-            format = "shortest",
-        },
+		link = {
+			style = "wiki",
+			format = "shortest",
+		},
 		-- wiki_link_func = "prepend_note_id",
 		-- markdown_link_func = "prepend_note_id",
 		preffered_link_style = "wiki",
