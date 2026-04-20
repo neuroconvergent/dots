@@ -2,16 +2,15 @@ return {
 	"sudo-tee/opencode.nvim",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"OXY2DEV/markview.nvim",
-		-- {
-		-- 	"MeanderingProgrammer/render-markdown.nvim",
-		-- 	opts = {
-		-- 		anti_conceal = { enabled = false },
-		-- 		-- file_types = { "opencode_output" },
-		-- 	},
-		-- 	-- ft = { "Avante", "copilot-chat", "opencode_output" },
-		-- 	ft = { "Avante", "copilot-chat" },
-		-- },
+		-- "OXY2DEV/markview.nvim",
+		{
+			"MeanderingProgrammer/render-markdown.nvim",
+			opts = {
+				anti_conceal = { enabled = true },
+				file_types = { "opencode_output" },
+			},
+			ft = { "opencode_output" },
+		},
 		-- Optional, for file mentions and commands completion, pick only one
 		-- 'saghen/blink.cmp',
 		"hrsh7th/nvim-cmp",

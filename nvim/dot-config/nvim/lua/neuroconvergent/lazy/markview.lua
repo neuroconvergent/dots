@@ -2,7 +2,7 @@ return {
 	"OXY2DEV/markview.nvim",
 	lazy = false,
 	priority = 49,
-    filetype = { "markdown", "quarto", "opencode_output"  },
+	filetype = {  "quarto" },
 	opts = {
 		auto_start = true,
 		preview = {

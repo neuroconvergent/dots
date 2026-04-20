@@ -124,6 +124,11 @@ return {
 				MarkviewPalette5fg = { fg = colors.sky },
 				MarkviewPalette6fg = { fg = colors.peach },
 
+				-- Render markdown
+				RenderMarkdownCode = { bg = colors.surface1 },
+                ["@markup.raw"] = { fg=colors.text },
+				markdownCode = { bg = colors.surface1 },
+
 				-- git-signs
 				GitSignsCurrentLineBlame = { fg = colors.surface1, bg = colors.overlay0 },
 			}
