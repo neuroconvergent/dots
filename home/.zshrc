@@ -122,3 +122,8 @@ function y() {
 [[ -f /home/neuroconvergent/.dart-cli-completion/zsh-config.zsh ]] && . /home/neuroconvergent/.dart-cli-completion/zsh-config.zsh || true
 ## [/Completion]
 
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/neuroconvergent/.lmstudio/bin"
+# End of LM Studio CLI section
+

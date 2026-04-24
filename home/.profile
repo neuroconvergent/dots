@@ -10,3 +10,8 @@ export DBUS_SESSION_BUS_ADDRESS="$(dbus-daemon --session --print-address --fork)
 # Created by `pipx` on 2024-12-30 16:52:30
 export PATH="$PATH:/home/sundar/.local/bin"
 . "$HOME/.cargo/env"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/neuroconvergent/.lmstudio/bin"
+# End of LM Studio CLI section
+
