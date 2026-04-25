@@ -27,7 +27,7 @@
       "docs/**"
     ]
   },
-  "model": "opencode-go/qwen3.5-plus",
+  "model": "opencode-go/kimi-k2.5",
   "small_model": "opencode-go/minimax-m2.5",
   "share": "manual",
   "autoupdate": false,
