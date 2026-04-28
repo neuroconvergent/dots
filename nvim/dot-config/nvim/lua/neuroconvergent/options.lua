@@ -107,3 +107,25 @@ vim.opt.diffopt:append("algorithm:histogram")
 -- Note: Setting this to 60 aligns most Jekyll front-matter perfectly
 vim.opt.diffopt:append("linematch:60")
 
+vim.api.nvim_create_augroup("TabSettings", { clear = true })
+
+vim.api.nvim_create_autocmd("FileType", {
+	group = "TabSettings",
+	pattern = "markdown",
+	callback = function()
+		vim.opt_local.tabstop = 2
+		vim.opt_local.softtabstop = 2
+		vim.opt_local.shiftwidth = 2
+	end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	group = "TabSettings",
+	pattern = "fortran",
+	callback = function()
+		vim.opt_local.tabstop = 6
+		vim.opt_local.softtabstop = 6
+		vim.opt_local.shiftwidth = 6
+	end,
+})
+
