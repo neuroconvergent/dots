@@ -80,6 +80,11 @@ return {
 					accept_current = "<leader>ro", -- Accept current (ours/right) change
 					accept_both = "<leader>rb", -- Accept both changes (incoming first)
 					discard = "<leader>rx", -- Discard both, keep base
+					-- Accept all (whole file) - uppercase versions
+					accept_all_incoming = "<leader>rT", -- Accept ALL incoming changes
+					accept_all_current = "<leader>rO", -- Accept ALL current changes
+					accept_all_both = "<leader>rB", -- Accept ALL both changes
+					discard_all = "<leader>rX", -- Discard ALL, reset to base
 					next_conflict = "]x", -- Jump to next conflict
 					prev_conflict = "[x", -- Jump to previous conflict
 					diffget_incoming = "<leader>ri", -- Get hunk from incoming (left/theirs) buffer
