@@ -27,7 +27,7 @@ return {
 			bibtex = { "bibtex-tidy" }, -- bibtex-tidy formatter for bibtex files
 
 			-- Python
-			python = { "black" }, -- Python formatter Black
+			python = { "ruff" }, -- Python formatter ruff
 
 			-- C++
 			cpp = { "clang-format" }, -- clang-format for C++
@@ -51,7 +51,7 @@ return {
 				options = {
 					ignore_errors = true,
 					lang_to_formatters = {
-						python = { "black" }, -- or "ruff_format"
+						python = { "ruff" }, -- or "ruff_format"
 						cpp = { "clang-format" },
 					},
 				},
