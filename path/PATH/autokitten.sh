@@ -1,14 +1,11 @@
 #!/usr/bin/env bash
 # Automatically create kitty multiplexer session at fuzzy found location
 
-BASE="$(pwd)"
-
 print_help() {
     cat <<EOF
 Usage: $(basename "$0") [OPTIONS] [target_dir]
 
 Options:
-  -b BASE_DIR       Set the base directory for fuzzy search (default: current directory)
   -h, --help        Show this help message and exit
 
 Arguments:
@@ -19,10 +16,6 @@ EOF
 # Parse options
 while [[ $# -gt 0 ]]; do
     case "$1" in
-        -b)
-            BASE="$2"
-            shift 2
-            ;;
         -h | --help)
             print_help
             exit 0
@@ -42,20 +35,19 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
+eval "$(zoxide init --cmd cd bash)"
+
 # Determine target directory
 if [ -n "$1" ]; then
     TARGET="$1"
+    cd "$TARGET" || exit
+    TARGET=$(pwd)
 else
-    TARGET=$(find "$BASE" -mindepth 1 -maxdepth 3 -type d |
-        sed "s|^$BASE/||" |
-        fzf --prompt="Select directory: " \
-            --preview "ls -la $BASE/{}" \
-        --height=40% --border)
-    [ -z "$TARGET" ] && exit 0
-    TARGET="$BASE/$TARGET"
+    cdi
+    TARGET=$(pwd)
 fi
 
-cd "$TARGET" || exit
+
 
 # Set main tab title
 kitten @ set-tab-title " "

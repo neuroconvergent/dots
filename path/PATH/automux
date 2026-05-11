@@ -6,7 +6,7 @@ SESSION_OVERRIDE=""
 
 print_help() {
 	cat <<EOF
-Usage: $(basename $0) [OPTIONS] [target_dir]
+Usage: $(basename "$0") [OPTIONS] [target_dir]
 
 Options:
   -b BASE_DIR       Set the base directory for fuzzy search (default: current directory)
