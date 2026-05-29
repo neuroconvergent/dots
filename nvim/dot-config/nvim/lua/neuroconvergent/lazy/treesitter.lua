@@ -28,6 +28,7 @@ return {
 			"markdown_inline",
 			"html",
 			"liquid",
+            "fortran"
 			-- ... your parsers
 		}
 		local alreadyInstalled = require("nvim-treesitter.config").get_installed()
