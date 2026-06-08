@@ -126,4 +126,5 @@ function y() {
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/home/neuroconvergent/.lmstudio/bin"
 # End of LM Studio CLI section
-
+precmd() { print -Pn "\e]0;%~\a" }
+preexec() { print -Pn "\e]0;$1\a" }
