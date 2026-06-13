@@ -43,7 +43,7 @@ gammastep-indicator &
 #swayidle -w timeout 240 '$HOME/PATH/lock_screen_off.sh' before-sleep '$HOME/PATH/lock_screen_off.sh' &
 
 ###Lock screen Timeout with hypridle
-hypridle &
+# hypridle &
 
 ###Clipboard with Cliphist
 wl-paste --type text --watch cliphist store &
