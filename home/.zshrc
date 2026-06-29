@@ -67,6 +67,7 @@ alias yayfind="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S
 alias calibre-launch='QT_QPA_PLATFORM="xcb" calibre' 
 alias nvidia-env='DRI_PRIME=pci-0000_01_00_0 __VK_LAYER_NV_optimus=NVIDIA_only __GLX_VENDOR_LIBRARY_NAME=nvidia'
 alias davinciresolve='QT_QPA_PLATFORM=xcb DRI_PRIME=pci-0000_01_00_0 __VK_LAYER_NV_optimus=NVIDIA_only __GLX_VENDOR_LIBRARY_NAME=nvidia /opt/resolve/bin/resolve'
+alias hermes-desktop='XDG_CURRENT_DESKTOP=GNOME hermes desktop'
 alias ls='exa'
 alias ll='exa -la'
 alias cat='bat'
