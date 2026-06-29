@@ -43,11 +43,11 @@ return {
 		note = {
 			template = "default.md",
 		},
-		completion = {
-			nvim_cmp = true,
-			min_chars = 2,
-			create_new = false,
-		},
+		-- completion = {
+		-- 	nvim_cmp = true,
+		-- 	min_chars = 2,
+		-- 	create_new = false,
+		-- },
 		new_notes_location = "notes_subdir",
 		-- Optional, customize how note IDs are generated given an optional title.
 		---@param title string|?
