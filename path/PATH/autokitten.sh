@@ -53,11 +53,12 @@ fi
 kitten @ set-tab-title " "
 
 # Launch opencode tab
-kitten @ launch --cwd current --type tab --tab-title " " opencode
+kitten @ launch --cwd current --type tab --tab-title " " opencode -c
 
-# Launch lazygit tab (only if git repo)
+# Launch lazygit tab and code review tab (only if git repo)
 if [ -d "$TARGET/.git" ] || git -C "$TARGET" rev-parse --is-inside-work-tree &>/dev/null; then
     kitten @ launch --cwd current --type tab --tab-title " " lazygit
+    kitten @ launch --cwd current --type tab --tab-title " " tuicr
 fi
 
 # Launch yazi tab
