@@ -39,6 +39,7 @@
       "git ls-files*": "allow",
       "openspec *": "allow",
       "mkdir *": "allow",
+      "tuicr *": "allow"
     },
     "webfetch": "allow",
     "websearch": "allow",
