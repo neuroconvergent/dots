@@ -79,7 +79,7 @@
   "transient_prompt": {
       "background": "transparent",
       "foreground": "p:pink",
-      "template" : "{{.UserName}} @ {{.HostName}} \ue285 "
+      "template" : "<p:blue>{{ now | date \"15:04:05\" }}</> {{.UserName}} @ {{.HostName}} \ue285 "
   },
   "version": 3
 }
